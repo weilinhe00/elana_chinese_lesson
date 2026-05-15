@@ -2,14 +2,14 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>Elana的中文课 · 在餐厅点餐</title>
+<title>Elana的中文课 · 在餐厅点餐 · Restaurant Ordering</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 /* ── Reset ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fff7ed,#fce4ec 50%,#e0f7fa);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.app{width:860px;position:relative}
-.slide{display:none;background:#fff;border-radius:28px;padding:20px 32px 14px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:530px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
+.app{width:880px;position:relative}
+.slide{display:none;background:#fff;border-radius:28px;padding:18px 28px 12px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:560px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
 .slide.active{display:flex}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
@@ -27,13 +27,15 @@ body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(1
 
 /* Typography */
 .tag{font-size:9px;font-weight:800;letter-spacing:.3px;color:inherit;margin-bottom:3px}
-.title{font-size:22px;font-weight:900;color:#1a1a2e;line-height:1.1;margin-bottom:2px}
+.title{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.1;margin-bottom:1px}
+.title-py{font-size:11px;color:#e91e8c;font-weight:700;margin-bottom:1px}
+.title-en{font-size:10.5px;color:#888;font-style:italic;margin-bottom:6px}
 .sub{font-size:10.5px;color:#888;margin-bottom:8px}
 .lbl{font-size:8.5px;font-weight:800;letter-spacing:.2px;margin-bottom:4px}
 .badge{font-size:8px;font-weight:800;position:absolute;top:10px;right:14px;opacity:.4}
 .card{border-radius:11px;padding:8px 10px}
 
-/* Vocab cards */
+/* Vocab cards — always show all 3 layers */
 .vc{border-radius:10px;padding:7px 4px;text-align:center}
 .vc .py{font-size:9px;color:#e91e8c;font-weight:700;margin-top:2px}
 .vc .hz{font-size:13px;font-weight:900;color:#1a1a2e;margin:1px 0}
@@ -52,41 +54,45 @@ body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(1
 .mwc .mwp{font-size:10px;color:#7c3aed;font-weight:700}
 .mwc .mwen{font-size:8.5px;color:#888;font-style:italic}
 .mwc .mwex{font-size:9px;color:#1a1a2e;font-weight:700;background:rgba(255,255,255,.7);padding:2px 6px;border-radius:6px;margin-top:3px}
+.mwc .mwexpy{font-size:7.5px;color:#7c3aed;font-weight:600}
+.mwc .mwexen{font-size:7.5px;color:#888;font-style:italic}
 
-/* Dialogue bubbles */
-.dlg{flex:1;display:flex;flex-direction:column;gap:6px}
+/* Dialogue bubbles — always show hz+py+en in dialogues */
+.dlg{flex:1;display:flex;flex-direction:column;gap:5px}
 .dlg-turn{display:flex;gap:8px;align-items:flex-start}
 .dlg-turn.right{flex-direction:row-reverse}
 .avi{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.12)}
 .avi.w{background:linear-gradient(135deg,#fbbf24,#f59e0b)}
 .avi.c{background:linear-gradient(135deg,#f9a8d4,#ec4899)}
 .avi.c2{background:linear-gradient(135deg,#a5b4fc,#6366f1)}
-.bub{border-radius:14px;padding:7px 11px;max-width:78%;position:relative}
+.avi.c3{background:linear-gradient(135deg,#86efac,#22c55e)}
+.bub{border-radius:14px;padding:6px 11px;max-width:80%;position:relative}
 .bub.w{background:#fef3c7;border-top-left-radius:4px}
 .bub.c{background:#fce7f3;border-top-right-radius:4px}
 .bub.c2{background:#e0e7ff;border-top-right-radius:4px}
-.bub .hz{font-size:12.5px;font-weight:800;color:#1a1a2e;line-height:1.3}
-.bub .py{font-size:9px;color:#e91e8c;font-weight:700;margin-top:2px}
-.bub .en{font-size:8.5px;color:#777;font-style:italic;margin-top:1px}
-.who{font-size:8px;font-weight:800;letter-spacing:.3px;color:#888;text-transform:uppercase;margin-bottom:2px}
+.bub.c3{background:#dcfce7;border-top-right-radius:4px}
+.bub .hz{font-size:12px;font-weight:800;color:#1a1a2e;line-height:1.3}
+.bub .py{font-size:8.5px;color:#e91e8c;font-weight:700;margin-top:1px;line-height:1.2}
+.bub .en{font-size:8px;color:#777;font-style:italic;margin-top:1px;line-height:1.2}
+.who{font-size:7.5px;font-weight:800;letter-spacing:.3px;color:#888;text-transform:uppercase;margin-bottom:1px}
 
 /* Sentence patterns */
-.sp{border-radius:10px;padding:7px 11px;margin-bottom:5px}
-.sp .pat{font-size:12px;font-weight:900;color:#1a1a2e}
-.sp .patpy{font-size:9px;color:#e91e8c;font-weight:600}
-.sp .paten{font-size:9px;color:#666;font-style:italic;margin:1px 0}
+.sp{border-radius:10px;padding:6px 10px;margin-bottom:4px}
+.sp .pat{font-size:11.5px;font-weight:900;color:#1a1a2e}
+.sp .patpy{font-size:8.5px;color:#e91e8c;font-weight:600}
+.sp .paten{font-size:8.5px;color:#666;font-style:italic;margin:1px 0}
 .sp .ex{font-size:10.5px;font-weight:700;margin-top:3px}
 .sp .expy{font-size:8px;color:#aaa}
 .sp .exen{font-size:8.5px;color:#999;font-style:italic}
 
 /* Cover */
 .cov{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
-.cov-title{font-size:42px;font-weight:900;background:linear-gradient(135deg,#ea580c,#e91e8c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.ctag{background:#ffedd5;color:#c2410c;border-radius:999px;padding:4px 10px;font-size:10.5px;font-weight:700;display:inline-block;margin:3px}
+.cov-title{font-size:40px;font-weight:900;background:linear-gradient(135deg,#ea580c,#e91e8c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ctag{background:#ffedd5;color:#c2410c;border-radius:999px;padding:4px 10px;font-size:10px;font-weight:700;display:inline-block;margin:3px}
 
 /* End slide */
-.endb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
-.cklist{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;max-width:720px}
+.endb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+.cklist{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;max-width:740px}
 .ck{background:#fff7ed;border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;color:#c2410c}
 
 /* Nav */
@@ -98,26 +104,32 @@ body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(1
 .dot.active{background:#ea580c;transform:scale(1.4)}
 
 /* Games */
-.gw{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px}
+.gw{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
 .gsbar{font-size:12px;font-weight:800;color:#c2410c;background:#ffedd5;padding:3px 12px;border-radius:999px}
 .gbtn{background:linear-gradient(135deg,#ea580c,#e91e8c);color:#fff;border:none;padding:5px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer;font-family:inherit}
 .gbtn:hover{opacity:.85}
-.gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d}
+.gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d;max-width:520px}
 
-/* Hint toggle */
-.hbtn{background:#ffedd5;color:#c2410c;border:2px solid #fdba74;padding:4px 12px;border-radius:999px;font-size:10.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s}
-.hbtn.on{background:#dcfce7;color:#15803d;border-color:#86efac}
-.hpy,.hen{display:none;font-size:8px;font-weight:600;line-height:1.3}
-.hpy{color:#7c3aed}
-.hen{color:#888;font-style:italic}
-body.hints .hpy,body.hints .hen{display:block}
+/* Global toggle: prominent, always visible at top right of slide */
+.toggle-bar{position:absolute;top:10px;left:14px;display:flex;gap:6px;z-index:10}
+.tgl{background:#ede9fe;color:#7c3aed;border:2px solid #c4b5fd;padding:3px 9px;border-radius:999px;font-size:9.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+.tgl:hover{transform:scale(1.05)}
+
+/* In games, py/en are hidden by default; shown when body has class */
+.gpy,.gen{display:none}
+.gpy{font-size:8.5px;color:#7c3aed;font-weight:700;line-height:1.3}
+.gen{font-size:8.5px;color:#888;font-style:italic;line-height:1.3}
+body.show-py .gpy{display:block}
+body.show-en .gen{display:block}
 
 /* Quiz */
-.qq{background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:14px;padding:14px 20px;text-align:center;width:100%;max-width:340px}
-.qqmain{font-size:32px;font-weight:900;color:#1a1a2e;line-height:1.1}
+.qq{background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:14px;padding:12px 18px;text-align:center;width:100%;max-width:360px}
+.qqmain{font-size:30px;font-weight:900;color:#1a1a2e;line-height:1.1}
 .qqlbl{font-size:11px;color:#888;margin-top:3px}
-.qopts{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:440px}
-.qopt{background:#fff;border:2px solid #e0e0e0;border-radius:11px;padding:9px 10px;font-weight:800;cursor:pointer;transition:.18s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:460px}
+.qopts.three{grid-template-columns:repeat(3,1fr)}
+.qopt{background:#fff;border:2px solid #e0e0e0;border-radius:11px;padding:8px 10px;font-weight:800;cursor:pointer;transition:.15s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:50px;justify-content:center}
 .qopt:hover{border-color:#ea580c;background:#fff7ed}
 .qopt.ok{background:#dcfce7;border-color:#16a34a;color:#15803d}
 .qopt.no{background:#fee2e2;border-color:#dc2626;color:#991b1b}
@@ -125,31 +137,21 @@ body.hints .hpy,body.hints .hen{display:block}
 
 /* Memory match */
 .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%;max-width:660px}
-.mcard{background:linear-gradient(135deg,#ea580c,#e91e8c);border-radius:10px;height:70px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;user-select:none;transition:.25s}
+.mcard{background:linear-gradient(135deg,#ea580c,#e91e8c);border-radius:10px;height:72px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;user-select:none;transition:.25s}
 .mcard.flip{background:#fff;border:2px solid #ea580c;cursor:default}
 .mcard.match{background:linear-gradient(135deg,#dcfce7,#bbf7d0)!important;border:2px solid #16a34a!important;cursor:default}
 .mcard-py{font-size:9px;color:#e91e8c;font-weight:700}
 .mcard-hz{font-size:14px;font-weight:900;color:#1a1a2e}
 
 /* Fill-in-blank */
-.fib{background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:14px;padding:14px 20px;width:100%;max-width:520px}
-.fib-row{font-size:14px;line-height:2;color:#1a1a2e;font-weight:700}
-.fib-blank{display:inline-block;min-width:88px;border-bottom:3px solid #ea580c;padding:0 6px;font-weight:900;color:#ea580c;text-align:center;margin:0 3px}
+.fib{background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:14px;padding:13px 18px;width:100%;max-width:540px}
+.fib-row{font-size:15px;line-height:2.1;color:#1a1a2e;font-weight:700;text-align:center}
+.fib-blank{display:inline-block;min-width:80px;border-bottom:3px solid #ea580c;padding:0 6px;font-weight:900;color:#ea580c;text-align:center;margin:0 2px;cursor:pointer}
 .fib-blank.filled{border-bottom-color:#16a34a;color:#15803d;background:#dcfce7;border-radius:6px}
 .fib-bank{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
-.fib-tok{background:#fff;border:2px solid #ea580c;color:#1a1a2e;padding:6px 14px;border-radius:999px;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;transition:.18s}
+.fib-tok{background:#fff;border:2px solid #ea580c;color:#1a1a2e;padding:5px 13px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
 .fib-tok:hover{background:#ffedd5}
 .fib-tok.used{opacity:.3;pointer-events:none}
-
-/* Menu display */
-.menu{background:linear-gradient(135deg,#fef3c7,#fed7aa);border-radius:14px;padding:14px 18px;border:3px dashed #c2410c}
-.menu-title{font-size:16px;font-weight:900;color:#c2410c;text-align:center;letter-spacing:2px;margin-bottom:6px}
-.menu-row{display:flex;justify-content:space-between;align-items:center;padding:4px 6px;border-bottom:1px dashed #fed7aa;font-size:11.5px;font-weight:700;color:#1a1a2e}
-.menu-row:last-child{border-bottom:none}
-.menu-row .l{flex:1;display:flex;align-items:center;gap:6px}
-.menu-row .em{font-size:16px}
-.menu-row .py{font-size:8px;color:#e91e8c;font-weight:600;display:block}
-.menu-row .p{font-weight:900;color:#c2410c;font-size:12px}
 
 /* Phrase rows */
 .phr{display:flex;align-items:center;gap:9px;border-radius:10px;padding:6px 11px;margin-bottom:4px}
@@ -157,6 +159,20 @@ body.hints .hpy,body.hints .hen{display:block}
 .phr .hz{font-size:13px;font-weight:900;color:#1a1a2e}
 .phr .py{font-size:9px;color:#e91e8c;font-weight:700}
 .phr .en{font-size:9px;color:#888;font-style:italic}
+
+/* Verb pick */
+.vbq{background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:14px;padding:14px 18px;width:100%;max-width:520px;text-align:center}
+.vbq-sentence{font-size:15px;font-weight:800;color:#1a1a2e;line-height:1.8}
+.vbq-blank{display:inline-block;min-width:64px;border-bottom:3px dashed #ea580c;color:#ea580c;padding:0 4px;font-weight:900}
+.vbq-py{font-size:9.5px;color:#7c3aed;font-weight:700;margin-top:3px}
+.vbq-en{font-size:9px;color:#888;font-style:italic;margin-top:1px}
+
+/* Response game */
+.resp-bub{background:#fef3c7;border-top-left-radius:4px;border-radius:14px;padding:10px 14px;max-width:560px;display:flex;gap:9px;align-items:flex-start}
+.resp-bub .avi{width:34px;height:34px;font-size:20px}
+.resp-bub .hz{font-size:14px;font-weight:800;color:#1a1a2e;line-height:1.3}
+.resp-bub .py{font-size:10px;color:#e91e8c;font-weight:700;margin-top:2px}
+.resp-bub .en{font-size:9.5px;color:#777;font-style:italic;margin-top:1px}
 </style>
 </head>
 <body>
@@ -167,30 +183,34 @@ body.hints .hpy,body.hints .hen{display:block}
 <div class="cov">
   <div style="font-size:48px">🏮🥢🍜</div>
   <div class="cov-title">在餐厅点餐<br><span style="font-size:18px;font-weight:700;background:none;-webkit-text-fill-color:#888">zài cāntīng diǎn cān · Ordering at a Restaurant</span></div>
-  <div style="background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:800;color:#c2410c">📅 2026年5月19日 · wǔ yuè shíjiǔ rì</div>
-  <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:680px">
+  <div style="background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:800;color:#c2410c">📅 2026年5月19日 · wǔ yuè shíjiǔ rì · May 19, 2026</div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:700px">
     <span class="ctag">🏮 餐厅 cāntīng · restaurant</span>
     <span class="ctag">🙋 服务员 fúwùyuán · waiter</span>
     <span class="ctag">📜 菜单 càidān · menu</span>
     <span class="ctag">🥢 量词 liàngcí · measure words</span>
     <span class="ctag">🍱 新食物 xīn shíwù · new food</span>
     <span class="ctag">🥤 新饮料 xīn yǐnliào · new drinks</span>
-    <span class="ctag">💬 对话 duìhuà · dialogues</span>
+    <span class="ctag">💬 8 对话 duìhuà · dialogues</span>
     <span class="ctag">🎭 角色扮演 juésè bànyǎn · role-play</span>
-    <span class="ctag">🎮 游戏 yóuxì · games</span>
+    <span class="ctag">🎮 8 游戏 yóuxì · games</span>
     <span class="ctag">💰 买单 mǎidān · pay the bill</span>
   </div>
-  <div style="font-size:11px;color:#aaa;margin-top:8px">30 pages · 30 页 · sān shí yè</div>
+  <div style="background:#fff;border:2px solid #fdba74;border-radius:14px;padding:9px 16px;font-size:11px;color:#c2410c;margin-top:8px;max-width:580px;line-height:1.6">
+    <b>💡 小贴士 xiǎo tiēshì · tip:</b> 游戏里默认只有中文。点上面的按钮可以打开拼音和英文！<br>
+    <span style="color:#888;font-style:italic">Games show only Chinese by default. Click the buttons at top-left to turn on pinyin and English!</span>
+  </div>
+  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 · sān shí yè · 30 pages</div>
 </div>
 </div>
 
 <!-- ════════════════ SLIDE 2: RESTAURANT PLACE & PEOPLE ════════════════ -->
 <div class="slide">
-<span class="badge co">vocabulary 1</span>
-<div class="tag co">🏮 餐厅 cāntīng · the restaurant — place &amp; people</div>
-<div class="title">在餐厅 zài cāntīng — at the restaurant</div>
-<div class="sub">学习餐厅的地方和人 xuéxí cāntīng de dìfang hé rén · places and people in a restaurant</div>
-<div class="c4" style="margin-bottom:8px">
+<span class="badge co">vocab 1</span>
+<div class="tag co">🏮 餐厅 cāntīng · restaurant — place &amp; people</div>
+<div class="title">在餐厅 zài cāntīng</div>
+<div class="title-en">at the restaurant — places &amp; people</div>
+<div class="c4" style="margin-bottom:6px">
   <div class="vc bo"><div style="font-size:26px">🏮</div><div class="py">cāntīng</div><div class="hz">餐厅</div><div class="en">restaurant</div></div>
   <div class="vc bp"><div style="font-size:26px">🙋‍♀️</div><div class="py">fúwùyuán</div><div class="hz">服务员</div><div class="en">waiter / waitress</div></div>
   <div class="vc bu"><div style="font-size:26px">👨‍🍳</div><div class="py">chúshī</div><div class="hz">厨师</div><div class="en">chef / cook</div></div>
@@ -200,20 +220,23 @@ body.hints .hpy,body.hints .hen{display:block}
   <div class="vc bb"><div style="font-size:26px">📜</div><div class="py">càidān</div><div class="hz">菜单</div><div class="en">menu</div></div>
   <div class="vc br"><div style="font-size:26px">🧾</div><div class="py">zhàngdān</div><div class="hz">账单</div><div class="en">bill / check</div></div>
 </div>
-<div class="card bo" style="font-size:10.5px">
-  <div class="lbl co">💡 useful sentence</div>
-  <div style="line-height:2;margin-top:3px">
-    <b>欢迎光临！</b> <span class="cp" style="font-size:8.5px">huānyíng guānglín · welcome!</span> — what the 服务员 fúwùyuán says when you arrive 🙋‍♀️
+<div class="card bo" style="font-size:11px">
+  <div class="lbl co">💡 useful sentence · 有用的句子 yǒuyòng de jùzi</div>
+  <div style="line-height:1.8;margin-top:4px">
+    <b>欢迎光临！</b><br>
+    <span class="cp" style="font-size:9.5px">huānyíng guānglín!</span><br>
+    <span style="color:#888;font-size:10px;font-style:italic">Welcome! — what the waiter says when you arrive 🙋‍♀️</span>
   </div>
 </div>
 </div>
 
 <!-- ════════════════ SLIDE 3: TABLE ITEMS ════════════════ -->
 <div class="slide">
-<span class="badge co">vocabulary 2</span>
+<span class="badge co">vocab 2</span>
 <div class="tag co">🥢 餐具 cānjù · utensils &amp; table items</div>
-<div class="title">餐桌上的东西 cānzhuō shàng de dōngxi — things on the table</div>
-<div class="c4" style="margin-bottom:8px">
+<div class="title">餐桌上的东西 cānzhuō shàng de dōngxi</div>
+<div class="title-en">things on the table</div>
+<div class="c4" style="margin-bottom:6px">
   <div class="vc bp"><div style="font-size:26px">🥢</div><div class="py">kuàizi</div><div class="hz">筷子</div><div class="en">chopsticks</div></div>
   <div class="vc bu"><div style="font-size:26px">🥄</div><div class="py">sháozi</div><div class="hz">勺子</div><div class="en">spoon</div></div>
   <div class="vc bg"><div style="font-size:26px">🍴</div><div class="py">chāzi</div><div class="hz">叉子</div><div class="en">fork</div></div>
@@ -224,16 +247,17 @@ body.hints .hpy,body.hints .hen{display:block}
   <div class="vc br"><div style="font-size:26px">🧻</div><div class="py">cānjīnzhǐ</div><div class="hz">餐巾纸</div><div class="en">napkin</div></div>
 </div>
 <div class="c2">
-  <div class="card bp" style="font-size:10.5px">
-    <div class="lbl cp">💬 sentences</div>
-    <div style="line-height:2;margin-top:3px">
-      请给我 <b>一双筷子</b> <span class="cp" style="font-size:8px">qǐng gěi wǒ yī shuāng kuàizi</span><br>
-      <span style="color:#888;font-size:9px">please give me a pair of chopsticks</span>
+  <div class="card bp" style="font-size:11px">
+    <div class="lbl cp">💬 句子 jùzi · sentence</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>请给我一双筷子。</b><br>
+      <span class="cp" style="font-size:9px">qǐng gěi wǒ yī shuāng kuàizi.</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">Please give me a pair of chopsticks.</span>
     </div>
   </div>
-  <div class="card by" style="font-size:10.5px">
-    <div class="lbl cy">💡 fun fact</div>
-    <div style="line-height:2;margin-top:3px">
+  <div class="card by" style="font-size:11px">
+    <div class="lbl cy">💡 小贴士 xiǎo tiēshì · tip</div>
+    <div style="line-height:1.7;margin-top:3px">
       <b>一双 yī shuāng</b> = one pair (chopsticks)<br>
       <b>一把 yī bǎ</b> = one (knife/spoon/fork)
     </div>
@@ -244,9 +268,9 @@ body.hints .hpy,body.hints .hen{display:block}
 <!-- ════════════════ SLIDE 4: FOOD REVIEW ════════════════ -->
 <div class="slide">
 <span class="badge cp">review</span>
-<div class="tag cp">🍜 复习食物 fùxí shíwù · food we already know</div>
-<div class="title">食物复习 — review: food we've learned</div>
-<div class="sub">这些我们都会说！zhèxiē wǒmen dōu huì shuō! · we can say all of these!</div>
+<div class="tag cp">🍜 复习食物 fùxí shíwù · review: food we know</div>
+<div class="title">食物复习 shíwù fùxí</div>
+<div class="title-en">food review — what we already learned</div>
 <div class="c5" style="margin-bottom:8px">
   <div class="fch bp"><span class="em">🍚</span><div class="py">mǐfàn</div><div class="hz">米饭</div><div class="en">rice</div></div>
   <div class="fch bu"><span class="em">🍜</span><div class="py">miàntiáo</div><div class="hz">面条</div><div class="en">noodles</div></div>
@@ -259,97 +283,99 @@ body.hints .hpy,body.hints .hen{display:block}
   <div class="fch bp"><span class="em">🍦</span><div class="py">bīngqílín</div><div class="hz">冰淇淋</div><div class="en">ice cream</div></div>
   <div class="fch bu"><span class="em">🍚</span><div class="py">chǎofàn</div><div class="hz">炒饭</div><div class="en">fried rice</div></div>
 </div>
-<div class="card bg" style="font-size:10.5px">
-  <div class="lbl cg">💡 remember</div>
-  <div style="line-height:1.9;margin-top:3px">
-    在餐厅，你可以点这些菜！zài cāntīng, nǐ kěyǐ diǎn zhèxiē cài!<br>
-    <span style="color:#888;font-size:9.5px">at the restaurant, you can order all these dishes!</span> &nbsp;·&nbsp; <b>点 diǎn</b> = to order
+<div class="card bg" style="font-size:11px">
+  <div class="lbl cg">💡 记住 jì zhù · remember</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>在餐厅，你可以点这些菜！</b><br>
+    <span class="cp" style="font-size:9px">zài cāntīng, nǐ kěyǐ diǎn zhèxiē cài!</span><br>
+    <span style="color:#888;font-size:9.5px;font-style:italic">At the restaurant, you can order all these dishes! · 点 diǎn = to order</span>
   </div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 5: NEW FOOD 1 (DUMPLING FAMILY) ════════════════ -->
+<!-- ════════════════ SLIDE 5: NEW FOOD 1 — DUMPLING FAMILY ════════════════ -->
 <div class="slide">
-<span class="badge co">vocabulary 3</span>
-<div class="tag co">🥟 新食物 (一) xīn shíwù · new food — the dumpling family</div>
-<div class="title">饺子的家人 jiǎozi de jiārén — the dumpling family!</div>
-<div class="sub">所有这些都是用面粉做的 suǒyǒu zhèxiē dōu shì yòng miànfěn zuò de · all made of flour</div>
-<div class="c3" style="margin-bottom:8px">
-  <div class="vc bp"><div style="font-size:32px">🥟</div><div class="py">jiǎozi</div><div class="hz">饺子</div><div class="en">dumplings (we know!)</div></div>
-  <div class="vc bo"><div style="font-size:32px">🥟</div><div class="py">bāozi</div><div class="hz">包子</div><div class="en">steamed bun</div></div>
-  <div class="vc by"><div style="font-size:32px">🍞</div><div class="py">mántou</div><div class="hz">馒头</div><div class="en">plain steamed bun</div></div>
-  <div class="vc bg"><div style="font-size:32px">🥟</div><div class="py">xiǎolóngbāo</div><div class="hz">小笼包</div><div class="en">soup dumplings ⭐</div></div>
-  <div class="vc bt"><div style="font-size:32px">🌯</div><div class="py">chūnjuǎn</div><div class="hz">春卷</div><div class="en">spring roll</div></div>
-  <div class="vc bu"><div style="font-size:32px">🥞</div><div class="py">bǐng</div><div class="hz">饼</div><div class="en">flat bread / pancake</div></div>
+<span class="badge co">vocab 3</span>
+<div class="tag co">🥟 食物 (一) shíwù · dumpling family</div>
+<div class="title">饺子的家人 jiǎozi de jiārén</div>
+<div class="title-en">the dumpling family — all made of flour 面粉 miànfěn</div>
+<div class="c3" style="margin-bottom:6px">
+  <div class="vc bp"><div style="font-size:30px">🥟</div><div class="py">jiǎozi</div><div class="hz">饺子</div><div class="en">dumplings</div></div>
+  <div class="vc bo"><div style="font-size:30px">🥟</div><div class="py">bāozi</div><div class="hz">包子</div><div class="en">steamed bun</div></div>
+  <div class="vc by"><div style="font-size:30px">🍞</div><div class="py">mántou</div><div class="hz">馒头</div><div class="en">plain steamed bun</div></div>
+  <div class="vc bg"><div style="font-size:30px">🥟</div><div class="py">xiǎolóngbāo</div><div class="hz">小笼包</div><div class="en">soup dumplings ⭐</div></div>
+  <div class="vc bt"><div style="font-size:30px">🌯</div><div class="py">chūnjuǎn</div><div class="hz">春卷</div><div class="en">spring roll</div></div>
+  <div class="vc bu"><div style="font-size:30px">🥞</div><div class="py">bǐng</div><div class="hz">饼</div><div class="en">flat bread / pancake</div></div>
 </div>
-<div class="card by" style="font-size:10.5px">
-  <div class="lbl cy">💡 culture tip</div>
-  <div style="line-height:1.9;margin-top:3px">
-    <b>小笼包 xiǎolóngbāo</b> = tiny soup dumplings — bite carefully, hot soup inside! 小心，里面有热汤！<br>
-    <span style="color:#888;font-size:9px">xiǎoxīn, lǐmiàn yǒu rètāng! · careful, hot soup inside!</span>
+<div class="card by" style="font-size:11px">
+  <div class="lbl cy">💡 文化 wénhuà · culture</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>小笼包</b> = tiny soup dumplings — bite carefully, hot soup inside!<br>
+    <span class="cp" style="font-size:9px">xiǎolóngbāo · xiǎoxīn, lǐmiàn yǒu rètāng!</span><br>
+    <b>小心，里面有热汤！</b> <span style="color:#888;font-size:9.5px;font-style:italic">Careful, hot soup inside!</span>
   </div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 6: NEW FOOD 2 (MAIN DISHES) ════════════════ -->
+<!-- ════════════════ SLIDE 6: NEW FOOD 2 — MAIN DISHES ════════════════ -->
 <div class="slide">
-<span class="badge co">vocabulary 4</span>
-<div class="tag co">🍲 新食物 (二) xīn shíwù · new food — main dishes</div>
-<div class="title">大菜 dà cài — main dishes</div>
-<div class="sub">餐厅常见的菜 cāntīng chángjiàn de cài · common restaurant dishes</div>
-<div class="c4" style="margin-bottom:8px">
-  <div class="vc bo"><div style="font-size:30px">🦆</div><div class="py">kǎoyā</div><div class="hz">烤鸭</div><div class="en">roast duck ⭐</div></div>
-  <div class="vc bb"><div style="font-size:30px">🐟</div><div class="py">yú</div><div class="hz">鱼</div><div class="en">fish</div></div>
-  <div class="vc by"><div style="font-size:30px">🍲</div><div class="py">tāng</div><div class="hz">汤</div><div class="en">soup</div></div>
-  <div class="vc bg"><div style="font-size:30px">🥗</div><div class="py">shālā</div><div class="hz">沙拉</div><div class="en">salad</div></div>
-  <div class="vc bp"><div style="font-size:30px">🍤</div><div class="py">xiā</div><div class="hz">虾</div><div class="en">shrimp / prawn</div></div>
-  <div class="vc bu"><div style="font-size:30px">🍕</div><div class="py">bǐsà</div><div class="hz">比萨</div><div class="en">pizza</div></div>
-  <div class="vc bt"><div style="font-size:30px">🌮</div><div class="py">juǎnbǐng</div><div class="hz">卷饼</div><div class="en">wrap / taco</div></div>
-  <div class="vc br"><div style="font-size:30px">🍟</div><div class="py">shǔtiáo</div><div class="hz">薯条</div><div class="en">fries</div></div>
+<span class="badge co">vocab 4</span>
+<div class="tag co">🍲 食物 (二) shíwù · main dishes</div>
+<div class="title">大菜 dà cài</div>
+<div class="title-en">main dishes — common restaurant dishes</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="vc bo"><div style="font-size:28px">🦆</div><div class="py">kǎoyā</div><div class="hz">烤鸭</div><div class="en">roast duck ⭐</div></div>
+  <div class="vc bb"><div style="font-size:28px">🐟</div><div class="py">yú</div><div class="hz">鱼</div><div class="en">fish</div></div>
+  <div class="vc by"><div style="font-size:28px">🍲</div><div class="py">tāng</div><div class="hz">汤</div><div class="en">soup</div></div>
+  <div class="vc bg"><div style="font-size:28px">🥗</div><div class="py">shālā</div><div class="hz">沙拉</div><div class="en">salad</div></div>
+  <div class="vc bp"><div style="font-size:28px">🍤</div><div class="py">xiā</div><div class="hz">虾</div><div class="en">shrimp / prawn</div></div>
+  <div class="vc bu"><div style="font-size:28px">🍕</div><div class="py">bǐsà</div><div class="hz">比萨</div><div class="en">pizza</div></div>
+  <div class="vc bt"><div style="font-size:28px">🌮</div><div class="py">juǎnbǐng</div><div class="hz">卷饼</div><div class="en">wrap / taco</div></div>
+  <div class="vc br"><div style="font-size:28px">🍟</div><div class="py">shǔtiáo</div><div class="hz">薯条</div><div class="en">fries</div></div>
 </div>
-<div class="card bo" style="font-size:10.5px">
+<div class="card bo" style="font-size:11px">
   <div class="lbl co">⭐ 北京烤鸭 Běijīng kǎoyā · Beijing roast duck</div>
-  <div style="line-height:1.9;margin-top:3px">
-    <b>北京 Běijīng</b> = Beijing (the city) · <b>烤 kǎo</b> = roast · <b>鸭 yā</b> = duck<br>
-    <span style="color:#888;font-size:9px">a famous dish — eaten with thin pancakes &amp; cucumber!</span>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>北京</b> Běijīng = Beijing · <b>烤</b> kǎo = roast · <b>鸭</b> yā = duck<br>
+    <span style="color:#888;font-size:9.5px;font-style:italic">A famous dish — eaten with thin pancakes &amp; cucumber!</span>
   </div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 7: NEW FOOD 3 (MEAT & VEGGIES) ════════════════ -->
+<!-- ════════════════ SLIDE 7: NEW FOOD 3 — MEAT & VEGGIES ════════════════ -->
 <div class="slide">
-<span class="badge co">vocabulary 5</span>
-<div class="tag co">🥩 新食物 (三) · meats &amp; vegetables</div>
-<div class="title">肉和蔬菜 ròu hé shūcài — meats and vegetables</div>
-<div class="sub">"肉 ròu" = meat &nbsp;·&nbsp; "菜 cài" = vegetable / dish</div>
-<div class="c4" style="margin-bottom:6px">
-  <div class="vc br"><div style="font-size:26px">🥩</div><div class="py">niúròu</div><div class="hz">牛肉</div><div class="en">beef</div></div>
-  <div class="vc bp"><div style="font-size:26px">🥓</div><div class="py">zhūròu</div><div class="hz">猪肉</div><div class="en">pork</div></div>
-  <div class="vc bo"><div style="font-size:26px">🍗</div><div class="py">jīròu</div><div class="hz">鸡肉</div><div class="en">chicken (review)</div></div>
-  <div class="vc by"><div style="font-size:26px">🐑</div><div class="py">yángròu</div><div class="hz">羊肉</div><div class="en">lamb</div></div>
+<span class="badge co">vocab 5</span>
+<div class="tag co">🥩 食物 (三) · meats &amp; vegetables</div>
+<div class="title">肉和蔬菜 ròu hé shūcài</div>
+<div class="title-en">meats and vegetables · 肉 ròu = meat · 菜 cài = vegetable / dish</div>
+<div class="c4" style="margin-bottom:5px">
+  <div class="vc br"><div style="font-size:24px">🥩</div><div class="py">niúròu</div><div class="hz">牛肉</div><div class="en">beef</div></div>
+  <div class="vc bp"><div style="font-size:24px">🥓</div><div class="py">zhūròu</div><div class="hz">猪肉</div><div class="en">pork</div></div>
+  <div class="vc bo"><div style="font-size:24px">🍗</div><div class="py">jīròu</div><div class="hz">鸡肉</div><div class="en">chicken</div></div>
+  <div class="vc by"><div style="font-size:24px">🐑</div><div class="py">yángròu</div><div class="hz">羊肉</div><div class="en">lamb</div></div>
 </div>
 <div class="c4" style="margin-bottom:6px">
-  <div class="vc bg"><div style="font-size:26px">🥬</div><div class="py">shūcài</div><div class="hz">蔬菜</div><div class="en">vegetables</div></div>
-  <div class="vc bt"><div style="font-size:26px">🍅</div><div class="py">xīhóngshì</div><div class="hz">西红柿</div><div class="en">tomato</div></div>
-  <div class="vc bu"><div style="font-size:26px">🥔</div><div class="py">tǔdòu</div><div class="hz">土豆</div><div class="en">potato</div></div>
-  <div class="vc bb"><div style="font-size:26px">🥕</div><div class="py">húluóbo</div><div class="hz">胡萝卜</div><div class="en">carrot</div></div>
+  <div class="vc bg"><div style="font-size:24px">🥬</div><div class="py">shūcài</div><div class="hz">蔬菜</div><div class="en">vegetables</div></div>
+  <div class="vc bt"><div style="font-size:24px">🍅</div><div class="py">xīhóngshì</div><div class="hz">西红柿</div><div class="en">tomato</div></div>
+  <div class="vc bu"><div style="font-size:24px">🥔</div><div class="py">tǔdòu</div><div class="hz">土豆</div><div class="en">potato</div></div>
+  <div class="vc bb"><div style="font-size:24px">🥕</div><div class="py">húluóbo</div><div class="hz">胡萝卜</div><div class="en">carrot</div></div>
 </div>
-<div class="card bp" style="font-size:10.5px">
-  <div class="lbl cp">💬 sentences</div>
-  <div style="line-height:2;margin-top:3px">
-    我喜欢吃 <b>牛肉面</b> wǒ xǐhuān chī <b>niúròu miàn</b> <span style="color:#888;font-size:9px">I like beef noodles</span><br>
-    服务员，请来一份 <b>西红柿炒鸡蛋</b> <span class="cp" style="font-size:8px">xīhóngshì chǎo jīdàn · tomato and egg stir-fry</span>
+<div class="card bp" style="font-size:11px">
+  <div class="lbl cp">💬 句子 jùzi · sentences</div>
+  <div style="line-height:1.8;margin-top:3px">
+    <b>我喜欢吃牛肉面。</b> <span class="cp" style="font-size:9px">wǒ xǐhuān chī niúròu miàn.</span> <span style="color:#888;font-size:9px;font-style:italic">I like to eat beef noodles.</span><br>
+    <b>请来一份西红柿炒鸡蛋。</b> <span class="cp" style="font-size:9px">qǐng lái yī fèn xīhóngshì chǎo jīdàn.</span> <span style="color:#888;font-size:9px;font-style:italic">Please bring a tomato &amp; egg stir-fry.</span>
   </div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 8: DRINKS (REVIEW + NEW) ════════════════ -->
+<!-- ════════════════ SLIDE 8: DRINKS ════════════════ -->
 <div class="slide">
-<span class="badge co">vocabulary 6</span>
-<div class="tag co">🥤 饮料 yǐnliào · drinks (review + new)</div>
-<div class="title">饮料 yǐnliào — drinks</div>
-<div class="sub">所有饮料用 <b>喝 hē</b> · all drinks use <b>喝 hē</b> (to drink)</div>
-<div class="lbl cg" style="margin-bottom:3px;font-size:10px">✅ 复习 fùxí · review (we know these)</div>
+<span class="badge co">vocab 6</span>
+<div class="tag co">🥤 饮料 yǐnliào · drinks</div>
+<div class="title">饮料 yǐnliào</div>
+<div class="title-en">drinks · all drinks use 喝 hē (to drink)</div>
+<div class="lbl cg" style="font-size:10px;margin-bottom:3px">✅ 复习 fùxí · review — we already know these</div>
 <div class="c5" style="margin-bottom:6px">
   <div class="fch bb"><span class="em">💧</span><div class="py">shuǐ</div><div class="hz">水</div><div class="en">water</div></div>
   <div class="fch bg"><span class="em">🥛</span><div class="py">niúnǎi</div><div class="hz">牛奶</div><div class="en">milk</div></div>
@@ -357,7 +383,7 @@ body.hints .hpy,body.hints .hen{display:block}
   <div class="fch bu"><span class="em">🧋</span><div class="py">nǎichá</div><div class="hz">奶茶</div><div class="en">milk tea</div></div>
   <div class="fch by"><span class="em">🧃</span><div class="py">guǒzhī</div><div class="hz">果汁</div><div class="en">juice</div></div>
 </div>
-<div class="lbl co" style="margin-bottom:3px;font-size:10px;margin-top:4px">⭐ 新词 xīn cí · NEW words</div>
+<div class="lbl co" style="font-size:10px;margin-top:4px;margin-bottom:3px">⭐ 新词 xīn cí · NEW words</div>
 <div class="c5" style="margin-bottom:6px">
   <div class="fch br"><span class="em">🥤</span><div class="py">kělè</div><div class="hz">可乐</div><div class="en">cola</div></div>
   <div class="fch bp"><span class="em">🥤</span><div class="py">xuěbì</div><div class="hz">雪碧</div><div class="en">sprite</div></div>
@@ -365,123 +391,129 @@ body.hints .hpy,body.hints .hen{display:block}
   <div class="fch bb"><span class="em">🧊</span><div class="py">bīng shuǐ</div><div class="hz">冰水</div><div class="en">ice water</div></div>
   <div class="fch by"><span class="em">🍊</span><div class="py">chéngzhī</div><div class="hz">橙汁</div><div class="en">orange juice</div></div>
 </div>
-<div class="card by" style="font-size:10px;margin-top:4px">
-  <div class="lbl cy">💡 tip</div>
-  <div style="margin-top:2px"><b>热 rè</b> = hot &nbsp;·&nbsp; <b>冰 bīng</b> = ice/cold &nbsp;·&nbsp; <b>热水 rè shuǐ</b> = hot water &nbsp;·&nbsp; <b>冰水 bīng shuǐ</b> = ice water</div>
+<div class="card by" style="font-size:11px;margin-top:4px">
+  <div class="lbl cy">💡 小贴士 xiǎo tiēshì · tip</div>
+  <div style="margin-top:2px;line-height:1.6"><b>热 rè</b> = hot &nbsp;·&nbsp; <b>冰 bīng</b> = ice/cold &nbsp;·&nbsp; so <b>热水 rè shuǐ</b> = hot water, <b>冰水 bīng shuǐ</b> = ice water</div>
 </div>
 </div>
 
 <!-- ════════════════ SLIDE 9: MEASURE WORDS INTRO ════════════════ -->
 <div class="slide">
-<span class="badge cu">vocabulary 7</span>
-<div class="tag cu">🥢 量词 liàngcí · measure words — VERY important!</div>
-<div class="title">量词 liàngcí — counting words</div>
-<div class="sub">In Chinese, we put a special word between a number and a thing. 一 + 量词 + 名词 (yī + liàngcí + míngcí)</div>
+<span class="badge cu">grammar 1</span>
+<div class="tag cu">🥢 量词 liàngcí · measure words</div>
+<div class="title">量词 liàngcí</div>
+<div class="title-en">measure words — VERY important in Chinese!</div>
+<div class="sub">In Chinese: <b>number + 量词 liàngcí + thing</b> · 一 + 量词 + 名词 (yī + liàngcí + míngcí · one + measure-word + noun)</div>
 <div class="c3" style="margin-bottom:6px">
-  <div class="mwc bp"><div class="mwh">个</div><div class="mwp">gè</div><div class="mwen">general / for anything</div><div class="mwex">一个汉堡 · 1 burger</div></div>
-  <div class="mwc bu"><div class="mwh">杯</div><div class="mwp">bēi</div><div class="mwen">a cup of (drinks)</div><div class="mwex">一杯水 · 1 cup water</div></div>
-  <div class="mwc bg"><div class="mwh">碗</div><div class="mwp">wǎn</div><div class="mwen">a bowl of</div><div class="mwex">一碗面条 · 1 bowl noodles</div></div>
-  <div class="mwc bo"><div class="mwh">盘</div><div class="mwp">pán</div><div class="mwen">a plate of</div><div class="mwex">一盘饺子 · 1 plate dumplings</div></div>
-  <div class="mwc by"><div class="mwh">份</div><div class="mwp">fèn</div><div class="mwen">a serving of</div><div class="mwex">一份沙拉 · 1 salad</div></div>
-  <div class="mwc bt"><div class="mwh">瓶</div><div class="mwp">píng</div><div class="mwen">a bottle of</div><div class="mwex">一瓶可乐 · 1 bottle cola</div></div>
+  <div class="mwc bp"><div class="mwh">个</div><div class="mwp">gè</div><div class="mwen">general / for anything</div><div class="mwex">一个汉堡</div><div class="mwexpy">yī gè hànbǎo</div><div class="mwexen">1 burger</div></div>
+  <div class="mwc bu"><div class="mwh">杯</div><div class="mwp">bēi</div><div class="mwen">a cup of (drinks)</div><div class="mwex">一杯水</div><div class="mwexpy">yī bēi shuǐ</div><div class="mwexen">1 cup of water</div></div>
+  <div class="mwc bg"><div class="mwh">碗</div><div class="mwp">wǎn</div><div class="mwen">a bowl of</div><div class="mwex">一碗面条</div><div class="mwexpy">yī wǎn miàntiáo</div><div class="mwexen">1 bowl of noodles</div></div>
+  <div class="mwc bo"><div class="mwh">盘</div><div class="mwp">pán</div><div class="mwen">a plate of</div><div class="mwex">一盘饺子</div><div class="mwexpy">yī pán jiǎozi</div><div class="mwexen">1 plate of dumplings</div></div>
+  <div class="mwc by"><div class="mwh">份</div><div class="mwp">fèn</div><div class="mwen">a serving of</div><div class="mwex">一份沙拉</div><div class="mwexpy">yī fèn shālā</div><div class="mwexen">1 serving of salad</div></div>
+  <div class="mwc bt"><div class="mwh">瓶</div><div class="mwp">píng</div><div class="mwen">a bottle of</div><div class="mwex">一瓶可乐</div><div class="mwexpy">yī píng kělè</div><div class="mwexen">1 bottle of cola</div></div>
 </div>
-<div class="card br" style="font-size:10.5px">
-  <div class="lbl cr">⚠️ very important rule</div>
-  <div style="line-height:1.9;margin-top:3px">
-    English: "I want <span style="text-decoration:line-through">a</span> burger" → Chinese: 我要 <b>一个</b> 汉堡 (yī <b>gè</b> hànbǎo)<br>
-    You can't just say "一汉堡" — you must put 个 gè in between! 一定要量词！yīdìng yào liàngcí!
+<div class="card br" style="font-size:11px">
+  <div class="lbl cr">⚠️ 重要规则 zhòngyào guīzé · very important rule</div>
+  <div style="line-height:1.7;margin-top:3px">
+    English: "I want <span style="text-decoration:line-through">a</span> burger" → Chinese: <b>我要一个汉堡</b> <span class="cp" style="font-size:9px">wǒ yào yī gè hànbǎo</span><br>
+    You can't say "<span style="text-decoration:line-through">一汉堡</span>" — you MUST put 个 gè in between!
   </div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 10: MEASURE WORDS WITH FOOD ════════════════ -->
+<!-- ════════════════ SLIDE 10: MEASURE WORDS APPLIED ════════════════ -->
 <div class="slide">
-<span class="badge cu">vocabulary 8</span>
-<div class="tag cu">🥢 量词应用 liàngcí yìngyòng · measure words in action</div>
-<div class="title">量词 + 食物 — measure words with food</div>
-<div class="sub">Which measure word goes with which food? 哪个量词配哪个食物？</div>
-<div class="c2" style="gap:8px;margin-bottom:6px">
+<span class="badge cu">grammar 2</span>
+<div class="tag cu">🥢 量词 + 食物 · measure words with food</div>
+<div class="title">量词应用 liàngcí yìngyòng</div>
+<div class="title-en">measure words in action — which one fits which food?</div>
+<div class="c2" style="gap:7px;margin-bottom:6px">
   <div class="card bu" style="font-size:11px">
-    <div class="lbl cu">🍚 碗 wǎn (bowl)</div>
-    <div style="line-height:2;margin-top:3px">
-      <b>一碗米饭</b> <span class="cp" style="font-size:8.5px">yī wǎn mǐfàn · 1 bowl of rice</span><br>
-      <b>一碗面条</b> <span class="cp" style="font-size:8.5px">yī wǎn miàntiáo · 1 bowl of noodles</span><br>
-      <b>一碗汤</b> <span class="cp" style="font-size:8.5px">yī wǎn tāng · 1 bowl of soup</span>
+    <div class="lbl cu">🍚 碗 wǎn · bowl</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>一碗米饭</b> <span class="cp" style="font-size:8.5px">yī wǎn mǐfàn</span> <span style="color:#888;font-size:9px;font-style:italic">1 bowl of rice</span><br>
+      <b>一碗面条</b> <span class="cp" style="font-size:8.5px">yī wǎn miàntiáo</span> <span style="color:#888;font-size:9px;font-style:italic">1 bowl of noodles</span><br>
+      <b>一碗汤</b> <span class="cp" style="font-size:8.5px">yī wǎn tāng</span> <span style="color:#888;font-size:9px;font-style:italic">1 bowl of soup</span>
     </div>
   </div>
   <div class="card bo" style="font-size:11px">
-    <div class="lbl co">🍽️ 盘 pán (plate)</div>
-    <div style="line-height:2;margin-top:3px">
-      <b>一盘饺子</b> <span class="cp" style="font-size:8.5px">yī pán jiǎozi · 1 plate dumplings</span><br>
-      <b>一盘炒饭</b> <span class="cp" style="font-size:8.5px">yī pán chǎofàn · 1 plate fried rice</span><br>
-      <b>一盘沙拉</b> <span class="cp" style="font-size:8.5px">yī pán shālā · 1 plate of salad</span>
+    <div class="lbl co">🍽️ 盘 pán · plate</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>一盘饺子</b> <span class="cp" style="font-size:8.5px">yī pán jiǎozi</span> <span style="color:#888;font-size:9px;font-style:italic">1 plate of dumplings</span><br>
+      <b>一盘炒饭</b> <span class="cp" style="font-size:8.5px">yī pán chǎofàn</span> <span style="color:#888;font-size:9px;font-style:italic">1 plate of fried rice</span><br>
+      <b>一盘沙拉</b> <span class="cp" style="font-size:8.5px">yī pán shālā</span> <span style="color:#888;font-size:9px;font-style:italic">1 plate of salad</span>
     </div>
   </div>
   <div class="card bp" style="font-size:11px">
-    <div class="lbl cp">🥤 杯 bēi (cup)</div>
-    <div style="line-height:2;margin-top:3px">
-      <b>一杯水</b> <span class="cp" style="font-size:8.5px">yī bēi shuǐ · 1 cup of water</span><br>
-      <b>两杯奶茶</b> <span class="cp" style="font-size:8.5px">liǎng bēi nǎichá · 2 cups milk tea</span><br>
-      <b>三杯果汁</b> <span class="cp" style="font-size:8.5px">sān bēi guǒzhī · 3 cups of juice</span>
+    <div class="lbl cp">🥤 杯 bēi · cup</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>一杯水</b> <span class="cp" style="font-size:8.5px">yī bēi shuǐ</span> <span style="color:#888;font-size:9px;font-style:italic">1 cup of water</span><br>
+      <b>两杯奶茶</b> <span class="cp" style="font-size:8.5px">liǎng bēi nǎichá</span> <span style="color:#888;font-size:9px;font-style:italic">2 cups of milk tea</span><br>
+      <b>三杯果汁</b> <span class="cp" style="font-size:8.5px">sān bēi guǒzhī</span> <span style="color:#888;font-size:9px;font-style:italic">3 cups of juice</span>
     </div>
   </div>
   <div class="card bg" style="font-size:11px">
-    <div class="lbl cg">🍔 个 gè (any item)</div>
-    <div style="line-height:2;margin-top:3px">
-      <b>一个汉堡</b> <span class="cp" style="font-size:8.5px">yī gè hànbǎo · 1 burger</span><br>
-      <b>两个包子</b> <span class="cp" style="font-size:8.5px">liǎng gè bāozi · 2 buns</span><br>
-      <b>一个鸡蛋</b> <span class="cp" style="font-size:8.5px">yī gè jīdàn · 1 egg</span>
+    <div class="lbl cg">🍔 个 gè · item (general)</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>一个汉堡</b> <span class="cp" style="font-size:8.5px">yī gè hànbǎo</span> <span style="color:#888;font-size:9px;font-style:italic">1 burger</span><br>
+      <b>两个包子</b> <span class="cp" style="font-size:8.5px">liǎng gè bāozi</span> <span style="color:#888;font-size:9px;font-style:italic">2 buns</span><br>
+      <b>一个鸡蛋</b> <span class="cp" style="font-size:8.5px">yī gè jīdàn</span> <span style="color:#888;font-size:9px;font-style:italic">1 egg</span>
     </div>
   </div>
 </div>
-<div class="card by" style="font-size:10.5px">
-  <div class="lbl cy">💡 special: 二 vs 两</div>
-  <div style="margin-top:2px;line-height:1.9">
-    Counting "two of something" → use <b>两 liǎng</b>, not 二 èr. So <b>两碗面条</b> liǎng wǎn miàntiáo ✅ &nbsp;·&nbsp; <span style="text-decoration:line-through">二碗面条</span> ❌
+<div class="card by" style="font-size:11px">
+  <div class="lbl cy">💡 特殊规则 tèshū guīzé · special: 二 vs 两</div>
+  <div style="margin-top:2px;line-height:1.7">
+    Counting "two of something" → use <b>两 liǎng</b>, NOT 二 èr! <br>
+    <b>两碗面条</b> liǎng wǎn miàntiáo ✅ <span style="color:#888;font-style:italic">(2 bowls of noodles)</span> &nbsp;·&nbsp; <span style="text-decoration:line-through">二碗面条</span> ❌
   </div>
 </div>
 </div>
 
 <!-- ════════════════ SLIDE 11: KEY VERBS ════════════════ -->
 <div class="slide">
-<span class="badge cg">grammar</span>
+<span class="badge cg">grammar 3</span>
 <div class="tag cg">🔑 关键动词 guānjiàn dòngcí · key verbs for ordering</div>
-<div class="title">点菜的动词 diǎn cài de dòngcí — verbs for ordering</div>
-<div class="sub">5 important verbs you'll use again and again at the restaurant!</div>
-<div class="c2" style="gap:8px">
+<div class="title">点菜的动词 diǎn cài de dòngcí</div>
+<div class="title-en">5 important verbs you'll use again and again!</div>
+<div class="c2" style="gap:7px">
   <div class="card bp" style="font-size:11px">
-    <div class="lbl cp" style="font-size:14px">要 <span style="color:#aaa;font-size:10px">yào</span> — to want</div>
-    <div style="line-height:2;margin-top:3px">
-      <b>我要</b>一碗面条 <span class="cp" style="font-size:8px">wǒ yào yī wǎn miàntiáo</span><br>
-      <span style="color:#888;font-size:9px">I want a bowl of noodles</span>
+    <div class="lbl cp" style="font-size:15px">要 <span style="color:#aaa;font-size:10px">yào</span> · to want</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>我要一碗面条。</b><br>
+      <span class="cp" style="font-size:9px">wǒ yào yī wǎn miàntiáo.</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">I want a bowl of noodles.</span>
     </div>
   </div>
   <div class="card bu" style="font-size:11px">
-    <div class="lbl cu" style="font-size:14px">点 <span style="color:#aaa;font-size:10px">diǎn</span> — to order (dishes)</div>
-    <div style="line-height:2;margin-top:3px">
-      <b>我想点</b>一个汉堡 <span class="cp" style="font-size:8px">wǒ xiǎng diǎn yī gè hànbǎo</span><br>
-      <span style="color:#888;font-size:9px">I'd like to order a burger</span>
+    <div class="lbl cu" style="font-size:15px">点 <span style="color:#aaa;font-size:10px">diǎn</span> · to order (food)</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>我想点一个汉堡。</b><br>
+      <span class="cp" style="font-size:9px">wǒ xiǎng diǎn yī gè hànbǎo.</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">I'd like to order a burger.</span>
     </div>
   </div>
   <div class="card bo" style="font-size:11px">
-    <div class="lbl co" style="font-size:14px">来 <span style="color:#aaa;font-size:10px">lái</span> — bring / I'll have</div>
-    <div style="line-height:2;margin-top:3px">
-      <b>来</b>一份饺子 <span class="cp" style="font-size:8px">lái yī fèn jiǎozi</span><br>
-      <span style="color:#888;font-size:9px">I'll have a serving of dumplings (casual!)</span>
+    <div class="lbl co" style="font-size:15px">来 <span style="color:#aaa;font-size:10px">lái</span> · I'll have / bring</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>来一份饺子。</b><br>
+      <span class="cp" style="font-size:9px">lái yī fèn jiǎozi.</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">I'll have a serving of dumplings (casual).</span>
     </div>
   </div>
   <div class="card bg" style="font-size:11px">
-    <div class="lbl cg" style="font-size:14px">给 <span style="color:#aaa;font-size:10px">gěi</span> — to give</div>
-    <div style="line-height:2;margin-top:3px">
-      请<b>给</b>我菜单 <span class="cp" style="font-size:8px">qǐng gěi wǒ càidān</span><br>
-      <span style="color:#888;font-size:9px">please give me the menu</span>
+    <div class="lbl cg" style="font-size:15px">给 <span style="color:#aaa;font-size:10px">gěi</span> · to give</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>请给我菜单。</b><br>
+      <span class="cp" style="font-size:9px">qǐng gěi wǒ càidān.</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">Please give me the menu.</span>
     </div>
   </div>
   <div class="card by" style="grid-column:span 2;font-size:11px">
-    <div class="lbl cy" style="font-size:14px">请 <span style="color:#aaa;font-size:10px">qǐng</span> — please / polite please-verb</div>
-    <div style="line-height:2;margin-top:3px">
-      <b>请</b>给我一杯水 <span class="cp" style="font-size:8px">qǐng gěi wǒ yī bēi shuǐ</span> &nbsp;·&nbsp; <span style="color:#888;font-size:9px">please give me a cup of water</span><br>
-      <b>请</b>问菜单在哪里？ <span class="cp" style="font-size:8px">qǐng wèn càidān zài nǎli?</span> &nbsp;·&nbsp; <span style="color:#888;font-size:9px">excuse me, where is the menu?</span>
+    <div class="lbl cy" style="font-size:15px">请 <span style="color:#aaa;font-size:10px">qǐng</span> · please</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>请给我一杯水。</b> <span class="cp" style="font-size:9px">qǐng gěi wǒ yī bēi shuǐ.</span> <span style="color:#888;font-size:9.5px;font-style:italic">Please give me a cup of water.</span><br>
+      <b>请问菜单在哪里？</b> <span class="cp" style="font-size:9px">qǐng wèn càidān zài nǎli?</span> <span style="color:#888;font-size:9.5px;font-style:italic">Excuse me, where is the menu?</span>
     </div>
   </div>
 </div>
@@ -491,77 +523,112 @@ body.hints .hpy,body.hints .hen{display:block}
 <div class="slide">
 <span class="badge cb">phrases</span>
 <div class="tag cb">🙏 礼貌用语 lǐmào yòngyǔ · polite phrases</div>
-<div class="title">在餐厅说什么 — what to say in the restaurant</div>
-<div class="sub">服务员喜欢有礼貌的客人！fúwùyuán xǐhuān yǒu lǐmào de kèrén! · waiters love polite customers!</div>
-<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<div class="title">在餐厅说什么 zài cāntīng shuō shénme</div>
+<div class="title-en">what to say in the restaurant — politeness wins! 😊</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:3px">
   <div class="phr bp">
     <span class="em">👋</span>
-    <div><div class="hz">你好 / 您好</div><div class="py">nǐ hǎo / nín hǎo</div></div>
-    <div style="margin-left:auto;text-align:right"><div class="en">hello (您 nín = polite "you")</div></div>
+    <div style="flex:1"><div class="hz">你好 / 您好</div><div class="py">nǐ hǎo / nín hǎo</div></div>
+    <div style="text-align:right"><div class="en">hello (您 nín = polite "you")</div></div>
   </div>
   <div class="phr bo">
     <span class="em">🙋</span>
-    <div><div class="hz">请问...</div><div class="py">qǐng wèn...</div></div>
-    <div style="margin-left:auto;text-align:right"><div class="en">excuse me, may I ask...</div></div>
+    <div style="flex:1"><div class="hz">请问...</div><div class="py">qǐng wèn...</div></div>
+    <div style="text-align:right"><div class="en">excuse me, may I ask...</div></div>
   </div>
   <div class="phr by">
     <span class="em">🙏</span>
-    <div><div class="hz">谢谢 / 谢谢你</div><div class="py">xièxie / xièxie nǐ</div></div>
-    <div style="margin-left:auto;text-align:right"><div class="en">thank you</div></div>
+    <div style="flex:1"><div class="hz">谢谢 / 谢谢你</div><div class="py">xièxie / xièxie nǐ</div></div>
+    <div style="text-align:right"><div class="en">thank you</div></div>
   </div>
   <div class="phr bg">
     <span class="em">😊</span>
-    <div><div class="hz">不客气</div><div class="py">bù kèqi</div></div>
-    <div style="margin-left:auto;text-align:right"><div class="en">you're welcome</div></div>
+    <div style="flex:1"><div class="hz">不客气</div><div class="py">bù kèqi</div></div>
+    <div style="text-align:right"><div class="en">you're welcome</div></div>
   </div>
   <div class="phr bb">
     <span class="em">🙇</span>
-    <div><div class="hz">对不起 / 不好意思</div><div class="py">duìbuqǐ / bùhǎoyìsi</div></div>
-    <div style="margin-left:auto;text-align:right"><div class="en">sorry / excuse me</div></div>
+    <div style="flex:1"><div class="hz">对不起 / 不好意思</div><div class="py">duìbuqǐ / bùhǎoyìsi</div></div>
+    <div style="text-align:right"><div class="en">sorry / excuse me</div></div>
   </div>
   <div class="phr bu">
     <span class="em">👌</span>
-    <div><div class="hz">没关系 / 没事</div><div class="py">méi guānxi / méi shì</div></div>
-    <div style="margin-left:auto;text-align:right"><div class="en">it's okay / no problem</div></div>
+    <div style="flex:1"><div class="hz">没关系 / 没事</div><div class="py">méi guānxi / méi shì</div></div>
+    <div style="text-align:right"><div class="en">it's okay / no problem</div></div>
   </div>
   <div class="phr br">
     <span class="em">👋</span>
-    <div><div class="hz">再见！</div><div class="py">zàijiàn!</div></div>
-    <div style="margin-left:auto;text-align:right"><div class="en">goodbye!</div></div>
+    <div style="flex:1"><div class="hz">再见！</div><div class="py">zàijiàn!</div></div>
+    <div style="text-align:right"><div class="en">goodbye!</div></div>
   </div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 13: GAME — MEASURE WORD MATCH ════════════════ -->
+<!-- ════════════════ SLIDE 13: GAME 1 — MEASURE WORD MATCH ════════════════ -->
 <div class="slide">
+<div class="toggle-bar"><button class="tgl" id="tpy" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten" onclick="tEN()">English</button></div>
 <span class="badge co">🎮 game 1</span>
-<div class="tag co">🎮 游戏 yóuxì · measure word match</div>
-<div class="title">量词配对 liàngcí pèiduì — match the measure word</div>
-<div class="sub">See the food — which measure word fits? 看食物，选量词！</div>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">量词配对 liàngcí pèiduì</div>
+<div class="title-en">measure word match — which word fits the food?</div>
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
     <div class="gsbar">🎯 <span id="lws">0</span>/8</div>
-    <div class="gsbar">question <span id="lwq">1</span>/8</div>
-    <button class="gbtn" onclick="initLw()">↺ restart</button>
-    <button class="hbtn" id="hb13" onclick="tH(this)">💡 hints: off</button>
+    <div class="gsbar">题 <span id="lwq">1</span>/8</div>
+    <button class="gbtn" onclick="initLw()">↺ 重来 chónglái</button>
   </div>
   <div class="qq">
     <div style="font-size:36px" id="lwem">🍚</div>
     <div class="qqmain" id="lwhz">米饭</div>
-    <div class="hpy" id="lwpy" style="font-size:10px;color:#e91e8c;font-weight:700">mǐfàn</div>
-    <div class="qqlbl">→ 一 ___ 米饭? Which measure word?</div>
+    <div class="gpy" id="lwpy" style="font-size:10px;color:#7c3aed;font-weight:700;text-align:center">mǐfàn</div>
+    <div class="qqlbl">一 ___ 米饭? <span class="gen">Which measure word fits?</span></div>
   </div>
-  <div class="qopts" id="lwo" style="grid-template-columns:repeat(3,1fr);max-width:380px"></div>
+  <div class="qopts three" id="lwo" style="max-width:420px"></div>
   <div class="gres" id="lwr"></div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 14: DIALOGUE 1 — WELCOME ════════════════ -->
+<!-- ════════════════ SLIDE 14: GAME 2 — EAT OR DRINK ════════════════ -->
 <div class="slide">
-<span class="badge ct">dialogue 1</span>
-<div class="tag ct">💬 对话 (一) duìhuà · the welcome 欢迎</div>
-<div class="title">场景一：进入餐厅 — scene 1: entering the restaurant</div>
-<div class="sub">服务员欢迎你，问你几个人 fúwùyuán huānyíng nǐ, wèn nǐ jǐ gè rén</div>
+<div class="toggle-bar"><button class="tgl" id="tpy2" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten2" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 2</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">吃还是喝 chī háishi hē</div>
+<div class="title-en">eat or drink? — click 吃 chī (eat) or 喝 hē (drink)</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="eds">0</span>/10</div>
+    <div class="gsbar">题 <span id="edq">1</span>/10</div>
+    <button class="gbtn" onclick="initEd()">↺ 重来</button>
+  </div>
+  <div class="qq" id="edcard">
+    <div style="font-size:48px" id="edem">🍚</div>
+    <div class="qqmain" id="edhz">米饭</div>
+    <div class="gpy" id="edpy" style="text-align:center;color:#7c3aed;font-weight:700">mǐfàn</div>
+    <div class="gen" id="eden" style="text-align:center;color:#888;font-style:italic;font-size:10px">rice</div>
+  </div>
+  <div style="display:flex;gap:12px;max-width:380px;width:100%">
+    <button class="qopt" style="flex:1;background:linear-gradient(135deg,#ffedd5,#fed7aa);border-color:#fb923c;font-size:18px;min-height:62px" onclick="edPick('eat')">
+      <div>🍽️ 吃</div>
+      <div class="gpy" style="font-size:10px;color:#c2410c">chī</div>
+      <div class="gen" style="font-size:9px;color:#c2410c;font-style:italic">eat</div>
+    </button>
+    <button class="qopt" style="flex:1;background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-color:#60a5fa;font-size:18px;min-height:62px" onclick="edPick('drink')">
+      <div>🥤 喝</div>
+      <div class="gpy" style="font-size:10px;color:#1e40af">hē</div>
+      <div class="gen" style="font-size:9px;color:#1e40af;font-style:italic">drink</div>
+    </button>
+  </div>
+  <div class="gres" id="edr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 15: DIALOGUE 1 — WELCOME ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 1</span>
+<div class="tag ct">💬 对话 (一) duìhuà · the welcome</div>
+<div class="title">场景一：进入餐厅 chǎngjǐng yī</div>
+<div class="title-en">scene 1: entering the restaurant</div>
 <div class="dlg">
   <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán · waiter</div>
     <div class="hz">欢迎光临！请问几位？</div>
@@ -573,7 +640,7 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">nǐ hǎo! wǒmen sān wèi.</div>
     <div class="en">Hello! We are three people.</div></div></div>
 
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">好的，请跟我来。这边请！</div>
     <div class="py">hǎo de, qǐng gēn wǒ lái. zhèbiān qǐng!</div>
     <div class="en">Okay, please follow me. This way please!</div></div></div>
@@ -583,20 +650,20 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">xièxie!</div>
     <div class="en">Thank you!</div></div></div>
 </div>
-<div class="card by" style="font-size:10px;margin-top:6px">
-  <div class="lbl cy">🔑 key words</div>
-  <div style="margin-top:2px"><b>几位 jǐ wèi</b> = how many people? &nbsp;·&nbsp; <b>位 wèi</b> = polite measure word for people &nbsp;·&nbsp; <b>这边 zhèbiān</b> = this way</div>
+<div class="card by" style="font-size:10.5px;margin-top:5px">
+  <div class="lbl cy">🔑 关键词 guānjiàn cí · key words</div>
+  <div style="margin-top:2px;line-height:1.6"><b>几位 jǐ wèi</b> = how many people? · <b>位 wèi</b> = polite measure word for people · <b>这边 zhèbiān</b> = this way</div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 15: DIALOGUE 2 — SITTING DOWN ════════════════ -->
+<!-- ════════════════ SLIDE 16: DIALOGUE 2 — SITTING DOWN ════════════════ -->
 <div class="slide">
-<span class="badge ct">dialogue 2</span>
-<div class="tag ct">💬 对话 (二) · sitting down 入座</div>
-<div class="title">场景二：坐下来 — scene 2: being seated</div>
-<div class="sub">服务员给你菜单 fúwùyuán gěi nǐ càidān</div>
+<span class="badge ct">对话 2</span>
+<div class="tag ct">💬 对话 (二) · sitting down 入座 rùzuò</div>
+<div class="title">场景二：坐下来 chǎngjǐng èr</div>
+<div class="title-en">scene 2: being seated &amp; getting the menu</div>
 <div class="dlg">
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">请坐！这是菜单。</div>
     <div class="py">qǐng zuò! zhè shì càidān.</div>
     <div class="en">Please have a seat! This is the menu.</div></div></div>
@@ -606,7 +673,7 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">xièxie!</div>
     <div class="en">Thank you!</div></div></div>
 
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">你们想喝点什么？</div>
     <div class="py">nǐmen xiǎng hē diǎn shénme?</div>
     <div class="en">What would you like to drink?</div></div></div>
@@ -616,20 +683,20 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">wǒ kàn kàn càidān, qǐng děng yīxià.</div>
     <div class="en">Let me look at the menu, please wait a moment.</div></div></div>
 </div>
-<div class="card by" style="font-size:10px;margin-top:6px">
-  <div class="lbl cy">🔑 key words</div>
-  <div style="margin-top:2px"><b>请坐 qǐng zuò</b> = please sit · <b>看看 kàn kàn</b> = take a look (verb doubled = "a little bit") · <b>等一下 děng yīxià</b> = wait a moment</div>
+<div class="card by" style="font-size:10.5px;margin-top:5px">
+  <div class="lbl cy">🔑 关键词 guānjiàn cí · key words</div>
+  <div style="margin-top:2px;line-height:1.6"><b>请坐 qǐng zuò</b> = please sit · <b>看看 kàn kàn</b> = take a look (verb doubled = a little) · <b>等一下 děng yīxià</b> = wait a moment</div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 16: DIALOGUE 3 — ORDER DRINKS ════════════════ -->
+<!-- ════════════════ SLIDE 17: DIALOGUE 3 — ORDER DRINKS ════════════════ -->
 <div class="slide">
-<span class="badge ct">dialogue 3</span>
+<span class="badge ct">对话 3</span>
 <div class="tag ct">💬 对话 (三) · ordering drinks 点饮料</div>
-<div class="title">场景三：点饮料 — scene 3: ordering drinks</div>
-<div class="sub">用 <b>要</b> 和 <b>杯</b> ! yòng <b>yào</b> hé <b>bēi</b>!</div>
+<div class="title">场景三：点饮料 chǎngjǐng sān</div>
+<div class="title-en">scene 3: ordering drinks · use 要 yào and 杯 bēi!</div>
 <div class="dlg">
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">你们想喝什么饮料？</div>
     <div class="py">nǐmen xiǎng hē shénme yǐnliào?</div>
     <div class="en">What drinks would you like?</div></div></div>
@@ -639,15 +706,15 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">wǒ yào yī bēi xīguā nǎixī.</div>
     <div class="en">I want a watermelon smoothie.</div></div></div>
 
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈 māma</div>
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈 māma · mum</div>
     <div class="hz">我要一杯热茶，谢谢。</div>
     <div class="py">wǒ yào yī bēi rè chá, xièxie.</div>
     <div class="en">I want a cup of hot tea, thank you.</div></div></div>
 
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">好的，一杯西瓜奶昔，一杯热茶。还要别的吗？</div>
-    <div class="py">hǎo de, yī bēi xīguā nǎixī, yī bēi rè chá. hái yào biéde ma?</div>
-    <div class="en">Okay — 1 smoothie, 1 hot tea. Anything else?</div></div></div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
+    <div class="hz">好的。还要别的吗？</div>
+    <div class="py">hǎo de. hái yào biéde ma?</div>
+    <div class="en">Okay. Anything else?</div></div></div>
 
   <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
     <div class="hz">还要一瓶冰水，谢谢！</div>
@@ -656,14 +723,36 @@ body.hints .hpy,body.hints .hen{display:block}
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 17: DIALOGUE 4 — ORDER FOOD ════════════════ -->
+<!-- ════════════════ SLIDE 18: GAME 3 — DRINK QUIZ ════════════════ -->
 <div class="slide">
-<span class="badge ct">dialogue 4</span>
-<div class="tag ct">💬 对话 (四) · ordering food 点菜</div>
-<div class="title">场景四：点菜 — scene 4: ordering food</div>
-<div class="sub">用 <b>点 / 来 / 要</b> · all three work for ordering food!</div>
+<div class="toggle-bar"><button class="tgl" id="tpy3" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten3" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 3</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">饮料问答 yǐnliào wèndá</div>
+<div class="title-en">drink quiz — see the emoji, pick the Chinese word!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="dqs">0</span>/8</div>
+    <div class="gsbar">题 <span id="dqq">1</span>/8</div>
+    <button class="gbtn" onclick="initDq()">↺ 重来</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="dqem" style="font-size:54px">🥤</div>
+    <div class="qqlbl">这是什么？<span class="gen">What drink is this?</span></div>
+  </div>
+  <div class="qopts" id="dqo"></div>
+  <div class="gres" id="dqr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 19: DIALOGUE 4 — ORDER FOOD ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 4</span>
+<div class="tag ct">💬 对话 (四) · ordering food 点菜 diǎn cài</div>
+<div class="title">场景四：点菜 chǎngjǐng sì</div>
+<div class="title-en">scene 4: ordering food · use 点 / 来 / 要 — all work!</div>
 <div class="dlg">
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">你们准备好点菜了吗？</div>
     <div class="py">nǐmen zhǔnbèi hǎo diǎn cài le ma?</div>
     <div class="en">Are you ready to order?</div></div></div>
@@ -673,14 +762,14 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">wǒ yào yī pán jiǎozi hé yī wǎn chǎofàn.</div>
     <div class="en">I want a plate of dumplings and a bowl of fried rice.</div></div></div>
 
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈 māma · mum</div>
     <div class="hz">来一份北京烤鸭，再来一碗汤。</div>
     <div class="py">lái yī fèn Běijīng kǎoyā, zài lái yī wǎn tāng.</div>
     <div class="en">I'll have a serving of Beijing duck, and also a bowl of soup.</div></div></div>
 
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">好的，请问还点别的吗？</div>
-    <div class="py">hǎo de, qǐng wèn hái diǎn biéde ma?</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
+    <div class="hz">好的，还要点别的吗？</div>
+    <div class="py">hǎo de, hái yào diǎn biéde ma?</div>
     <div class="en">Okay, will you order anything else?</div></div></div>
 
   <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
@@ -688,54 +777,42 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">gòu le, xièxie!</div>
     <div class="en">That's enough, thank you!</div></div></div>
 </div>
-<div class="card by" style="font-size:9.5px;margin-top:4px">
-  <div class="lbl cy">🔑 key</div>
-  <div style="margin-top:1px"><b>再 zài</b> = also/again &nbsp;·&nbsp; <b>够了 gòu le</b> = that's enough &nbsp;·&nbsp; <b>别的 biéde</b> = other / anything else</div>
+<div class="card by" style="font-size:10px;margin-top:5px">
+  <div class="lbl cy">🔑 关键词</div>
+  <div style="margin-top:1px"><b>再 zài</b> = also/again · <b>够了 gòu le</b> = that's enough · <b>别的 biéde</b> = other / anything else</div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 18: DIALOGUE 5 — ASKING ABOUT MENU ════════════════ -->
+<!-- ════════════════ SLIDE 20: GAME 4 — FOOD QUIZ ════════════════ -->
 <div class="slide">
-<span class="badge ct">dialogue 5</span>
-<div class="tag ct">💬 对话 (五) · asking about the menu 问菜单</div>
-<div class="title">场景五：问菜单 — scene 5: asking questions</div>
-<div class="sub">不认识菜？没关系！bù rènshi cài? méi guānxi! · don't know the dish? no problem!</div>
-<div class="dlg">
-  <div class="dlg-turn right"><div class="avi c">🤔</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
-    <div class="hz">请问，这是什么菜？</div>
-    <div class="py">qǐng wèn, zhè shì shénme cài?</div>
-    <div class="en">Excuse me, what dish is this?</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">这是西红柿炒鸡蛋，很好吃！</div>
-    <div class="py">zhè shì xīhóngshì chǎo jīdàn, hěn hǎochī!</div>
-    <div class="en">This is tomato and egg stir-fry, very tasty!</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
-    <div class="hz">这里有什么好吃的？</div>
-    <div class="py">zhèlǐ yǒu shénme hǎochī de?</div>
-    <div class="en">What's good to eat here?</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">我们的小笼包很有名！很多人都喜欢。</div>
-    <div class="py">wǒmen de xiǎolóngbāo hěn yǒumíng! hěn duō rén dōu xǐhuān.</div>
-    <div class="en">Our soup dumplings are very famous! Lots of people like them.</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">😋</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
-    <div class="hz">那我要一份小笼包！</div>
-    <div class="py">nà wǒ yào yī fèn xiǎolóngbāo!</div>
-    <div class="en">Then I want a serving of soup dumplings!</div></div></div>
+<div class="toggle-bar"><button class="tgl" id="tpy4" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten4" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 4</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">食物问答 shíwù wèndá</div>
+<div class="title-en">food quiz — see the emoji, pick the Chinese word!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="fqs">0</span>/10</div>
+    <div class="gsbar">题 <span id="fqq">1</span>/10</div>
+    <button class="gbtn" onclick="initFq()">↺ 重来</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="fqem" style="font-size:54px">🥟</div>
+    <div class="qqlbl">这是什么？<span class="gen">What dish is this?</span></div>
+  </div>
+  <div class="qopts" id="fqo"></div>
+  <div class="gres" id="fqr"></div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 19: DIALOGUE 6 — SPECIAL REQUESTS ════════════════ -->
+<!-- ════════════════ SLIDE 21: DIALOGUE 5 — SPECIAL REQUESTS ════════════════ -->
 <div class="slide">
-<span class="badge ct">dialogue 6</span>
-<div class="tag ct">💬 对话 (六) · special requests 特殊要求</div>
-<div class="title">场景六：特殊要求 — scene 6: special requests</div>
-<div class="sub">说出你的喜好！shuō chū nǐ de xǐhào! · tell them your preferences!</div>
+<span class="badge ct">对话 5</span>
+<div class="tag ct">💬 对话 (五) · special requests 特殊要求 tèshū yāoqiú</div>
+<div class="title">场景五：特殊要求 chǎngjǐng wǔ</div>
+<div class="title-en">scene 5: special requests · tell them your preferences!</div>
 <div class="dlg">
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">请问要辣的吗？</div>
     <div class="py">qǐng wèn yào là de ma?</div>
     <div class="en">Excuse me, do you want it spicy?</div></div></div>
@@ -745,7 +822,7 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">bú yào là, xièxie. wǒ bù néng chī là.</div>
     <div class="en">No spicy, thank you. I can't eat spicy.</div></div></div>
 
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">好的，没问题。糖呢？要加糖吗？</div>
     <div class="py">hǎo de, méi wèntí. táng ne? yào jiā táng ma?</div>
     <div class="en">Okay, no problem. And sugar? Want to add sugar?</div></div></div>
@@ -755,23 +832,45 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">shǎo yīdiǎn táng, duō yīdiǎn bīng, xièxie!</div>
     <div class="en">A little less sugar, a little more ice, thank you!</div></div></div>
 </div>
-<div class="card by" style="font-size:10px;margin-top:6px">
-  <div class="lbl cy">🔑 magic words</div>
-  <div style="margin-top:2px;line-height:1.8">
-    <b>多一点 duō yīdiǎn</b> = a little more &nbsp;·&nbsp; <b>少一点 shǎo yīdiǎn</b> = a little less<br>
-    <b>不要 bú yào</b> = don't want / no &nbsp;·&nbsp; <b>辣 là</b> = spicy &nbsp;·&nbsp; <b>糖 táng</b> = sugar &nbsp;·&nbsp; <b>冰 bīng</b> = ice
+<div class="card by" style="font-size:10.5px;margin-top:5px">
+  <div class="lbl cy">🔑 神奇词 shénqí cí · magic words</div>
+  <div style="margin-top:2px;line-height:1.7">
+    <b>多一点 duō yīdiǎn</b> = a little more · <b>少一点 shǎo yīdiǎn</b> = a little less · <b>不要 bú yào</b> = don't want · <b>辣 là</b> = spicy · <b>糖 táng</b> = sugar · <b>冰 bīng</b> = ice
   </div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 20: DIALOGUE 7 — FOOD ARRIVES ════════════════ -->
+<!-- ════════════════ SLIDE 22: GAME 5 — VERB PICK ════════════════ -->
 <div class="slide">
-<span class="badge ct">dialogue 7</span>
-<div class="tag ct">💬 对话 (七) · food arrives 上菜</div>
-<div class="title">场景七：上菜了！— scene 7: food arrives!</div>
-<div class="sub">菜来了！cài lái le! · the food is here!</div>
+<div class="toggle-bar"><button class="tgl" id="tpy5" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten5" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 5</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">动词配对 dòngcí pèiduì</div>
+<div class="title-en">verb match — which verb fits the sentence?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="vbs">0</span>/8</div>
+    <div class="gsbar">题 <span id="vbq">1</span>/8</div>
+    <button class="gbtn" onclick="initVb()">↺ 重来</button>
+  </div>
+  <div class="vbq">
+    <div class="vbq-sentence" id="vbsent">我 <span class="vbq-blank">___</span> 一杯水。</div>
+    <div class="vbq-py gpy" id="vbpy">wǒ ___ yī bēi shuǐ.</div>
+    <div class="vbq-en gen" id="vben">I ___ a cup of water.</div>
+  </div>
+  <div class="qopts three" id="vbo" style="max-width:440px"></div>
+  <div class="gres" id="vbr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 23: DIALOGUE 6 — FOOD ARRIVES ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 6</span>
+<div class="tag ct">💬 对话 (六) · food arrives 上菜 shàng cài</div>
+<div class="title">场景六：上菜了！chǎngjǐng liù</div>
+<div class="title-en">scene 6: the food arrives!</div>
 <div class="dlg">
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">这是您点的饺子和炒饭。请慢用！</div>
     <div class="py">zhè shì nín diǎn de jiǎozi hé chǎofàn. qǐng màn yòng!</div>
     <div class="en">Here are the dumplings and fried rice you ordered. Please enjoy slowly!</div></div></div>
@@ -781,12 +880,12 @@ body.hints .hpy,body.hints .hen{display:block}
     <div class="py">wā, kàn qǐlái hǎo xiāng!</div>
     <div class="en">Wow, it looks so delicious!</div></div></div>
 
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈 māma · mum</div>
     <div class="hz">服务员，请再给我们一双筷子。</div>
     <div class="py">fúwùyuán, qǐng zài gěi wǒmen yī shuāng kuàizi.</div>
     <div class="en">Waiter, please give us another pair of chopsticks.</div></div></div>
 
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
     <div class="hz">好的，马上来！</div>
     <div class="py">hǎo de, mǎshàng lái!</div>
     <div class="en">Okay, coming right away!</div></div></div>
@@ -798,242 +897,143 @@ body.hints .hpy,body.hints .hen{display:block}
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 21: DIALOGUE 8 — ASKING FOR MORE ════════════════ -->
+<!-- ════════════════ SLIDE 24: DIALOGUE 7 — PAYING & GOODBYE ════════════════ -->
 <div class="slide">
-<span class="badge ct">dialogue 8</span>
-<div class="tag ct">💬 对话 (八) · asking for more 再要</div>
-<div class="title">场景八：再要一点 — scene 8: asking for more</div>
-<div class="sub">还想要更多？再来一点！hái xiǎng yào gèng duō? zài lái yīdiǎn!</div>
+<span class="badge ct">对话 7</span>
+<div class="tag ct">💬 对话 (七) · paying &amp; goodbye 买单和再见</div>
+<div class="title">场景七：买单 chǎngjǐng qī</div>
+<div class="title-en">scene 7: paying the bill &amp; saying goodbye</div>
 <div class="dlg">
-  <div class="dlg-turn right"><div class="avi c">🙋</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
-    <div class="hz">服务员，请给我一杯水。</div>
-    <div class="py">fúwùyuán, qǐng gěi wǒ yī bēi shuǐ.</div>
-    <div class="en">Waiter, please give me a cup of water.</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">要热水还是冰水？</div>
-    <div class="py">yào rè shuǐ háishi bīng shuǐ?</div>
-    <div class="en">Hot water or ice water?</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">🧊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
-    <div class="hz">冰水，谢谢！</div>
-    <div class="py">bīng shuǐ, xièxie!</div>
-    <div class="en">Ice water, thank you!</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
-    <div class="hz">再来一份饺子，可以吗？</div>
-    <div class="py">zài lái yī fèn jiǎozi, kěyǐ ma?</div>
-    <div class="en">One more serving of dumplings, is that okay?</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">当然可以！请稍等。</div>
-    <div class="py">dāngrán kěyǐ! qǐng shāo děng.</div>
-    <div class="en">Of course! Please wait a little.</div></div></div>
-</div>
-<div class="card by" style="font-size:10px;margin-top:4px">
-  <div class="lbl cy">🔑 key</div>
-  <div style="margin-top:2px"><b>A 还是 B?</b> háishi = "A or B?" (asking choice) · <b>可以吗? kěyǐ ma?</b> = is it okay? · <b>当然 dāngrán</b> = of course</div>
-</div>
-</div>
-
-<!-- ════════════════ SLIDE 22: DIALOGUE 9 — PAYING ════════════════ -->
-<div class="slide">
-<span class="badge ct">dialogue 9</span>
-<div class="tag ct">💬 对话 (九) · paying the bill 买单</div>
-<div class="title">场景九：买单 — scene 9: paying the bill</div>
-<div class="sub">吃完了！chī wán le! · finished eating!</div>
-<div class="dlg">
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈 māma · mum</div>
     <div class="hz">服务员，买单！</div>
     <div class="py">fúwùyuán, mǎi dān!</div>
     <div class="en">Waiter, the bill please!</div></div></div>
 
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">好的，请稍等。这是您的账单 — 一共一百二十元。</div>
-    <div class="py">hǎo de, qǐng shāo děng. zhè shì nín de zhàngdān — yīgòng yībǎi èrshí yuán.</div>
-    <div class="en">Okay, one moment. Here is your bill — 120 yuan in total.</div></div></div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
+    <div class="hz">好的。一共一百二十元。</div>
+    <div class="py">hǎo de. yīgòng yībǎi èrshí yuán.</div>
+    <div class="en">Okay. 120 yuan in total.</div></div></div>
 
   <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
     <div class="hz">多少钱？</div>
     <div class="py">duōshǎo qián?</div>
     <div class="en">How much money?</div></div></div>
 
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">一百二十元。</div>
-    <div class="py">yībǎi èrshí yuán.</div>
-    <div class="en">120 yuan.</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
-    <div class="hz">给您。</div>
-    <div class="py">gěi nín.</div>
-    <div class="en">Here you go.</div></div></div>
-</div>
-<div class="card by" style="font-size:10px;margin-top:4px">
-  <div class="lbl cy">💰 money words</div>
-  <div style="margin-top:2px"><b>多少钱? duōshǎo qián?</b> = how much money? &nbsp;·&nbsp; <b>元 yuán</b> = yuan (Chinese money) &nbsp;·&nbsp; <b>一共 yīgòng</b> = total / altogether</div>
-</div>
-</div>
-
-<!-- ════════════════ SLIDE 23: DIALOGUE 10 — GOODBYE ════════════════ -->
-<div class="slide">
-<span class="badge ct">dialogue 10</span>
-<div class="tag ct">💬 对话 (十) · goodbye 告别</div>
-<div class="title">场景十：再见 — scene 10: goodbye</div>
-<div class="sub">下次再来！xià cì zài lái! · come back next time!</div>
-<div class="dlg">
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">谢谢光临！请慢走！</div>
-    <div class="py">xièxie guānglín! qǐng màn zǒu!</div>
-    <div class="en">Thank you for coming! Please walk slowly (take care)!</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
-    <div class="hz">谢谢！今天的菜真好吃！</div>
-    <div class="py">xièxie! jīntiān de cài zhēn hǎochī!</div>
-    <div class="en">Thank you! Today's food was really delicious!</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">谢谢您的夸奖！欢迎下次再来！</div>
-    <div class="py">xièxie nín de kuājiǎng! huānyíng xià cì zài lái!</div>
-    <div class="en">Thank you for the compliment! Welcome to come again next time!</div></div></div>
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán</div>
+    <div class="hz">一百二十元。谢谢光临！请慢走！</div>
+    <div class="py">yībǎi èrshí yuán. xièxie guānglín! qǐng màn zǒu!</div>
+    <div class="en">120 yuan. Thank you for coming! Please take care!</div></div></div>
 
   <div class="dlg-turn right"><div class="avi c">👋</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
-    <div class="hz">再见！</div>
-    <div class="py">zàijiàn!</div>
-    <div class="en">Goodbye!</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
-    <div class="hz">再见！</div>
-    <div class="py">zàijiàn!</div>
-    <div class="en">Goodbye!</div></div></div>
+    <div class="hz">谢谢！再见！</div>
+    <div class="py">xièxie! zàijiàn!</div>
+    <div class="en">Thank you! Goodbye!</div></div></div>
 </div>
-<div class="card bg" style="font-size:10.5px;margin-top:6px">
-  <div class="lbl cg">🎉 you finished the dialogue cycle!</div>
-  <div style="margin-top:2px">你完成了完整的点餐对话！nǐ wánchéng le wánzhěng de diǎn cān duìhuà!</div>
+<div class="card by" style="font-size:10px;margin-top:5px">
+  <div class="lbl cy">💰 钱 qián · money</div>
+  <div style="margin-top:1px"><b>多少钱? duōshǎo qián?</b> = how much money? · <b>元 yuán</b> = yuan (Chinese money) · <b>一共 yīgòng</b> = total / altogether</div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 24: GAME — FOOD ORDER QUIZ ════════════════ -->
+<!-- ════════════════ SLIDE 25: ROLE-PLAY (BIRTHDAY DINNER) ════════════════ -->
 <div class="slide">
-<span class="badge co">🎮 game 2</span>
-<div class="tag co">🎮 游戏 · what would you order?</div>
-<div class="title">点餐问答 diǎn cān wèndá — what's this food?</div>
-<div class="sub">See the food picture — pick the correct Chinese name!</div>
+<span class="badge cg">角色扮演</span>
+<div class="tag cg">🎭 角色扮演 juésè bànyǎn · role-play</div>
+<div class="title">Elana的生日晚餐 Elana de shēngrì wǎncān</div>
+<div class="title-en">Elana's birthday dinner — full role-play (everyone speaks!)</div>
+<div class="dlg" style="gap:3px">
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">欢迎光临！请问几位？</div><div class="py">huānyíng guānglín! jǐ wèi?</div><div class="en">Welcome! How many people?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c3">👨</div><div class="bub c3" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">三位，今天是我女儿的生日！</div><div class="py">sān wèi, jīntiān shì wǒ nǚ'ér de shēngrì!</div><div class="en">Three, today is my daughter's birthday!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">生日快乐！这边请！</div><div class="py">shēngrì kuàilè! zhèbiān qǐng!</div><div class="en">Happy birthday! This way please!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">谢谢！我要一份北京烤鸭！</div><div class="py">xièxie! wǒ yào yī fèn Běijīng kǎoyā!</div><div class="en">Thanks! I want a serving of Beijing duck!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">来一盘饺子和一碗汤。</div><div class="py">lái yī pán jiǎozi hé yī wǎn tāng.</div><div class="en">I'll have a plate of dumplings and a bowl of soup.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c3">👨</div><div class="bub c3" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">再来一份西红柿炒鸡蛋。</div><div class="py">zài lái yī fèn xīhóngshì chǎo jīdàn.</div><div class="en">And one tomato &amp; egg stir-fry.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">饮料呢？</div><div class="py">yǐnliào ne?</div><div class="en">And drinks?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🧋</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">三杯奶茶，多一点冰，少一点糖！</div><div class="py">sān bēi nǎichá, duō yīdiǎn bīng, shǎo yīdiǎn táng!</div><div class="en">Three milk teas, more ice, less sugar!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">还要生日蛋糕吗？🎂</div><div class="py">hái yào shēngrì dàngāo ma?</div><div class="en">Also want a birthday cake?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🤩</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">要！一个大蛋糕，谢谢！</div><div class="py">yào! yī gè dà dàngāo, xièxie!</div><div class="en">Yes! A big cake, thank you!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 26: GAME 6 — MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" id="tpy6" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten6" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 6</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">记忆配对 jìyì pèiduì</div>
+<div class="title-en">memory match — flip the cards and find pairs!</div>
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
-    <div class="gsbar">🎯 <span id="fqs">0</span>/10</div>
-    <div class="gsbar">question <span id="fqq">1</span>/10</div>
-    <button class="gbtn" onclick="initFq()">↺ restart</button>
-    <button class="hbtn" id="hb24" onclick="tH(this)">💡 hints: off</button>
-  </div>
-  <div class="qq">
-    <div class="qqmain" id="fqem" style="font-size:54px">🥟</div>
-    <div class="qqlbl" id="fqlbl">What is this dish called?</div>
-  </div>
-  <div class="qopts" id="fqo"></div>
-  <div class="gres" id="fqr"></div>
-</div>
-</div>
-
-<!-- ════════════════ SLIDE 25: FULL ROLE-PLAY 1 ════════════════ -->
-<div class="slide">
-<span class="badge cg">role-play 1</span>
-<div class="tag cg">🎭 完整对话 (一) wánzhěng duìhuà · full role-play</div>
-<div class="title">Elana和妈妈在餐厅 — Elana and Mum at the restaurant</div>
-<div class="sub">把所有学过的都用上！bǎ suǒyǒu xué guò de dōu yòng shàng! · use everything we learned!</div>
-<div class="dlg" style="gap:4px">
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">欢迎光临！请问几位？</div><div class="py">huānyíng guānglín! jǐ wèi?</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">你好！两位，谢谢！</div><div class="py">nǐ hǎo! liǎng wèi, xièxie!</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">请坐，这是菜单。想喝什么？</div><div class="py">qǐng zuò, zhè shì càidān. xiǎng hē shénme?</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">我要一杯西瓜奶昔。</div><div class="py">wǒ yào yī bēi xīguā nǎixī.</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">来一杯热茶。</div><div class="py">lái yī bēi rè chá.</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">好的。要点什么菜？</div><div class="py">hǎo de. yào diǎn shénme cài?</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">😋</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">一盘饺子，一碗炒饭，不要辣！</div><div class="py">yī pán jiǎozi, yī wǎn chǎofàn, bú yào là!</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">再来一份小笼包。</div><div class="py">zài lái yī fèn xiǎolóngbāo.</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">好的，请稍等！</div><div class="py">hǎo de, qǐng shāo děng!</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">谢谢！</div><div class="py">xièxie!</div></div></div>
-</div>
-</div>
-
-<!-- ════════════════ SLIDE 26: FULL ROLE-PLAY 2 (BIRTHDAY) ════════════════ -->
-<div class="slide">
-<span class="badge cg">role-play 2</span>
-<div class="tag cg">🎂 完整对话 (二) · Elana's birthday dinner!</div>
-<div class="title">Elana的生日晚餐 — Elana's birthday dinner</div>
-<div class="sub">爸爸、妈妈、Elana — 1月3日的庆祝晚餐！bàba, māma, Elana — yī yuè sān rì de qìngzhù wǎncān!</div>
-<div class="dlg" style="gap:4px">
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">欢迎光临！请问几位？</div><div class="py">huānyíng guānglín! jǐ wèi?</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c2" style="background:linear-gradient(135deg,#86efac,#22c55e)">👨</div><div class="bub c2" style="background:#dcfce7;padding:5px 9px"><div class="hz" style="font-size:11.5px">三位，今天是我女儿的生日！</div><div class="py">sān wèi, jīntiān shì wǒ nǚ'ér de shēngrì!</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">生日快乐！这边请！</div><div class="py">shēngrì kuàilè! zhèbiān qǐng!</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">谢谢！我要一份北京烤鸭！</div><div class="py">xièxie! wǒ yào yī fèn Běijīng kǎoyā!</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">来一盘饺子和一碗汤。</div><div class="py">lái yī pán jiǎozi hé yī wǎn tāng.</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c2" style="background:linear-gradient(135deg,#86efac,#22c55e)">👨</div><div class="bub c2" style="background:#dcfce7;padding:5px 9px"><div class="hz" style="font-size:11.5px">再来一份西红柿炒鸡蛋，一盘薯条。</div><div class="py">zài lái yī fèn xīhóngshì chǎo jīdàn, yī pán shǔtiáo.</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">饮料呢？</div><div class="py">yǐnliào ne?</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">🧋</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">三杯奶茶，多一点冰，少一点糖！</div><div class="py">sān bēi nǎichá, duō yīdiǎn bīng, shǎo yīdiǎn táng!</div></div></div>
-
-  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">还要生日蛋糕吗？🎂</div><div class="py">hái yào shēngrì dàngāo ma?</div></div></div>
-
-  <div class="dlg-turn right"><div class="avi c">🤩</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">要！一个大蛋糕，谢谢！</div><div class="py">yào! yī gè dà dàngāo, xièxie!</div></div></div>
-</div>
-</div>
-
-<!-- ════════════════ SLIDE 27: GAME — MEMORY MATCH ════════════════ -->
-<div class="slide">
-<span class="badge co">🎮 game 3</span>
-<div class="tag co">🎮 记忆配对 jìyì pèiduì · memory match</div>
-<div class="title">餐厅记忆游戏 — restaurant memory match</div>
-<div class="sub">Flip the cards. Match the Chinese word with the emoji! 找到配对！</div>
-<div class="gw">
-  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
-    <div class="gsbar">🎯 matches: <span id="mm">0</span>/6</div>
-    <div class="gsbar">🔄 flips: <span id="mf">0</span></div>
-    <button class="gbtn" onclick="initMem()">↺ restart</button>
-    <button class="hbtn" id="hb27" onclick="tH(this)">💡 hints: off</button>
+    <div class="gsbar">🎯 配对 <span id="mm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 <span id="mf">0</span></div>
+    <button class="gbtn" onclick="initMem()">↺ 重来</button>
   </div>
   <div class="mgrid" id="mgrid"></div>
   <div class="gres" id="mres"></div>
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 28: GAME — FILL IN BLANKS ════════════════ -->
+<!-- ════════════════ SLIDE 27: GAME 7 — FILL IN BLANKS ════════════════ -->
 <div class="slide">
-<span class="badge co">🎮 game 4</span>
-<div class="tag co">🎮 填空 tiánkòng · fill in the blanks</div>
-<div class="title">完成对话 wánchéng duìhuà — complete the dialogue!</div>
-<div class="sub">Click the right word from the bottom! 点击下面的词！</div>
+<div class="toggle-bar"><button class="tgl" id="tpy7" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten7" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 7</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">填空 tiánkòng</div>
+<div class="title-en">fill in the blanks — click words to complete the dialogue!</div>
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
-    <div class="gsbar">🎯 round <span id="fbround">1</span>/3</div>
-    <button class="gbtn" onclick="initFb()">↺ restart</button>
-    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">next →</button>
+    <div class="gsbar">🎯 关 <span id="fbround">1</span>/3</div>
+    <button class="gbtn" onclick="initFb()">↺ 重来</button>
+    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">下一关 →</button>
   </div>
   <div class="fib" id="fbwrap"></div>
   <div class="gres" id="fbres" style="font-size:13px"></div>
 </div>
 </div>
 
+<!-- ════════════════ SLIDE 28: GAME 8 — WAITER RESPONSE ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" id="tpy8" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten8" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 8</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">服务员说什么？fúwùyuán shuō shénme?</div>
+<div class="title-en">how do you respond? — pick the right reply to the waiter!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="rrs">0</span>/6</div>
+    <div class="gsbar">题 <span id="rrq">1</span>/6</div>
+    <button class="gbtn" onclick="initRr()">↺ 重来</button>
+  </div>
+  <div class="resp-bub">
+    <div class="avi w">🙋‍♀️</div>
+    <div>
+      <div class="hz" id="rrhz">欢迎光临！请问几位？</div>
+      <div class="py gpy" id="rrpy">huānyíng guānglín! qǐng wèn jǐ wèi?</div>
+      <div class="en gen" id="rren">Welcome! How many people?</div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#888">↓ 你怎么回答？<span class="gen">your reply?</span> ↓</div>
+  <div class="qopts" id="rro" style="max-width:560px"></div>
+  <div class="gres" id="rrr"></div>
+</div>
+</div>
+
 <!-- ════════════════ SLIDE 29: PHRASE SUMMARY ════════════════ -->
 <div class="slide">
-<span class="badge cy">summary</span>
+<span class="badge cy">总结</span>
 <div class="tag cy">📋 短语总结 duǎnyǔ zǒngjié · phrase summary</div>
-<div class="title">点餐必备短语 — must-know ordering phrases</div>
-<div class="sub">Print these out and practice! 练习一下！liànxí yīxià!</div>
-<div class="two" style="gap:7px">
+<div class="title">点餐必备短语 diǎn cān bìbèi duǎnyǔ</div>
+<div class="title-en">must-know phrases for ordering — practice these!</div>
+<div class="two" style="gap:6px">
   <div>
     <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
       <div class="pat">几位？</div><div class="patpy">jǐ wèi?</div>
@@ -1048,11 +1048,11 @@ body.hints .hpy,body.hints .hen{display:block}
       <div class="paten">please give me the menu.</div>
     </div>
     <div class="sp bg" style="padding:5px 9px;margin-bottom:3px">
-      <div class="pat">我要___。</div><div class="patpy">wǒ yào ___ .</div>
+      <div class="pat">我要 ___。</div><div class="patpy">wǒ yào ___ .</div>
       <div class="paten">I want ___.</div>
     </div>
     <div class="sp by" style="padding:5px 9px;margin-bottom:3px">
-      <div class="pat">来一份___。</div><div class="patpy">lái yī fèn ___ .</div>
+      <div class="pat">来一份 ___。</div><div class="patpy">lái yī fèn ___ .</div>
       <div class="paten">I'll have a serving of ___.</div>
     </div>
     <div class="sp bt" style="padding:5px 9px;margin-bottom:3px">
@@ -1094,28 +1094,37 @@ body.hints .hpy,body.hints .hen{display:block}
 <div class="endb">
   <div style="font-size:54px">🌟🥢🎉</div>
   <div style="font-size:32px;font-weight:900;background:linear-gradient(135deg,#ea580c,#e91e8c);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Elana，你会点餐了！</div>
-  <div style="font-size:14px;color:#888">nǐ huì diǎn cān le! · you can order food now!</div>
-  <div style="font-size:12px;color:#aaa">下次去餐厅，记得用中文点餐！xià cì qù cāntīng, jìde yòng zhōngwén diǎn cān!</div>
-  <div class="cklist">
-    <span class="ck">✅ 餐厅词汇</span>
-    <span class="ck">✅ 餐具</span>
-    <span class="ck">✅ 食物复习</span>
-    <span class="ck">✅ 新食物</span>
-    <span class="ck">✅ 肉和蔬菜</span>
-    <span class="ck">✅ 饮料</span>
-    <span class="ck">✅ 量词</span>
-    <span class="ck">✅ 动词 要/点/来/给/请</span>
-    <span class="ck">✅ 礼貌用语</span>
-    <span class="ck">✅ 10个对话场景</span>
-    <span class="ck">✅ 2个角色扮演</span>
-    <span class="ck">🎮 量词配对</span>
-    <span class="ck">🎮 食物问答</span>
-    <span class="ck">🎮 记忆配对</span>
-    <span class="ck">🎮 填空游戏</span>
+  <div style="font-size:14px;color:#7c3aed;font-weight:700">Elana, nǐ huì diǎn cān le!</div>
+  <div style="font-size:12px;color:#888;font-style:italic">Elana, you can order food now!</div>
+  <div style="font-size:11px;color:#aaa;margin-top:4px">
+    下次去餐厅，记得用中文点餐！<br>
+    <span style="color:#7c3aed;font-weight:700">xià cì qù cāntīng, jìde yòng zhōngwén diǎn cān!</span><br>
+    <span style="font-style:italic">Next time you go to a restaurant, remember to order in Chinese!</span>
   </div>
-  <div style="font-size:12px;color:#888;margin-top:6px">太厉害了！tài lìhai le! 加油！jiā yóu! 💪</div>
-  <div style="font-size:11px;color:#aaa">📅 2026年5月19日 · wǔ yuè shíjiǔ rì</div>
-  <a href="index.html" style="background:linear-gradient(135deg,#ea580c,#e91e8c);color:#fff;padding:8px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:12px;margin-top:6px">← 回到课程列表 back to lessons</a>
+  <div class="cklist">
+    <span class="ck">✅ 餐厅词汇 cāntīng cíhuì</span>
+    <span class="ck">✅ 餐具 cānjù</span>
+    <span class="ck">✅ 食物 shíwù</span>
+    <span class="ck">✅ 饮料 yǐnliào</span>
+    <span class="ck">✅ 量词 liàngcí</span>
+    <span class="ck">✅ 动词 dòngcí</span>
+    <span class="ck">✅ 礼貌用语 lǐmào yòngyǔ</span>
+    <span class="ck">✅ 7 个对话 duìhuà</span>
+    <span class="ck">✅ 角色扮演 juésè bànyǎn</span>
+    <span class="ck">🎮 量词配对</span>
+    <span class="ck">🎮 吃还是喝</span>
+    <span class="ck">🎮 饮料问答</span>
+    <span class="ck">🎮 食物问答</span>
+    <span class="ck">🎮 动词配对</span>
+    <span class="ck">🎮 记忆配对</span>
+    <span class="ck">🎮 填空</span>
+    <span class="ck">🎮 服务员问答</span>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:6px">
+    太厉害了！tài lìhai le! · amazing! 加油！jiā yóu! · keep going! 💪
+  </div>
+  <div style="font-size:11px;color:#aaa">📅 2026年5月19日 · wǔ yuè shíjiǔ rì · May 19, 2026</div>
+  <a href="index.html" style="background:linear-gradient(135deg,#ea580c,#e91e8c);color:#fff;padding:8px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:12px;margin-top:6px">← 回到课程列表 huí dào kèchéng lièbiǎo · back to lessons</a>
 </div>
 </div>
 
@@ -1147,34 +1156,43 @@ document.addEventListener('keydown',e=>{
 });
 const GI={};
 
-// ── Hint toggle ──
-let hintOn=false;
-function tH(btn){
-  hintOn=!hintOn;
-  document.body.classList.toggle('hints',hintOn);
-  document.querySelectorAll('.hbtn').forEach(b=>{
-    b.textContent=hintOn?'💡 hints: on':'💡 hints: off';
-    b.classList.toggle('on',hintOn);
+// ── Global toggles for pinyin / English in games ──
+let showPY=false,showEN=false;
+function tPY(){
+  showPY=!showPY;
+  document.body.classList.toggle('show-py',showPY);
+  document.querySelectorAll('.tgl[id^="tpy"]').forEach(b=>{
+    b.textContent=showPY?'拼音 pīnyīn ✓':'拼音 pīnyīn';
+    b.classList.toggle('on',showPY);
+  });
+}
+function tEN(){
+  showEN=!showEN;
+  document.body.classList.toggle('show-en',showEN);
+  document.querySelectorAll('.tgl[id^="ten"]').forEach(b=>{
+    b.textContent=showEN?'English ✓':'English';
+    b.classList.toggle('on',showEN);
   });
 }
 
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
 function $id(id){return document.getElementById(id)}
 
-// ── Game 1: Measure Word Quiz (slide 13, index 12) ──
+// ════ GAME 1: Measure Word Quiz (slide 13, index 12) ════
 const LW=[
   {em:'🍚',hz:'米饭',py:'mǐfàn',mw:'碗'},
   {em:'🍜',hz:'面条',py:'miàntiáo',mw:'碗'},
   {em:'🍲',hz:'汤',py:'tāng',mw:'碗'},
   {em:'🥟',hz:'饺子',py:'jiǎozi',mw:'盘'},
+  {em:'🍕',hz:'比萨',py:'bǐsà',mw:'盘'},
   {em:'🍔',hz:'汉堡',py:'hànbǎo',mw:'个'},
   {em:'🥚',hz:'鸡蛋',py:'jīdàn',mw:'个'},
+  {em:'🍰',hz:'蛋糕',py:'dàngāo',mw:'个'},
   {em:'🥤',hz:'可乐',py:'kělè',mw:'瓶'},
   {em:'🧋',hz:'奶茶',py:'nǎichá',mw:'杯'},
   {em:'💧',hz:'水',py:'shuǐ',mw:'杯'},
   {em:'🥗',hz:'沙拉',py:'shālā',mw:'份'},
-  {em:'🍦',hz:'冰淇淋',py:'bīngqílín',mw:'个'},
-  {em:'🍗',hz:'鸡肉',py:'jīròu',mw:'份'},
+  {em:'🦆',hz:'烤鸭',py:'kǎoyā',mw:'份'},
 ];
 const MW_OPTS=[
   {hz:'碗',py:'wǎn',en:'bowl'},
@@ -1193,7 +1211,7 @@ function initLw(){
 function showLw(){
   if(lwQ>=8){
     const r=$id('lwr');r.style.display='block';
-    r.textContent='🎉 '+lwScore+'/8 — '+(lwScore===8?'perfect! 完美！':lwScore>=6?'great! 很好！':'keep going! 加油！');
+    r.textContent='🎉 '+lwScore+'/8 — '+(lwScore===8?'完美！wánměi!':lwScore>=6?'很好！hěn hǎo!':'加油！jiā yóu!');
     $id('lwo').innerHTML='';return;
   }
   const it=lwItems[lwQ];
@@ -1202,11 +1220,10 @@ function showLw(){
   const correctMw=it.mw;
   const wrong=MW_OPTS.filter(o=>o.hz!==correctMw);
   const opts=[MW_OPTS.find(o=>o.hz===correctMw),...shuffle(wrong).slice(0,2)];
-  shuffle(opts);
   const el=$id('lwo');el.innerHTML='';let ans=false;
-  opts.sort(()=>Math.random()-.5).forEach(opt=>{
+  shuffle(opts).forEach(opt=>{
     const btn=document.createElement('button');btn.className='qopt';
-    btn.innerHTML=`<span class="qopt-hz" style="font-size:20px">${opt.hz}</span><span class="hpy">${opt.py}</span><span class="hen">${opt.en}</span>`;
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:22px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
     btn.onclick=function(){
       if(ans)return;ans=true;
       if(opt.hz===correctMw){btn.classList.add('ok');lwScore++;$id('lws').textContent=lwScore;}
@@ -1218,16 +1235,110 @@ function showLw(){
 }
 GI[12]=initLw;
 
-// ── Game 2: Food Quiz (slide 24, index 23) ──
+// ════ GAME 2: Eat or Drink (slide 14, index 13) ════
+const ED=[
+  {em:'🍚',hz:'米饭',py:'mǐfàn',en:'rice',t:'eat'},
+  {em:'🍜',hz:'面条',py:'miàntiáo',en:'noodles',t:'eat'},
+  {em:'🥟',hz:'饺子',py:'jiǎozi',en:'dumplings',t:'eat'},
+  {em:'🥟',hz:'小笼包',py:'xiǎolóngbāo',en:'soup dumplings',t:'eat'},
+  {em:'🦆',hz:'烤鸭',py:'kǎoyā',en:'roast duck',t:'eat'},
+  {em:'🍗',hz:'鸡肉',py:'jīròu',en:'chicken',t:'eat'},
+  {em:'🍰',hz:'蛋糕',py:'dàngāo',en:'cake',t:'eat'},
+  {em:'🥗',hz:'沙拉',py:'shālā',en:'salad',t:'eat'},
+  {em:'🍦',hz:'冰淇淋',py:'bīngqílín',en:'ice cream',t:'eat'},
+  {em:'🥩',hz:'牛肉',py:'niúròu',en:'beef',t:'eat'},
+  {em:'💧',hz:'水',py:'shuǐ',en:'water',t:'drink'},
+  {em:'🥛',hz:'牛奶',py:'niúnǎi',en:'milk',t:'drink'},
+  {em:'🧃',hz:'果汁',py:'guǒzhī',en:'juice',t:'drink'},
+  {em:'🧋',hz:'奶茶',py:'nǎichá',en:'milk tea',t:'drink'},
+  {em:'🥤',hz:'可乐',py:'kělè',en:'cola',t:'drink'},
+  {em:'🥤',hz:'雪碧',py:'xuěbì',en:'sprite',t:'drink'},
+  {em:'♨️',hz:'热水',py:'rè shuǐ',en:'hot water',t:'drink'},
+  {em:'🍊',hz:'橙汁',py:'chéngzhī',en:'orange juice',t:'drink'},
+];
+let edScore=0,edQ=0,edItems=[];
+function initEd(){
+  edScore=0;edQ=0;edItems=shuffle(ED).slice(0,10);
+  $id('eds').textContent='0';$id('edq').textContent='1';$id('edr').style.display='none';
+  $id('edcard').style.opacity='1';showEd();
+}
+function showEd(){
+  if(edQ>=10){
+    const r=$id('edr');r.style.display='block';
+    r.textContent='🎉 '+edScore+'/10 — '+(edScore>=9?'完美！wánměi!':edScore>=7?'很好！hěn hǎo!':'加油！jiā yóu!');
+    $id('edcard').style.opacity='.4';return;
+  }
+  const it=edItems[edQ];
+  $id('edem').textContent=it.em;$id('edhz').textContent=it.hz;$id('edpy').textContent=it.py;$id('eden').textContent=it.en;
+  $id('edq').textContent=edQ+1;
+}
+function edPick(type){
+  if(edQ>=edItems.length)return;
+  const it=edItems[edQ];const ok=it.t===type;
+  if(ok){edScore++;$id('eds').textContent=edScore;}
+  const c=$id('edcard');
+  c.style.background=ok?'linear-gradient(135deg,#dcfce7,#bbf7d0)':'linear-gradient(135deg,#fee2e2,#fca5a5)';
+  edQ++;setTimeout(()=>{c.style.background='linear-gradient(135deg,#ffedd5,#fce7f3)';showEd();},600);
+}
+GI[13]=initEd;
+
+// ════ GAME 3: Drink Quiz (slide 18, index 17) ════
+const DQ=[
+  {em:'💧',hz:'水',py:'shuǐ',en:'water'},
+  {em:'🥛',hz:'牛奶',py:'niúnǎi',en:'milk'},
+  {em:'🍵',hz:'茶',py:'chá',en:'tea'},
+  {em:'🧋',hz:'奶茶',py:'nǎichá',en:'milk tea'},
+  {em:'🧃',hz:'果汁',py:'guǒzhī',en:'juice'},
+  {em:'🥤',hz:'可乐',py:'kělè',en:'cola'},
+  {em:'🥤',hz:'雪碧',py:'xuěbì',en:'sprite'},
+  {em:'♨️',hz:'热水',py:'rè shuǐ',en:'hot water'},
+  {em:'🧊',hz:'冰水',py:'bīng shuǐ',en:'ice water'},
+  {em:'🍊',hz:'橙汁',py:'chéngzhī',en:'orange juice'},
+];
+let dqScore=0,dqQ=0,dqItems=[];
+function initDq(){
+  dqScore=0;dqQ=0;dqItems=shuffle(DQ).slice(0,8);
+  $id('dqs').textContent='0';$id('dqq').textContent='1';$id('dqr').style.display='none';
+  showDq();
+}
+function showDq(){
+  if(dqQ>=8){
+    const r=$id('dqr');r.style.display='block';
+    r.textContent='🎉 '+dqScore+'/8 — '+(dqScore===8?'完美！wánměi!':dqScore>=6?'很好！hěn hǎo!':'加油！jiā yóu!');
+    $id('dqo').innerHTML='';return;
+  }
+  const it=dqItems[dqQ];
+  $id('dqem').textContent=it.em;$id('dqq').textContent=dqQ+1;
+  const wrong=DQ.filter(o=>o.hz!==it.hz);
+  const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('dqo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');dqScore++;$id('dqs').textContent=dqScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      dqQ++;setTimeout(showDq,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[17]=initDq;
+
+// ════ GAME 4: Food Quiz (slide 20, index 19) ════
 const FQ=[
   {em:'🥟',hz:'饺子',py:'jiǎozi',en:'dumplings'},
+  {em:'🥟',hz:'包子',py:'bāozi',en:'steamed bun'},
+  {em:'🥟',hz:'小笼包',py:'xiǎolóngbāo',en:'soup dumplings'},
+  {em:'🌯',hz:'春卷',py:'chūnjuǎn',en:'spring roll'},
   {em:'🍜',hz:'面条',py:'miàntiáo',en:'noodles'},
   {em:'🍚',hz:'米饭',py:'mǐfàn',en:'rice'},
   {em:'🦆',hz:'烤鸭',py:'kǎoyā',en:'roast duck'},
   {em:'🥗',hz:'沙拉',py:'shālā',en:'salad'},
   {em:'🍲',hz:'汤',py:'tāng',en:'soup'},
   {em:'🐟',hz:'鱼',py:'yú',en:'fish'},
-  {em:'🦐',hz:'虾',py:'xiā',en:'shrimp'},
+  {em:'🍤',hz:'虾',py:'xiā',en:'shrimp'},
   {em:'🍔',hz:'汉堡',py:'hànbǎo',en:'burger'},
   {em:'🍕',hz:'比萨',py:'bǐsà',en:'pizza'},
   {em:'🍟',hz:'薯条',py:'shǔtiáo',en:'fries'},
@@ -1236,10 +1347,7 @@ const FQ=[
   {em:'🍅',hz:'西红柿',py:'xīhóngshì',en:'tomato'},
   {em:'🥔',hz:'土豆',py:'tǔdòu',en:'potato'},
   {em:'🥕',hz:'胡萝卜',py:'húluóbo',en:'carrot'},
-  {em:'🥤',hz:'可乐',py:'kělè',en:'cola'},
-  {em:'🧋',hz:'奶茶',py:'nǎichá',en:'milk tea'},
   {em:'🍦',hz:'冰淇淋',py:'bīngqílín',en:'ice cream'},
-  {em:'🍰',hz:'蛋糕',py:'dàngāo',en:'cake'},
 ];
 let fqScore=0,fqQ=0,fqItems=[];
 function initFq(){
@@ -1250,18 +1358,17 @@ function initFq(){
 function showFq(){
   if(fqQ>=10){
     const r=$id('fqr');r.style.display='block';
-    r.textContent='🎉 '+fqScore+'/10 — '+(fqScore>=9?'perfect! 完美！':fqScore>=7?'great! 很好！':'keep going! 加油！');
+    r.textContent='🎉 '+fqScore+'/10 — '+(fqScore>=9?'完美！wánměi!':fqScore>=7?'很好！hěn hǎo!':'加油！jiā yóu!');
     $id('fqo').innerHTML='';return;
   }
   const it=fqItems[fqQ];
   $id('fqem').textContent=it.em;$id('fqq').textContent=fqQ+1;
   const wrong=FQ.filter(o=>o.hz!==it.hz);
   const opts=[it,...shuffle(wrong).slice(0,3)];
-  shuffle(opts);
   const el=$id('fqo');el.innerHTML='';let ans=false;
-  opts.sort(()=>Math.random()-.5).forEach(opt=>{
+  shuffle(opts).forEach(opt=>{
     const btn=document.createElement('button');btn.className='qopt';
-    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="hpy">${opt.py}</span><span class="hen">${opt.en}</span>`;
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
     btn.onclick=function(){
       if(ans)return;ans=true;
       if(opt.hz===it.hz){btn.classList.add('ok');fqScore++;$id('fqs').textContent=fqScore;}
@@ -1271,9 +1378,63 @@ function showFq(){
     el.appendChild(btn);
   });
 }
-GI[23]=initFq;
+GI[19]=initFq;
 
-// ── Game 3: Memory Match (slide 27, index 26) ──
+// ════ GAME 5: Verb Pick (slide 22, index 21) ════
+const VB=[
+  {sent:'我 ___ 一杯水。',py:'wǒ ___ yī bēi shuǐ.',en:'I ___ a cup of water.',a:'要'},
+  {sent:'我想 ___ 一个汉堡。',py:'wǒ xiǎng ___ yī gè hànbǎo.',en:'I want to ___ a burger.',a:'点'},
+  {sent:'___ 一份饺子。',py:'___ yī fèn jiǎozi.',en:'___ a serving of dumplings.',a:'来'},
+  {sent:'请 ___ 我菜单。',py:'qǐng ___ wǒ càidān.',en:'Please ___ me the menu.',a:'给'},
+  {sent:'___ 问，这是什么菜？',py:'___ wèn, zhè shì shénme cài?',en:'___ ask, what dish is this?',a:'请'},
+  {sent:'我 ___ 一盘小笼包。',py:'wǒ ___ yī pán xiǎolóngbāo.',en:'I ___ a plate of soup dumplings.',a:'要'},
+  {sent:'妈妈 ___ 一杯热茶。',py:'māma ___ yī bēi rè chá.',en:'Mum ___ a cup of hot tea.',a:'要'},
+  {sent:'再 ___ 一碗汤！',py:'zài ___ yī wǎn tāng!',en:'Also ___ a bowl of soup!',a:'来'},
+  {sent:'___ 我们点菜。',py:'___ wǒmen diǎn cài.',en:'___ us order.',a:'给'},
+  {sent:'___ 给我筷子。',py:'___ gěi wǒ kuàizi.',en:'___ give me chopsticks.',a:'请'},
+];
+const VB_OPTS=[
+  {hz:'要',py:'yào',en:'want'},
+  {hz:'点',py:'diǎn',en:'order'},
+  {hz:'来',py:'lái',en:'bring/have'},
+  {hz:'给',py:'gěi',en:'give'},
+  {hz:'请',py:'qǐng',en:'please'},
+];
+let vbScore=0,vbQ=0,vbItems=[];
+function initVb(){
+  vbScore=0;vbQ=0;vbItems=shuffle(VB).slice(0,8);
+  $id('vbs').textContent='0';$id('vbq').textContent='1';$id('vbr').style.display='none';
+  showVb();
+}
+function showVb(){
+  if(vbQ>=8){
+    const r=$id('vbr');r.style.display='block';
+    r.textContent='🎉 '+vbScore+'/8 — '+(vbScore===8?'完美！wánměi!':vbScore>=6?'很好！hěn hǎo!':'加油！jiā yóu!');
+    $id('vbo').innerHTML='';return;
+  }
+  const it=vbItems[vbQ];
+  $id('vbsent').innerHTML=it.sent.replace('___','<span class="vbq-blank">___</span>');
+  $id('vbpy').textContent=it.py;
+  $id('vben').textContent=it.en;
+  $id('vbq').textContent=vbQ+1;
+  const wrong=VB_OPTS.filter(o=>o.hz!==it.a);
+  const opts=[VB_OPTS.find(o=>o.hz===it.a),...shuffle(wrong).slice(0,2)];
+  const el=$id('vbo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:22px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.a){btn.classList.add('ok');vbScore++;$id('vbs').textContent=vbScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.a)b.classList.add('ok');});}
+      vbQ++;setTimeout(showVb,1300);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[21]=initVb;
+
+// ════ GAME 6: Memory Match (slide 26, index 25) ════
 const MEM=[
   {id:1,hz:'菜单',py:'càidān',em:'📜'},
   {id:2,hz:'筷子',py:'kuàizi',em:'🥢'},
@@ -1299,7 +1460,7 @@ function initMem(){
       el.classList.add('flip');
       if(card.side==='hz'){
         el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
-          <div class="mcard-py">${card.py}</div>
+          <div class="mcard-py gpy">${card.py}</div>
           <div class="mcard-hz">${card.hz}</div>
         </div>`;
       }else{el.innerHTML=`<div style="font-size:34px">${card.em}</div>`;}
@@ -1309,7 +1470,7 @@ function initMem(){
         if(mFlipped[0].card.id===mFlipped[1].card.id){
           mFlipped[0].el.classList.add('match');mFlipped[1].el.classList.add('match');
           mFlipped=[];mMatched++;$id('mm').textContent=mMatched;
-          if(mMatched===6){setTimeout(()=>{const r=$id('mres');r.style.display='block';r.textContent='🎉 perfect! '+mFlips+' flips — 太棒了！';},400);}
+          if(mMatched===6){setTimeout(()=>{const r=$id('mres');r.style.display='block';r.textContent='🎉 '+mFlips+' 翻 fān · 太棒了！tài bàng le!';},400);}
         }else{
           mLock=true;setTimeout(()=>{
             mFlipped[0].el.classList.remove('flip');mFlipped[0].el.textContent='🎴';
@@ -1322,9 +1483,9 @@ function initMem(){
     grid.appendChild(el);
   });
 }
-GI[26]=initMem;
+GI[25]=initMem;
 
-// ── Game 4: Fill-in-blank (slide 28, index 27) ──
+// ════ GAME 7: Fill-in-blank (slide 27, index 26) ════
 const FB_ROUNDS=[
   {
     sentence:'欢迎光临！请问 ___ ?',
@@ -1336,7 +1497,7 @@ const FB_ROUNDS=[
   {
     sentence:'我 ___ 一杯西瓜奶昔，谢谢！',
     py:'wǒ ___ yī bēi xīguā nǎixī, xièxie!',
-    en:'I ___ one watermelon smoothie, thank you!',
+    en:'I ___ a watermelon smoothie, thank you!',
     blanks:['要'],
     bank:['要','是','叫','看']
   },
@@ -1369,8 +1530,8 @@ function renderFb(){
     if(i<parts.length-1){html+=`<span class="fib-blank" id="fb-b${bidx}" data-bi="${bidx}">____</span>`;bidx++;}
   });
   html+='</div>';
-  html+=`<div style="font-size:9.5px;color:#7c3aed;font-weight:600;text-align:center;margin-top:4px">${round.py}</div>`;
-  html+=`<div style="font-size:9px;color:#888;font-style:italic;text-align:center">${round.en}</div>`;
+  html+=`<div class="gpy" style="font-size:10px;color:#7c3aed;font-weight:600;text-align:center;margin-top:4px">${round.py}</div>`;
+  html+=`<div class="gen" style="font-size:9.5px;color:#888;font-style:italic;text-align:center">${round.en}</div>`;
   html+='<div class="fib-bank">';
   shuffle(round.bank).forEach(t=>{html+=`<button class="fib-tok" data-w="${t}">${t}</button>`;});
   html+='</div>';
@@ -1384,14 +1545,13 @@ function renderFb(){
       bk.textContent=word;bk.classList.add('filled');
       fbFilled[next]=word;
       tok.classList.add('used');
-      bk.dataset.tok=tok.dataset.w;
       bk.onclick=function(){
         bk.textContent='____';bk.classList.remove('filled');
         fbFilled[next]=null;
         wrap.querySelectorAll('.fib-tok').forEach(t=>{if(t.dataset.w===word&&t.classList.contains('used')){t.classList.remove('used');}});
         bk.onclick=null;
       };
-      if(fbFilled.every((w,i)=>w!==null)){
+      if(fbFilled.every(w=>w!==null)){
         const correct=fbFilled.every((w,i)=>w===round.blanks[i]);
         const r=$id('fbres');r.style.display='block';
         if(correct){
@@ -1399,11 +1559,11 @@ function renderFb(){
           r.textContent='🎉 对了！duì le! correct!';
           $id('fbnext').style.display=fbIdx<FB_ROUNDS.length-1?'inline-block':'none';
           if(fbIdx===FB_ROUNDS.length-1){
-            setTimeout(()=>{r.textContent='🌟 all 3 finished! 太棒了！tài bàng le!';},700);
+            setTimeout(()=>{r.textContent='🌟 全部完成！quánbù wánchéng! all done — 太棒了！';},700);
           }
         }else{
           r.style.background='linear-gradient(135deg,#fee2e2,#fca5a5)';r.style.color='#991b1b';
-          r.textContent='❌ try again! 再试一次！';
+          r.textContent='❌ 再试一次！zài shì yī cì! try again!';
         }
       }
     };
@@ -1412,7 +1572,96 @@ function renderFb(){
 function nextFb(){
   if(fbIdx<FB_ROUNDS.length-1){fbIdx++;$id('fbres').style.display='none';$id('fbnext').style.display='none';renderFb();}
 }
-GI[27]=initFb;
+GI[26]=initFb;
+
+// ════ GAME 8: Waiter Response (slide 28, index 27) ════
+const RR=[
+  {
+    q:{hz:'欢迎光临！请问几位？',py:'huānyíng guānglín! qǐng wèn jǐ wèi?',en:'Welcome! How many people?'},
+    a:{hz:'我们三位，谢谢！',py:'wǒmen sān wèi, xièxie!',en:'We are three, thank you!'},
+    w:[
+      {hz:'我吃饺子。',py:'wǒ chī jiǎozi.',en:'I eat dumplings.'},
+      {hz:'我叫Elana。',py:'wǒ jiào Elana.',en:'My name is Elana.'},
+      {hz:'再见！',py:'zàijiàn!',en:'Goodbye!'},
+    ]
+  },
+  {
+    q:{hz:'你们想喝什么？',py:'nǐmen xiǎng hē shénme?',en:'What would you like to drink?'},
+    a:{hz:'我要一杯奶茶。',py:'wǒ yào yī bēi nǎichá.',en:'I want a cup of milk tea.'},
+    w:[
+      {hz:'我吃面条。',py:'wǒ chī miàntiáo.',en:'I eat noodles.'},
+      {hz:'我8岁了。',py:'wǒ bā suì le.',en:'I am 8 years old.'},
+      {hz:'我喜欢蓝色。',py:'wǒ xǐhuān lánsè.',en:'I like blue.'},
+    ]
+  },
+  {
+    q:{hz:'要辣的吗？',py:'yào là de ma?',en:'Want it spicy?'},
+    a:{hz:'不要辣，谢谢。',py:'bú yào là, xièxie.',en:'No spicy, thank you.'},
+    w:[
+      {hz:'你好！',py:'nǐ hǎo!',en:'Hello!'},
+      {hz:'多少钱？',py:'duōshǎo qián?',en:'How much money?'},
+      {hz:'再来一杯。',py:'zài lái yī bēi.',en:'One more cup please.'},
+    ]
+  },
+  {
+    q:{hz:'还要点别的吗？',py:'hái yào diǎn biéde ma?',en:'Order anything else?'},
+    a:{hz:'够了，谢谢！',py:'gòu le, xièxie!',en:"That's enough, thank you!"},
+    w:[
+      {hz:'我妈妈在家。',py:'wǒ māma zài jiā.',en:'My mum is at home.'},
+      {hz:'今天是星期一。',py:'jīntiān shì xīngqīyī.',en:'Today is Monday.'},
+      {hz:'我有一个哥哥。',py:'wǒ yǒu yī gè gēge.',en:'I have an older brother.'},
+    ]
+  },
+  {
+    q:{hz:'一共一百二十元。',py:'yīgòng yībǎi èrshí yuán.',en:'Total: 120 yuan.'},
+    a:{hz:'好的，给您。',py:'hǎo de, gěi nín.',en:'Okay, here you go.'},
+    w:[
+      {hz:'我喜欢红色。',py:'wǒ xǐhuān hóngsè.',en:'I like red.'},
+      {hz:'请给我筷子。',py:'qǐng gěi wǒ kuàizi.',en:'Please give me chopsticks.'},
+      {hz:'欢迎光临！',py:'huānyíng guānglín!',en:'Welcome!'},
+    ]
+  },
+  {
+    q:{hz:'谢谢光临！请慢走！',py:'xièxie guānglín! qǐng màn zǒu!',en:'Thank you for coming! Take care!'},
+    a:{hz:'谢谢！再见！',py:'xièxie! zàijiàn!',en:'Thank you! Goodbye!'},
+    w:[
+      {hz:'我要点菜。',py:'wǒ yào diǎn cài.',en:'I want to order.'},
+      {hz:'这是什么？',py:'zhè shì shénme?',en:'What is this?'},
+      {hz:'我饿了。',py:'wǒ è le.',en:"I'm hungry."},
+    ]
+  },
+];
+let rrScore=0,rrQ=0,rrItems=[];
+function initRr(){
+  rrScore=0;rrQ=0;rrItems=shuffle(RR);
+  $id('rrs').textContent='0';$id('rrq').textContent='1';$id('rrr').style.display='none';
+  showRr();
+}
+function showRr(){
+  if(rrQ>=6){
+    const r=$id('rrr');r.style.display='block';
+    r.textContent='🎉 '+rrScore+'/6 — '+(rrScore===6?'完美！wánměi!':rrScore>=4?'很好！hěn hǎo!':'加油！jiā yóu!');
+    $id('rro').innerHTML='';return;
+  }
+  const it=rrItems[rrQ];
+  $id('rrhz').textContent=it.q.hz;$id('rrpy').textContent=it.q.py;$id('rren').textContent=it.q.en;
+  $id('rrq').textContent=rrQ+1;
+  const opts=[it.a,...it.w.slice(0,3)];
+  const el=$id('rro');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.style.padding='9px 12px';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:12.5px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.a.hz){btn.classList.add('ok');rrScore++;$id('rrs').textContent=rrScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.a.hz)b.classList.add('ok');});}
+      rrQ++;setTimeout(showRr,1300);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[27]=initRr;
 </script>
 </body>
 </html>
