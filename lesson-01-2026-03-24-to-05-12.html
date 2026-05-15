@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Elana的中文课</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* ── CRITICAL: pinyin must NEVER be uppercased by CSS ── */
+body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fce4ec,#e8eaf6 50%,#e0f7fa);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.app{width:860px;position:relative}
+.slide{display:none;background:#fff;border-radius:28px;padding:20px 32px 14px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:510px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
+.slide.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Colours & backgrounds ── */
+.cp{color:#e91e8c}.cu{color:#7c3aed}.ct{color:#0891b2}.co{color:#ea580c}.cg{color:#16a34a}.cb{color:#2563eb}.cy{color:#ca8a04}
+.bp{background:#fce7f3}.bu{background:#ede9fe}.bt{background:#cffafe}.bo{background:#ffedd5}.bg{background:#dcfce7}.bb{background:#dbeafe}.by{background:#fef9c3}.br{background:#fee2e2}
+
+/* ── Layout helpers ── */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.c4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.c5{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.c6{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.c7{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+
+/* ── Typography — no text-transform anywhere ── */
+.tag{font-size:9px;font-weight:800;letter-spacing:.3px;color:inherit;margin-bottom:3px}
+.title{font-size:22px;font-weight:900;color:#1a1a2e;line-height:1.1;margin-bottom:2px}
+.sub{font-size:10.5px;color:#888;margin-bottom:8px}
+.lbl{font-size:8.5px;font-weight:800;letter-spacing:.2px;margin-bottom:4px}
+.badge{font-size:8px;font-weight:800;position:absolute;top:10px;right:14px;opacity:.4}
+.card{border-radius:11px;padding:8px 10px}
+
+/* ── Vocab cards ── */
+.vc{border-radius:10px;padding:7px 4px;text-align:center}
+.vc .py{font-size:9px;color:#e91e8c;font-weight:700;margin-top:2px}
+.vc .hz{font-size:13px;font-weight:900;color:#1a1a2e;margin:1px 0}
+.vc .en{font-size:8.5px;color:#888}
+
+/* ── Number cards ── */
+.nc{border-radius:8px;padding:5px 3px;text-align:center}
+.nc .nd{font-size:11px;font-weight:900;color:#e91e8c}
+.nc .nh{font-size:12px;font-weight:900;color:#1a1a2e}
+.nc .np{font-size:7.5px;color:#7c3aed;font-weight:600}
+
+/* ── Month / weekday cards ── */
+.mc{border-radius:8px;padding:5px 3px;text-align:center}
+.mc .py{font-size:8px;color:#e91e8c;font-weight:700}
+.mc .hz{font-size:11px;font-weight:900;color:#1a1a2e}
+.mc .en{font-size:7.5px;color:#888;margin-top:1px}
+.wc{border-radius:8px;padding:6px 3px;text-align:center}
+.wc .em{font-size:13px}
+.wc .py{font-size:7px;color:#e91e8c;font-weight:700;line-height:1.3}
+.wc .hz{font-size:10px;font-weight:900;color:#1a1a2e}
+.wc .en{font-size:7px;color:#888}
+
+/* ── Colour swatches ── */
+.csw{border-radius:10px;padding:11px 5px;text-align:center}
+.csw .py{font-size:8.5px;color:rgba(255,255,255,.9);font-weight:700}
+.csw .hz{font-size:13px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.csw .en{font-size:8px;color:rgba(255,255,255,.85);margin-top:1px}
+
+/* ── Food cards ── */
+.fch{border-radius:9px;padding:6px 4px;text-align:center}
+.fch .em{font-size:16px;display:block}
+.fch .py{font-size:8px;color:#e91e8c;font-weight:600}
+.fch .hz{font-size:10px;font-weight:800;color:#1a1a2e}
+.fch .en{font-size:7.5px;color:#888}
+
+/* ── Fruit+juice cards ── */
+.frj{border-radius:10px;padding:8px 8px}
+.frj .top{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.frj .em{font-size:22px}
+.frj .py{font-size:9px;color:#e91e8c;font-weight:700}
+.frj .hz{font-size:13px;font-weight:900;color:#1a1a2e}
+.frj .en{font-size:9px;color:#888}
+.frj .drv{font-size:8.5px;background:rgba(255,255,255,.65);border-radius:6px;padding:2px 6px;margin-top:2px;color:#555}
+.frj .drvpy{font-size:7.5px;color:#7c3aed;font-weight:600}
+
+/* ── Drink cards ── */
+.dkc{border-radius:11px;padding:10px 10px;display:flex;align-items:center;gap:10px}
+.dkc .em{font-size:28px;flex-shrink:0}
+.dkc .py{font-size:10px;color:#e91e8c;font-weight:700}
+.dkc .hz{font-size:15px;font-weight:900;color:#1a1a2e}
+.dkc .en{font-size:10px;color:#888}
+
+/* ── Sentence patterns ── */
+.sp{border-radius:10px;padding:6px 10px;margin-bottom:4px}
+.sp .pat{font-size:11px;font-weight:900;color:#1a1a2e}
+.sp .patpy{font-size:8px;color:#e91e8c;font-weight:600}
+.sp .paten{font-size:8.5px;color:#666;font-style:italic;margin:1px 0}
+.sp .ex{font-size:10px;font-weight:700}
+.sp .expy{font-size:7.5px;color:#aaa}
+.sp .exen{font-size:8px;color:#999;font-style:italic}
+
+/* ── Cover ── */
+.cov{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.cov-title{font-size:42px;font-weight:900;background:linear-gradient(135deg,#e91e8c,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ctag{background:#ede9fe;color:#7c3aed;border-radius:999px;padding:4px 10px;font-size:10.5px;font-weight:700;display:inline-block;margin:3px}
+
+/* ── End slide ── */
+.endb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.cklist{display:flex;flex-wrap:wrap;justify-content:center;gap:5px}
+.ck{background:#f0fdf4;border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;color:#15803d}
+
+/* ── Tables ── */
+.pt{border-collapse:collapse;width:100%;font-size:10px}
+.pt th{background:#fce7f3;color:#be185d;font-weight:800;padding:2px 4px;text-align:center;font-size:8px}
+.pt td{padding:2px 4px;text-align:center;border:1px solid #f0f0f0;font-size:10px}
+
+/* ── Nav ── */
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
+.nbtn{width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;font-size:15px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);transition:.2s;color:#333;display:flex;align-items:center;justify-content:center}
+.nbtn:hover{transform:scale(1.1)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:430px}
+.dot{width:6px;height:6px;border-radius:50%;background:#ddd;cursor:pointer;transition:.2s}
+.dot.active{background:#e91e8c;transform:scale(1.4)}
+
+/* ══ GAMES ══ */
+.gw{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px}
+.gsbar{font-size:12px;font-weight:800;color:#7c3aed;background:#f3e8ff;padding:3px 12px;border-radius:999px}
+.gbtn{background:linear-gradient(135deg,#e91e8c,#7c3aed);color:#fff;border:none;padding:5px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer;font-family:inherit}
+.gbtn:hover{opacity:.85}
+.gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d}
+
+/* Hint toggle button */
+.hbtn{background:#f3e8ff;color:#7c3aed;border:2px solid #d8b4fe;padding:4px 12px;border-radius:999px;font-size:10.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s}
+.hbtn.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+
+/* Hints hidden by default; shown when body has .hints class */
+.hpy,.hen{display:none;font-size:7.5px;font-weight:600;line-height:1.3}
+.hpy{color:#7c3aed}
+.hen{color:#888;font-style:italic}
+body.hints .hpy,body.hints .hen{display:block}
+
+/* Memory match */
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%}
+.mcard{background:linear-gradient(135deg,#e91e8c,#7c3aed);border-radius:10px;height:68px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;user-select:none;transition:.25s}
+.mcard.flip{background:#fff;border:2px solid #e91e8c;cursor:default}
+.mcard.match{background:linear-gradient(135deg,#dcfce7,#bbf7d0)!important;border:2px solid #16a34a!important;cursor:default}
+.mcard-py{font-size:9px;color:#e91e8c;font-weight:700}
+.mcard-hz{font-size:15px;font-weight:900;color:#1a1a2e}
+
+/* Quiz */
+.qq{background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:14px;padding:14px 20px;text-align:center;width:100%;max-width:310px}
+.qqmain{font-size:38px;font-weight:900;color:#1a1a2e;line-height:1}
+.qqlbl{font-size:11px;color:#888;margin-top:3px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px}
+.qopt{background:#fff;border:2px solid #e0e0e0;border-radius:11px;padding:9px 10px;font-weight:800;cursor:pointer;transition:.18s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px}
+.qopt:hover{border-color:#7c3aed;background:#faf5ff}
+.qopt.ok{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.qopt.no{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qopt-hz{font-size:16px}
+
+/* Colour game */
+.cq-box{border-radius:14px;padding:12px 26px;text-align:center;min-width:200px}
+.cq-hz{font-size:28px;font-weight:900;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.35)}
+.cq-py{font-size:12px;color:rgba(255,255,255,.9);font-weight:600;margin-top:3px}
+.cq-opts{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;padding-bottom:22px}
+.cq-opt{width:52px;height:52px;border-radius:50%;border:4px solid #fff;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.18);transition:.2s;position:relative}
+.cq-opt:hover{transform:scale(1.15)}
+.cq-opt.ok{box-shadow:0 0 0 4px #16a34a,0 3px 10px rgba(0,0,0,.2)!important;transform:scale(1.2)}
+.cq-opt.no{box-shadow:0 0 0 4px #dc2626!important}
+.cq-lbl{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;text-align:center;line-height:1.3}
+.cq-lbl-hz{font-size:8.5px;font-weight:700;color:#444;display:block}
+
+/* Eat/drink */
+.eod-card{background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:14px;padding:12px 22px;text-align:center;max-width:250px;width:100%}
+.eod-em{font-size:34px}
+.eod-hz{font-size:20px;font-weight:900;color:#1a1a2e;margin-top:3px}
+.eod-btns{display:flex;gap:11px;max-width:280px;width:100%}
+.eodb{flex:1;padding:10px;border-radius:12px;border:none;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;transition:.18s}
+.eodb:hover{transform:scale(1.05)}
+.eodb.eat{background:linear-gradient(135deg,#ffedd5,#fed7aa);color:#c2410c}
+.eodb.drink{background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e40af}
+.eodb-hz{font-size:18px;font-weight:900}
+.eodb-py{font-size:9px;font-weight:700;opacity:.7}
+
+/* Fruit-colour match */
+.fcwrap{display:flex;gap:18px;width:100%;align-items:flex-start;justify-content:center}
+.fccol{display:flex;flex-direction:column;gap:6px;min-width:148px}
+.fci{border-radius:10px;padding:7px 9px;cursor:pointer;border:3px solid transparent;display:flex;align-items:center;gap:7px;transition:.18s}
+.fci-f{background:#fff7ed}.fci-c{background:#f3e8ff}
+.fci:hover{transform:scale(1.03)}
+.fci.sel{border-color:#e91e8c;box-shadow:0 0 0 2px #fce7f3}
+.fci.mat{border-color:#16a34a!important;background:#f0fdf4!important;cursor:default}
+.fci.bad{border-color:#dc2626!important;animation:shk .3s}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.fcdot{width:20px;height:20px;border-radius:50%;flex-shrink:0}
+.fci-hz{font-size:12px;font-weight:800;color:#1a1a2e}
+.fci-py{font-size:8px;color:#e91e8c;font-weight:600}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="slide active">
+<div class="cov">
+  <div style="font-size:42px">🌸🐼✏️</div>
+  <div class="cov-title">Elana的中文课<br><span style="font-size:20px;font-weight:700;background:none;-webkit-text-fill-color:#888">elana de zhōngwén kè · Chinese Lesson Review</span></div>
+  <div style="background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:800;color:#7c3aed">📅 2026年3月24日 — 2026年5月12日</div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:620px">
+    <span class="ctag">🔤 拼音 pīnyīn · pronunciation</span>
+    <span class="ctag">👨‍👩‍👧 家庭 jiātíng · family</span>
+    <span class="ctag">🔢 数字 shùzì · numbers</span>
+    <span class="ctag">📅 月份 yuèfèn · months</span>
+    <span class="ctag">📆 星期 xīngqī · days of week</span>
+    <span class="ctag">🎨 颜色 yánsè · colours</span>
+    <span class="ctag">🍜 食物 shíwù · food</span>
+    <span class="ctag">🍎 水果 shuǐguǒ · fruits</span>
+    <span class="ctag">🥤 饮料 yǐnliào · drinks</span>
+    <span class="ctag">💬 句型 jùxíng · sentences</span>
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cu">pronunciation</span>
+<div class="tag cu">🔤 拼音 pīnyīn · how Chinese sounds work</div>
+<div class="title">拼音 pīnyīn — the sound system of Chinese</div>
+<div class="two" style="gap:9px">
+  <!-- LEFT -->
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <div class="card bp">
+      <div class="lbl cp">声母 shēngmǔ · initial consonants (the beginning of a syllable)</div>
+      <table class="pt" style="margin-top:3px">
+        <tr><th>lips 唇</th><td>b</td><td>p</td><td>m</td><td>f</td></tr>
+        <tr><th>tip 舌尖</th><td>d</td><td>t</td><td>n</td><td>l</td></tr>
+        <tr><th>back 舌根</th><td>g</td><td>k</td><td>h</td><td></td></tr>
+        <tr><th>palate 舌面</th><td>j</td><td>q</td><td>x</td><td></td></tr>
+        <tr><th>curl 翘舌</th><td>zh</td><td>ch</td><td>sh</td><td>r</td></tr>
+        <tr><th>flat 舌齿</th><td>z</td><td>c</td><td>s</td><td></td></tr>
+      </table>
+    </div>
+    <div class="card bt">
+      <div class="lbl ct">韵母 yùnmǔ · finals (the vowel ending of a syllable)</div>
+      <div style="font-size:10px;line-height:1.9;margin-top:2px">
+        <b>Single:</b> a &nbsp;o &nbsp;e &nbsp;i &nbsp;u &nbsp;ü<br>
+        <b>Compound:</b> ai &nbsp;ei &nbsp;ao &nbsp;ou &nbsp;ia &nbsp;ie &nbsp;ua &nbsp;uo<br>
+        <b>Nasal -n:</b> an &nbsp;en &nbsp;in &nbsp;un<br>
+        <b>Nasal -ng:</b> ang &nbsp;eng &nbsp;ing &nbsp;ong
+      </div>
+    </div>
+    <div class="card by" style="font-size:10px">
+      <div class="lbl cy">special whole-syllable sounds — read each as one unit</div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:3px">
+        <span style="background:#fef08a;border-radius:4px;padding:2px 5px;font-weight:700;color:#854d0e;font-size:9px">zhi &nbsp;chi &nbsp;shi &nbsp;ri</span>
+        <span style="background:#fef08a;border-radius:4px;padding:2px 5px;font-weight:700;color:#854d0e;font-size:9px">zi &nbsp;ci &nbsp;si</span>
+        <span style="background:#fef08a;border-radius:4px;padding:2px 5px;font-weight:700;color:#854d0e;font-size:9px">ye &nbsp;wu &nbsp;yu &nbsp;yue</span>
+      </div>
+    </div>
+  </div>
+  <!-- RIGHT -->
+  <div style="display:flex;flex-direction:column;gap:7px">
+    <div class="card bu">
+      <div class="lbl cu">声调 shēngdiào · tones — every syllable has one!</div>
+      <div style="display:flex;gap:3px;margin-top:5px">
+        <div style="flex:1;background:#fce7f3;border-radius:9px;padding:5px 2px;text-align:center">
+          <div style="font-size:17px;font-weight:900;color:#e91e8c">ā</div>
+          <svg width="36" height="12" viewBox="0 0 36 12"><path d="M3 10 L33 2" stroke="#e91e8c" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+          <div style="font-size:7.5px;font-weight:800;color:#e91e8c">tone 1 — flat</div>
+          <div style="font-size:10px;font-weight:700">māo 猫</div>
+          <div style="font-size:7.5px;color:#888">cat</div>
+        </div>
+        <div style="flex:1;background:#ffedd5;border-radius:9px;padding:5px 2px;text-align:center">
+          <div style="font-size:17px;font-weight:900;color:#ea580c">á</div>
+          <svg width="36" height="12" viewBox="0 0 36 12"><path d="M3 11 L33 2" stroke="#ea580c" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+          <div style="font-size:7.5px;font-weight:800;color:#ea580c">tone 2 — rising</div>
+          <div style="font-size:10px;font-weight:700">máo 毛</div>
+          <div style="font-size:7.5px;color:#888">hair</div>
+        </div>
+        <div style="flex:1;background:#dcfce7;border-radius:9px;padding:5px 2px;text-align:center">
+          <div style="font-size:17px;font-weight:900;color:#16a34a">ǎ</div>
+          <svg width="36" height="12" viewBox="0 0 36 12"><path d="M3 6 Q9 12 16 11 Q27 9 33 2" stroke="#16a34a" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+          <div style="font-size:7.5px;font-weight:800;color:#16a34a">tone 3 — dip</div>
+          <div style="font-size:10px;font-weight:700">mǎ 马</div>
+          <div style="font-size:7.5px;color:#888">horse</div>
+        </div>
+        <!-- Tone 4 — dark bg to avoid purple clash -->
+        <div style="flex:1;background:#3b0764;border-radius:9px;padding:5px 2px;text-align:center">
+          <div style="font-size:17px;font-weight:900;color:#e9d5ff">à</div>
+          <svg width="36" height="12" viewBox="0 0 36 12"><path d="M3 2 L33 11" stroke="#e9d5ff" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+          <div style="font-size:7.5px;font-weight:800;color:#d8b4fe">tone 4 — falling</div>
+          <div style="font-size:10px;font-weight:700;color:#fff">dà 大</div>
+          <div style="font-size:7.5px;color:#d8b4fe">big</div>
+        </div>
+        <div style="flex:1;background:#cffafe;border-radius:9px;padding:5px 2px;text-align:center">
+          <div style="font-size:17px;font-weight:900;color:#0891b2">a</div>
+          <svg width="36" height="12" viewBox="0 0 36 12"><circle cx="18" cy="8" r="3" fill="#0891b2"/></svg>
+          <div style="font-size:7.5px;font-weight:800;color:#0891b2">neutral — soft</div>
+          <div style="font-size:10px;font-weight:700">ma 吗</div>
+          <div style="font-size:7.5px;color:#888">? (question)</div>
+        </div>
+      </div>
+    </div>
+    <div class="card bg">
+      <div class="lbl cg">where to write the tone mark — 4 rules</div>
+      <div style="font-size:10px;line-height:2;margin-top:3px">
+        <span style="background:#16a34a;color:#fff;border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;margin-right:4px">1</span>there is an <b>a</b> → mark the <b>a</b>: <span class="cp">māo &nbsp;hǎo &nbsp;lái</span><br>
+        <span style="background:#16a34a;color:#fff;border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;margin-right:4px">2</span>no a → mark <b>o</b> or <b>e</b>: <span class="cp">wǒ &nbsp;hē &nbsp;zuò</span><br>
+        <span style="background:#16a34a;color:#fff;border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;margin-right:4px">3</span><b>iu</b> or <b>ui</b> → mark the <b>last</b> vowel: <span class="cp">liú &nbsp;guì</span><br>
+        <span style="background:#16a34a;color:#fff;border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;margin-right:4px">4</span>single vowel → mark it directly: <span class="cp">bǐ &nbsp;lǜ</span>
+      </div>
+    </div>
+    <div class="card br" style="font-size:10px">
+      <div class="lbl" style="color:#dc2626">⚠️ tone change rule (变调 biàndiào)</div>
+      <div style="margin-top:3px;line-height:1.9">
+        when <b>tone 3 + tone 3</b> come together, the first changes to <b>tone 2</b>:<br>
+        <span class="cp" style="font-weight:800">nǐ hǎo → ní hǎo</span>&nbsp;·&nbsp;你好 <span style="color:#888;font-size:8.5px">hello</span><br>
+        <span class="cp" style="font-weight:800">wǒ yě → wó yě</span>&nbsp;·&nbsp;我也 <span style="color:#888;font-size:8.5px">me too</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">vocabulary 1/8</span>
+<div class="tag cp">👨‍👩‍👧 家庭 jiātíng · family</div>
+<div class="title">家庭成员 (一) jiātíng chéngyuán — core family members</div>
+<div class="sub">直系家庭 zhíxì jiātíng · immediate family</div>
+<div class="c3" style="margin-bottom:9px">
+  <div class="vc bb"><div style="font-size:26px">👨</div><div class="py">bàba</div><div class="hz">爸爸</div><div class="en">dad / father</div></div>
+  <div class="vc bp"><div style="font-size:26px">👩</div><div class="py">māma</div><div class="hz">妈妈</div><div class="en">mum / mother</div></div>
+  <div class="vc bg"><div style="font-size:26px">🧑</div><div class="py">gēge</div><div class="hz">哥哥</div><div class="en">older brother</div></div>
+  <div class="vc by"><div style="font-size:26px">👧</div><div class="py">jiějie</div><div class="hz">姐姐</div><div class="en">older sister</div></div>
+  <div class="vc bt"><div style="font-size:26px">👦</div><div class="py">dìdi</div><div class="hz">弟弟</div><div class="en">younger brother</div></div>
+  <div class="vc bu"><div style="font-size:26px">👶</div><div class="py">mèimei</div><div class="hz">妹妹</div><div class="en">younger sister</div></div>
+</div>
+<div class="c2">
+  <div class="card bp" style="font-size:10.5px">
+    <div class="lbl cp">句型 jùxíng · useful sentences</div>
+    <div style="line-height:2;margin-top:3px">
+      <b>这是</b> <span class="cp" style="font-size:8px">zhè shì · this is</span> <b>我的妈妈</b> <span class="cp" style="font-size:8px">wǒ de māma · my mum</span>。<br>
+      <b>我有</b> <span class="cp" style="font-size:8px">wǒ yǒu · I have</span> <b>一个哥哥</b> <span class="cp" style="font-size:8px">yī gè gēge · one older brother</span>。
+    </div>
+  </div>
+  <div class="card by" style="font-size:10.5px">
+    <div class="lbl cy">💡 tip</div>
+    <div style="line-height:2;margin-top:3px">
+      哥 gē · jiě 姐 = <b>older</b> (大 dà · big)<br>
+      弟 dì · mèi 妹 = <b>younger</b> (小 xiǎo · small)
+    </div>
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">vocabulary 2/8</span>
+<div class="tag cp">👨‍👩‍👧 家庭 jiātíng · family</div>
+<div class="title">家庭成员 (二) jiātíng chéngyuán — extended family</div>
+<div class="sub">祖父母和亲戚 zǔfùmǔ hé qīnqi · grandparents and relatives</div>
+<div class="c4" style="margin-bottom:9px">
+  <div class="vc bo"><div style="font-size:24px">👴</div><div class="py">yéye</div><div class="hz">爷爷</div><div class="en">paternal grandpa</div></div>
+  <div class="vc bp"><div style="font-size:24px">👵</div><div class="py">nǎinai</div><div class="hz">奶奶</div><div class="en">paternal grandma</div></div>
+  <div class="vc bt"><div style="font-size:24px">👴</div><div class="py">wàigōng / lǎoye</div><div class="hz">外公/姥爷</div><div class="en">maternal grandpa</div></div>
+  <div class="vc bu"><div style="font-size:24px">👵</div><div class="py">wàipó / lǎolao</div><div class="hz">外婆/姥姥</div><div class="en">maternal grandma</div></div>
+  <div class="vc bg"><div style="font-size:24px">👩</div><div class="py">gūmā / āyí</div><div class="hz">姑妈/阿姨</div><div class="en">aunt</div></div>
+  <div class="vc by"><div style="font-size:24px">👨</div><div class="py">shūshu / jiùjiu</div><div class="hz">叔叔/舅舅</div><div class="en">uncle</div></div>
+  <div class="vc bb"><div style="font-size:24px">👧</div><div class="py">biǎojiě / biǎomèi</div><div class="hz">表姐/表妹</div><div class="en">female cousin</div></div>
+  <div class="vc br"><div style="font-size:24px">👦</div><div class="py">biǎogē / biǎodì</div><div class="hz">表哥/表弟</div><div class="en">male cousin</div></div>
+</div>
+<div class="card bp" style="font-size:10.5px">
+  <div class="lbl cp">句型 jùxíng · key sentence</div>
+  <div style="margin-top:2px;line-height:2">
+    我的家里有 <span class="cp" style="font-size:8px">wǒ de jiālǐ yǒu · in my family there are</span>
+    <b>爸爸、妈妈和我</b> <span class="cp" style="font-size:8px">bàba, māma hé wǒ · dad, mum and me</span>。
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">🎮 game</span>
+<div class="tag cp">🎮 游戏时间！yóuxì shíjiān! · game time!</div>
+<div class="title">家庭配对游戏 jiātíng · memory match</div>
+<div class="sub">Flip the cards and find the matching pairs! 翻开卡片，找到配对！fānkāi kǎpiàn, zhǎodào pèiduì!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 matches: <span id="fm">0</span>/6</div>
+    <div class="gsbar">🔄 flips: <span id="ff">0</span></div>
+    <button class="gbtn" onclick="initFam()">↺ restart</button>
+    <button class="hbtn" id="hb4" onclick="tH(this)">💡 hints: off</button>
+  </div>
+  <div class="mgrid" id="fgrid" style="max-width:660px"></div>
+  <div class="gres" id="fres"></div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">vocabulary 3/8</span>
+<div class="tag cp">🔢 数字 shùzì · numbers 1–30</div>
+<div class="title">数字 shùzì — numbers one to thirty</div>
+<div class="sub">一到三十 yī dào sānshí &nbsp;·&nbsp; pattern: 十 shí = 10 &nbsp;·&nbsp; 二十 èrshí = 20 &nbsp;·&nbsp; 二十五 èrshíwǔ = 25</div>
+<div class="c6" style="margin-bottom:8px">
+  <div class="nc bp"><div class="nd">1</div><div class="nh">一</div><div class="np">yī</div></div>
+  <div class="nc bu"><div class="nd">2</div><div class="nh">二</div><div class="np">èr</div></div>
+  <div class="nc bg"><div class="nd">3</div><div class="nh">三</div><div class="np">sān</div></div>
+  <div class="nc bo"><div class="nd">4</div><div class="nh">四</div><div class="np">sì</div></div>
+  <div class="nc bt"><div class="nd">5</div><div class="nh">五</div><div class="np">wǔ</div></div>
+  <div class="nc by"><div class="nd">6</div><div class="nh">六</div><div class="np">liù</div></div>
+  <div class="nc br"><div class="nd">7</div><div class="nh">七</div><div class="np">qī</div></div>
+  <div class="nc bb"><div class="nd">8</div><div class="nh">八</div><div class="np">bā</div></div>
+  <div class="nc bp"><div class="nd">9</div><div class="nh">九</div><div class="np">jiǔ</div></div>
+  <div class="nc bu"><div class="nd">10</div><div class="nh">十</div><div class="np">shí</div></div>
+  <div class="nc bg"><div class="nd">11</div><div class="nh">十一</div><div class="np">shíyī</div></div>
+  <div class="nc bo"><div class="nd">12</div><div class="nh">十二</div><div class="np">shí'èr</div></div>
+  <div class="nc bt"><div class="nd">13</div><div class="nh">十三</div><div class="np">shísān</div></div>
+  <div class="nc by"><div class="nd">14</div><div class="nh">十四</div><div class="np">shísì</div></div>
+  <div class="nc br"><div class="nd">15</div><div class="nh">十五</div><div class="np">shíwǔ</div></div>
+  <div class="nc bb"><div class="nd">16</div><div class="nh">十六</div><div class="np">shíliù</div></div>
+  <div class="nc bp"><div class="nd">17</div><div class="nh">十七</div><div class="np">shíqī</div></div>
+  <div class="nc bu"><div class="nd">18</div><div class="nh">十八</div><div class="np">shíbā</div></div>
+  <div class="nc bg"><div class="nd">19</div><div class="nh">十九</div><div class="np">shíjiǔ</div></div>
+  <div class="nc bo"><div class="nd">20</div><div class="nh">二十</div><div class="np">èrshí</div></div>
+  <div class="nc bt"><div class="nd">21</div><div class="nh">二十一</div><div class="np">èrshíyī</div></div>
+  <div class="nc by"><div class="nd">22</div><div class="nh">二十二</div><div class="np">èrshí'èr</div></div>
+  <div class="nc br"><div class="nd">23</div><div class="nh">二十三</div><div class="np">èrshísān</div></div>
+  <div class="nc bb"><div class="nd">24</div><div class="nh">二十四</div><div class="np">èrshísì</div></div>
+  <div class="nc bp"><div class="nd">25</div><div class="nh">二十五</div><div class="np">èrshíwǔ</div></div>
+  <div class="nc bu"><div class="nd">26</div><div class="nh">二十六</div><div class="np">èrshíliù</div></div>
+  <div class="nc bg"><div class="nd">27</div><div class="nh">二十七</div><div class="np">èrshíqī</div></div>
+  <div class="nc bo"><div class="nd">28</div><div class="nh">二十八</div><div class="np">èrshíbā</div></div>
+  <div class="nc bt"><div class="nd">29</div><div class="nh">二十九</div><div class="np">èrshíjiǔ</div></div>
+  <div class="nc by"><div class="nd">30</div><div class="nh">三十</div><div class="np">sānshí</div></div>
+</div>
+<div class="card by" style="font-size:10px">
+  <div class="lbl cy">📅 dates: 一月三日 yī yuè sān rì = January 3rd &nbsp;·&nbsp; 几月几日？jǐ yuè jǐ rì? = what date? &nbsp;·&nbsp; 今天是 jīntiān shì = today is</div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">🎮 game</span>
+<div class="tag cp">🎮 游戏时间！yóuxì shíjiān! · game time!</div>
+<div class="title">数字问答 shùzì quiz — numbers</div>
+<div class="sub">See the digit — pick the matching Chinese character!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="ns">0</span>/8</div>
+    <div class="gsbar">question <span id="nq">1</span></div>
+    <button class="gbtn" onclick="initNum()">↺ restart</button>
+    <button class="hbtn" id="hb6" onclick="tH(this)">💡 hints: off</button>
+  </div>
+  <div class="qq"><div class="qqmain" id="nd">?</div><div class="qqlbl">Which Chinese character is this number?</div></div>
+  <div class="qopts" id="no"></div>
+  <div class="gres" id="nr"></div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">vocabulary 4/8</span>
+<div class="tag cp">📅 月份 yuèfèn · months &nbsp;&nbsp; 📆 星期 xīngqī · days &nbsp;&nbsp; 日期 rìqī · dates</div>
+<div class="title">月份、星期和日期 — months, days of the week and dates</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px">
+  <div class="mc bp"><div class="py">yī yuè</div><div class="hz">一月</div><div class="en">January</div></div>
+  <div class="mc bu"><div class="py">èr yuè</div><div class="hz">二月</div><div class="en">February</div></div>
+  <div class="mc bg"><div class="py">sān yuè</div><div class="hz">三月</div><div class="en">March</div></div>
+  <div class="mc bo"><div class="py">sì yuè</div><div class="hz">四月</div><div class="en">April</div></div>
+  <div class="mc bt"><div class="py">wǔ yuè</div><div class="hz">五月</div><div class="en">May</div></div>
+  <div class="mc by"><div class="py">liù yuè</div><div class="hz">六月</div><div class="en">June</div></div>
+  <div class="mc br"><div class="py">qī yuè</div><div class="hz">七月</div><div class="en">July</div></div>
+  <div class="mc bb"><div class="py">bā yuè</div><div class="hz">八月</div><div class="en">August</div></div>
+  <div class="mc bp"><div class="py">jiǔ yuè</div><div class="hz">九月</div><div class="en">September</div></div>
+  <div class="mc bu"><div class="py">shí yuè</div><div class="hz">十月</div><div class="en">October</div></div>
+  <div class="mc bg"><div class="py">shíyī yuè</div><div class="hz">十一月</div><div class="en">November</div></div>
+  <div class="mc bo"><div class="py">shí'èr yuè</div><div class="hz">十二月</div><div class="en">December</div></div>
+</div>
+<div class="c7" style="margin-bottom:6px">
+  <div class="wc bp"><div class="em">😴</div><div class="py">xīngqīyī</div><div class="hz">星期一</div><div class="en">Monday</div></div>
+  <div class="wc bu"><div class="em">📚</div><div class="py">xīngqī'èr</div><div class="hz">星期二</div><div class="en">Tuesday</div></div>
+  <div class="wc bg"><div class="em">🎨</div><div class="py">xīngqīsān</div><div class="hz">星期三</div><div class="en">Wednesday</div></div>
+  <div class="wc bo"><div class="em">🏃</div><div class="py">xīngqīsì</div><div class="hz">星期四</div><div class="en">Thursday</div></div>
+  <div class="wc by"><div class="em">🎉</div><div class="py">xīngqīwǔ</div><div class="hz">星期五</div><div class="en">Friday</div></div>
+  <div class="wc bt"><div class="em">🛍️</div><div class="py">xīngqīliù</div><div class="hz">星期六</div><div class="en">Saturday</div></div>
+  <div class="wc br"><div class="em">☀️</div><div class="py">xīngqīrì</div><div class="hz">星期日</div><div class="en">Sunday</div></div>
+</div>
+<div class="c2">
+  <div class="card bg" style="font-size:10px">
+    <div class="lbl cg">日期 rìqī · date format</div>
+    <div style="line-height:2;margin-top:2px">
+      几月几日 jǐ yuè jǐ rì <span style="color:#888;font-size:8.5px">= what date?</span><br>
+      一月三日 yī yuè sān rì <span style="color:#888;font-size:8.5px">= January 3rd</span><br>
+      五月十四日 wǔ yuè shísì rì <span style="color:#888;font-size:8.5px">= May 14th</span>
+    </div>
+  </div>
+  <div class="card bu" style="font-size:10px">
+    <div class="lbl cu">句型 jùxíng · sentences</div>
+    <div style="line-height:2;margin-top:2px">
+      今天是 jīntiān shì <span style="color:#888;font-size:8.5px">today is</span><br>
+      星期几？xīngqī jǐ? <span style="color:#888;font-size:8.5px">what day of the week?</span><br>
+      几月几日？jǐ yuè jǐ rì? <span style="color:#888;font-size:8.5px">what date?</span>
+    </div>
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">🎮 game</span>
+<div class="tag cp">🎮 游戏时间！yóuxì shíjiān! · game time!</div>
+<div class="title">月份问答 yuèfèn quiz — months</div>
+<div class="sub">See the number — pick the correct Chinese month!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="ms">0</span>/8</div>
+    <div class="gsbar">question <span id="mq">1</span></div>
+    <button class="gbtn" onclick="initMon()">↺ restart</button>
+    <button class="hbtn" id="hb8" onclick="tH(this)">💡 hints: off</button>
+  </div>
+  <div class="qq"><div class="qqmain" id="mn">?</div><div class="qqlbl">Which Chinese month is this number?</div></div>
+  <div class="qopts" id="mo"></div>
+  <div class="gres" id="mr"></div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">🎮 game</span>
+<div class="tag cp">🎮 游戏时间！yóuxì shíjiān! · game time!</div>
+<div class="title">星期问答 xīngqī quiz — days of the week</div>
+<div class="sub">See the number (1 = Monday) — pick the correct Chinese day!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="ws">0</span>/7</div>
+    <div class="gsbar">question <span id="wq">1</span></div>
+    <button class="gbtn" onclick="initWk()">↺ restart</button>
+    <button class="hbtn" id="hb9" onclick="tH(this)">💡 hints: off</button>
+  </div>
+  <div class="qq"><div class="qqmain" id="wn">?</div><div class="qqlbl">Which day of the week is this? (1 = Monday ... 7 = Sunday)</div></div>
+  <div class="qopts" id="wo"></div>
+  <div class="gres" id="wr"></div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">vocabulary 5/8</span>
+<div class="tag cp">🎨 颜色 yánsè · colours</div>
+<div class="title">颜色 yánsè — seven colours</div>
+<div class="sub">七种颜色 qī zhǒng yánsè · 7 colours we learned</div>
+<div class="c7" style="margin-bottom:10px">
+  <div class="csw" style="background:#ef4444"><div class="py">hóngsè</div><div class="hz">红色</div><div class="en">red</div></div>
+  <div class="csw" style="background:#f97316"><div class="py">chéngsè</div><div class="hz">橙色</div><div class="en">orange</div></div>
+  <div class="csw" style="background:#eab308"><div class="py">huángsè</div><div class="hz">黄色</div><div class="en">yellow</div></div>
+  <div class="csw" style="background:#22c55e"><div class="py">lǜsè</div><div class="hz">绿色</div><div class="en">green</div></div>
+  <div class="csw" style="background:#3b82f6"><div class="py">lánsè</div><div class="hz">蓝色</div><div class="en">blue</div></div>
+  <div class="csw" style="background:#a855f7"><div class="py">zǐsè</div><div class="hz">紫色</div><div class="en">purple</div></div>
+  <div class="csw" style="background:#ec4899"><div class="py">fěnsè</div><div class="hz">粉色</div><div class="en">pink</div></div>
+</div>
+<div class="c2">
+  <div class="card bp" style="font-size:10.5px">
+    <div class="lbl cp">句型 jùxíng · sentences</div>
+    <div style="line-height:2;margin-top:3px">
+      我喜欢 wǒ xǐhuān <span style="color:#888;font-size:8.5px">I like</span> <b>蓝色和紫色</b> <span class="cp" style="font-size:8px">lánsè hé zǐsè · blue and purple</span>。<br>
+      这是 zhè shì <span style="color:#888;font-size:8.5px">this is</span> <b>红色的</b> <span class="cp" style="font-size:8px">hóngsè de · red (colour)</span>。
+    </div>
+  </div>
+  <div class="card by" style="font-size:10.5px">
+    <div class="lbl cy">颜色 + 的 + 名词 yánsè + de + noun</div>
+    <div style="line-height:2;margin-top:3px">
+      <b>红色的苹果</b> <span class="cp" style="font-size:8px">hóngsè de píngguǒ</span><br>
+      <span style="color:#888;font-size:8.5px">a red apple</span>
+    </div>
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">🎮 game</span>
+<div class="tag cp">🎮 游戏时间！yóuxì shíjiān! · game time!</div>
+<div class="title">颜色转盘 yánsè quiz — colours</div>
+<div class="sub">See the colour patch — click the matching circle!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="cs">0</span>/7</div>
+    <button class="gbtn" onclick="initCol()">↺ restart</button>
+    <button class="hbtn" id="hb11" onclick="tH(this)">💡 hints: off</button>
+  </div>
+  <div class="cq-box" id="cbox" style="background:#e91e8c;min-width:210px">
+    <div class="cq-py" id="cpy">ready?</div>
+    <div class="cq-hz" id="chz">???</div>
+  </div>
+  <div class="cq-opts" id="copts"></div>
+  <div class="gres" id="cr"></div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">vocabulary 6/8</span>
+<div class="tag cp">🍜 食物 shíwù · food</div>
+<div class="title">食物 shíwù — food (things you eat 吃 chī)</div>
+<div class="sub">固体食物 gùtǐ shíwù · solid food items</div>
+<div class="c5" style="margin-bottom:9px">
+  <div class="fch bp"><span class="em">🍚</span><div class="py">mǐfàn</div><div class="hz">米饭</div><div class="en">rice</div></div>
+  <div class="fch bu"><span class="em">🍜</span><div class="py">miàntiáo</div><div class="hz">面条</div><div class="en">noodles</div></div>
+  <div class="fch bg"><span class="em">🥟</span><div class="py">jiǎozi</div><div class="hz">饺子</div><div class="en">dumplings</div></div>
+  <div class="fch bo"><span class="em">🥚</span><div class="py">jīdàn</div><div class="hz">鸡蛋</div><div class="en">egg</div></div>
+  <div class="fch bt"><span class="em">🍗</span><div class="py">jīròu</div><div class="hz">鸡肉</div><div class="en">chicken</div></div>
+  <div class="fch by"><span class="em">🍞</span><div class="py">miànbāo</div><div class="hz">面包</div><div class="en">bread</div></div>
+  <div class="fch br"><span class="em">🍔</span><div class="py">hànbǎo</div><div class="hz">汉堡</div><div class="en">burger</div></div>
+  <div class="fch bb"><span class="em">🍰</span><div class="py">dàngāo</div><div class="hz">蛋糕</div><div class="en">cake</div></div>
+  <div class="fch bp"><span class="em">🍦</span><div class="py">bīngqílín</div><div class="hz">冰淇淋</div><div class="en">ice cream</div></div>
+  <div class="fch bu"><span class="em">🍚</span><div class="py">chǎofàn</div><div class="hz">炒饭</div><div class="en">fried rice</div></div>
+</div>
+<div class="c2">
+  <div class="card bp" style="font-size:10.5px">
+    <div class="lbl cp">句型 jùxíng · sentences</div>
+    <div style="line-height:2;margin-top:3px">
+      我喜欢<b>吃</b> wǒ xǐhuān <b>chī</b> <span style="color:#888;font-size:8.5px">I like to eat</span> <b>饺子</b> jiǎozi dumplings。<br>
+      我不喜欢吃 wǒ bù xǐhuān chī <span style="color:#888;font-size:8.5px">I don't like to eat</span> <b>汉堡</b> hànbǎo burgers。
+    </div>
+  </div>
+  <div class="card by" style="font-size:10.5px">
+    <div class="lbl cy">吃 chī vs 喝 hē</div>
+    <div style="line-height:2;margin-top:3px">
+      <b>吃 chī</b> = eat (solid food)<br>
+      <b>喝 hē</b> = drink (liquids — next slides 👉)
+    </div>
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">🎮 game</span>
+<div class="tag cp">🎮 游戏时间！yóuxì shíjiān! · game time!</div>
+<div class="title">吃还是喝？chī háishi hē? — eat or drink?</div>
+<div class="sub">See the item — click 吃 (eat) or 喝 (drink)!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="es">0</span>/10</div>
+    <div class="gsbar">question <span id="eq">1</span>/10</div>
+    <button class="gbtn" onclick="initEod()">↺ restart</button>
+    <button class="hbtn" id="hb13" onclick="tH(this)">💡 hints: off</button>
+  </div>
+  <div class="eod-card" id="ecard">
+    <div class="eod-em" id="eem">🍚</div>
+    <div class="eod-hz" id="ehz">米饭</div>
+    <div class="hpy" id="epy" style="font-size:10px;color:#e91e8c;font-weight:700;margin-top:2px">mǐfàn</div>
+    <div class="hen" id="een" style="font-size:9px;color:#888;font-style:italic">rice</div>
+  </div>
+  <div class="eod-btns">
+    <button class="eodb eat" onclick="eodG('eat')">
+      <div class="eodb-hz">🍽️ 吃</div>
+      <div class="eodb-py">chī · eat</div>
+    </button>
+    <button class="eodb drink" onclick="eodG('drink')">
+      <div class="eodb-hz">🥤 喝</div>
+      <div class="eodb-py">hē · drink</div>
+    </button>
+  </div>
+  <div class="gres" id="er"></div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">vocabulary 7/8</span>
+<div class="tag cp">🍎 水果 shuǐguǒ · fruits &nbsp;+&nbsp; 🥤 果汁/奶昔 guǒzhī / nǎixī · juices &amp; smoothies</div>
+<div class="title">水果、果汁和奶昔 — fruits, juices and smoothies</div>
+<div class="c4">
+  <div class="frj bp">
+    <div class="top"><div class="em">🍎</div><div><div class="py">píngguǒ</div><div class="hz">苹果</div><div class="en">apple</div></div></div>
+    <div class="drv">→ 🍎 苹果汁 píngguǒ zhī <span style="color:#888;font-size:7.5px">apple juice</span></div>
+  </div>
+  <div class="frj bo">
+    <div class="top"><div class="em">🍊</div><div><div class="py">chéngzi</div><div class="hz">橙子</div><div class="en">orange</div></div></div>
+    <div class="drv">→ 🍊 橙汁 chéngzhī <span style="color:#888;font-size:7.5px">orange juice</span></div>
+  </div>
+  <div class="frj by">
+    <div class="top"><div class="em">🍌</div><div><div class="py">xiāngjiāo</div><div class="hz">香蕉</div><div class="en">banana</div></div></div>
+    <div class="drv">→ 🍌 香蕉奶昔 xiāngjiāo nǎixī <span style="color:#888;font-size:7.5px">banana smoothie</span></div>
+  </div>
+  <div class="frj bu">
+    <div class="top"><div class="em">🍇</div><div><div class="py">pútáo</div><div class="hz">葡萄</div><div class="en">grape</div></div></div>
+    <div class="drv">→ 🍇 葡萄汁 pútáo zhī <span style="color:#888;font-size:7.5px">grape juice</span></div>
+  </div>
+  <div class="frj bp">
+    <div class="top"><div class="em">🍓</div><div><div class="py">cǎoméi</div><div class="hz">草莓</div><div class="en">strawberry</div></div></div>
+    <div class="drv">→ 🍓 草莓奶昔 cǎoméi nǎixī <span style="color:#888;font-size:7.5px">strawberry smoothie</span></div>
+  </div>
+  <div class="frj bg">
+    <div class="top"><div class="em">🍉</div><div><div class="py">xīguā</div><div class="hz">西瓜</div><div class="en">watermelon</div></div></div>
+    <div class="drv">→ 🍉 西瓜汁 xīguā zhī <span style="color:#888;font-size:7.5px">watermelon juice</span></div>
+    <div class="drv">→ 🍉 西瓜奶昔 xīguā nǎixī <span style="color:#888;font-size:7.5px">watermelon smoothie ⭐</span></div>
+  </div>
+  <div class="frj bp">
+    <div class="top"><div class="em">🍑</div><div><div class="py">táozi</div><div class="hz">桃子</div><div class="en">peach</div></div></div>
+    <div class="drv">→ 🍑 桃汁 táo zhī <span style="color:#888;font-size:7.5px">peach juice</span></div>
+  </div>
+  <div class="frj bo">
+    <div class="top"><div class="em">🥭</div><div><div class="py">mángguǒ</div><div class="hz">芒果</div><div class="en">mango</div></div></div>
+    <div class="drv">→ 🥭 芒果汁 mángguǒ zhī <span style="color:#888;font-size:7.5px">mango juice</span></div>
+  </div>
+</div>
+<div class="card by" style="font-size:10px;margin-top:7px">
+  <div class="lbl cy">果汁 guǒzhī = juice &nbsp;·&nbsp; 奶昔 nǎixī = smoothie / milkshake &nbsp;·&nbsp; all drinks → use 喝 hē (to drink)</div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">vocabulary 8/8</span>
+<div class="tag cp">🥤 饮料 yǐnliào · other drinks</div>
+<div class="title">其他饮料 qítā yǐnliào — other drinks (non-fruit)</div>
+<div class="sub">所有的饮料都用 喝 hē suǒyǒu de yǐnliào dōu yòng hē · all drinks use 喝 hē (to drink)</div>
+<div class="c2" style="flex:1">
+  <div class="dkc bb"><div class="em">💧</div><div><div class="py">shuǐ</div><div class="hz">水</div><div class="en">water</div></div></div>
+  <div class="dkc bg"><div class="em">🥛</div><div><div class="py">niúnǎi</div><div class="hz">牛奶</div><div class="en">milk</div></div></div>
+  <div class="dkc bt"><div class="em">🍵</div><div><div class="py">chá</div><div class="hz">茶</div><div class="en">tea</div></div></div>
+  <div class="dkc bu"><div class="em">🧋</div><div><div class="py">nǎichá</div><div class="hz">奶茶</div><div class="en">milk tea / bubble tea</div></div></div>
+  <div class="dkc br"><div class="em">☕</div><div><div class="py">kāfēi</div><div class="hz">咖啡</div><div class="en">coffee</div></div></div>
+  <div class="dkc by"><div class="em">🧃</div><div><div class="py">guǒzhī</div><div class="hz">果汁</div><div class="en">juice (general)</div></div></div>
+</div>
+<div class="card bp" style="font-size:10.5px;margin-top:7px">
+  <div class="lbl cp">句型 jùxíng · sentences</div>
+  <div style="line-height:2;margin-top:2px">
+    我喜欢喝 wǒ xǐhuān hē <span style="color:#888;font-size:8.5px">I like to drink</span> <b>奶茶</b> nǎichá milk tea。&nbsp;
+    我不喜欢喝 wǒ bù xǐhuān hē <span style="color:#888;font-size:8.5px">I don't like to drink</span> <b>咖啡</b> kāfēi coffee。
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cp">🎮 game</span>
+<div class="tag cp">🎮 游戏时间！yóuxì shíjiān! · game time!</div>
+<div class="title">水果颜色配对 shuǐguǒ colour match</div>
+<div class="sub">Click a fruit, then click its matching colour!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 matches: <span id="fcs">0</span>/5</div>
+    <button class="gbtn" onclick="initFc()">↺ restart</button>
+    <button class="hbtn" id="hb16" onclick="tH(this)">💡 hints: off</button>
+  </div>
+  <div class="fcwrap">
+    <div class="fccol" id="ffl"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e91e8c;font-size:20px;opacity:.3">↔</div>
+    <div class="fccol" id="fcl"></div>
+  </div>
+  <div class="gres" id="fcr"></div>
+</div>
+</div>
+<div class="slide">
+<span class="badge ct">sentences 1</span>
+<div class="tag ct">💬 常用句型 cháng yòng jùxíng · key sentence patterns (1)</div>
+<div class="title">常用句型 (一) — useful sentence patterns</div>
+<div class="two">
+  <div>
+    <div class="sp bp">
+      <div class="pat">这是___。</div><div class="patpy">zhè shì ___ .</div><div class="paten">this is ___</div>
+      <div class="ex cp">这是我的妈妈<span class="expy"> wǒ de māma</span></div><div class="exen">this is my mum</div>
+    </div>
+    <div class="sp bu">
+      <div class="pat">我喜欢___。</div><div class="patpy">wǒ xǐhuān ___ .</div><div class="paten">I like ___</div>
+      <div class="ex cu">我喜欢蓝色和紫色<span class="expy"> lánsè hé zǐsè</span></div><div class="exen">I like blue and purple</div>
+    </div>
+    <div class="sp bo">
+      <div class="pat">我不喜欢___。</div><div class="patpy">wǒ bù xǐhuān ___ .</div><div class="paten">I don't like ___</div>
+      <div class="ex co">我不喜欢咖啡<span class="expy"> kāfēi</span></div><div class="exen">I don't like coffee</div>
+    </div>
+    <div class="sp br">
+      <div class="pat">我想___。</div><div class="patpy">wǒ xiǎng ___ .</div><div class="paten">I want to ___</div>
+      <div class="ex" style="color:#dc2626">我想喝奶茶<span class="expy"> hē nǎichá</span></div><div class="exen">I want to drink milk tea</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bt">
+      <div class="pat">我喜欢吃/喝___。</div><div class="patpy">wǒ xǐhuān chī / hē ___ .</div><div class="paten">I like to eat / drink ___</div>
+      <div class="ex ct">我喜欢吃饺子<span class="expy"> chī jiǎozi</span></div><div class="exen">I like to eat dumplings</div>
+    </div>
+    <div class="sp bg">
+      <div class="pat">你喜欢___吗？</div><div class="patpy">nǐ xǐhuān ___ ma ?</div><div class="paten">do you like ___?</div>
+      <div class="ex cg">你喜欢猫吗<span class="expy"> māo ma</span></div><div class="exen">do you like cats?</div>
+    </div>
+    <div class="sp bb">
+      <div class="pat">我有/没有___。</div><div class="patpy">wǒ yǒu / méiyǒu ___ .</div><div class="paten">I have / don't have ___</div>
+      <div class="ex cb">我有一个哥哥<span class="expy"> yī gè gēge</span></div><div class="exen">I have one older brother</div>
+    </div>
+    <div class="sp by">
+      <div class="pat">这是___颜色的。</div><div class="patpy">zhè shì ___ yánsè de .</div><div class="paten">this is the colour ___</div>
+      <div class="ex cy">这是红色的<span class="expy"> hóngsè de</span></div><div class="exen">this is red</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge ct">sentences 2</span>
+<div class="tag ct">💬 常用句型 cháng yòng jùxíng · key sentence patterns (2)</div>
+<div class="title">常用句型 (二) — useful sentence patterns</div>
+<div class="two">
+  <div>
+    <div class="sp bb">
+      <div class="pat">你好！nǐ hǎo!</div><div class="paten">hello!</div>
+      <div class="ex cb">你好，我叫Elana！<span class="expy"> nǐ hǎo, wǒ jiào Elana</span></div><div class="exen">hello, my name is Elana!</div>
+    </div>
+    <div class="sp bp">
+      <div class="pat">我叫___。</div><div class="patpy">wǒ jiào ___ .</div><div class="paten">my name is ___</div>
+      <div class="ex cp">我叫Elana。</div>
+    </div>
+    <div class="sp bg">
+      <div class="pat">我___岁了。</div><div class="patpy">wǒ ___ suì le .</div><div class="paten">I am ___ years old</div>
+      <div class="ex cg">我8岁了<span class="expy"> bā suì le</span></div><div class="exen">I am 8 years old</div>
+    </div>
+    <div class="sp bu">
+      <div class="pat">我的生日是___月___日。</div><div class="patpy">wǒ de shēngrì shì ___ yuè ___ rì .</div><div class="paten">my birthday is ___ month ___ day</div>
+      <div class="ex cu">我的生日是1月3日<span class="expy"> yī yuè sān rì</span></div><div class="exen">my birthday is January 3rd</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bo">
+      <div class="pat">今天是___月___日。</div><div class="patpy">jīntiān shì ___ yuè ___ rì .</div><div class="paten">today is ___ month ___ day</div>
+      <div class="ex co">今天是5月15日<span class="expy"> wǔ yuè shíwǔ rì</span></div><div class="exen">today is May 15th</div>
+    </div>
+    <div class="sp by">
+      <div class="pat">今天是星期___。</div><div class="patpy">jīntiān shì xīngqī ___ .</div><div class="paten">today is ___ (day of week)</div>
+      <div class="ex cy">今天是星期四<span class="expy"> xīngqīsì</span></div><div class="exen">today is Thursday</div>
+    </div>
+    <div class="sp br">
+      <div class="pat">我的家里有___。</div><div class="patpy">wǒ de jiālǐ yǒu ___ .</div><div class="paten">in my family there is/are ___</div>
+      <div class="ex" style="color:#dc2626">爸爸、妈妈和我<span class="expy"> bàba, māma hé wǒ</span></div><div class="exen">dad, mum and me</div>
+    </div>
+    <div class="sp bt">
+      <div class="pat">很高兴认识你！</div><div class="patpy">hěn gāoxìng rènshi nǐ !</div><div class="paten">nice to meet you!</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="slide">
+<span class="badge cg">self introduction</span>
+<div class="tag cg">👋 自我介绍 zìwǒ jièshào · Elana's self introduction</div>
+<div class="title">Elana的自我介绍 — my introduction in Chinese!</div>
+<div style="display:flex;flex-direction:column;gap:5px;flex:1">
+  <div style="display:flex;gap:9px;background:#fce7f3;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">😊</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">你好！我叫Elana。</div>
+    <div style="font-size:9px;color:#e91e8c;font-weight:600">nǐ hǎo! wǒ jiào Elana.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">hello! my name is Elana.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ffedd5;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🎂</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我8岁了，我的生日是1月3日。</div>
+    <div style="font-size:9px;color:#e91e8c;font-weight:600">wǒ bā suì le, wǒ de shēngrì shì yī yuè sān rì.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">I am 8 years old. my birthday is January 3rd.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dbeafe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">❤️</span>
+    <div><div style="font-size:12px;font-weight:900;color:#1a1a2e">我喜欢蓝色和紫色，我喜欢喝西瓜奶昔，我喜欢吃饺子和冰淇淋。</div>
+    <div style="font-size:8.5px;color:#e91e8c;font-weight:600">wǒ xǐhuān lánsè hé zǐsè, wǒ xǐhuān hē xīguā nǎixī, wǒ xǐhuān chī jiǎozi hé bīngqílín.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">I like blue and purple. I like to drink watermelon smoothies. I like to eat dumplings and ice cream.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#fee2e2;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🙁</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我不喜欢咖啡和汉堡。</div>
+    <div style="font-size:9px;color:#e91e8c;font-weight:600">wǒ bù xǐhuān kāfēi hé hànbǎo.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">I don't like coffee and burgers.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dcfce7;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">👨‍👩‍👧</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我的家里有爸爸、妈妈和我。</div>
+    <div style="font-size:9px;color:#e91e8c;font-weight:600">wǒ de jiālǐ yǒu bàba, māma hé wǒ.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">in my family there is dad, mum and me.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ede9fe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🤝</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">很高兴认识你！</div>
+    <div style="font-size:9px;color:#e91e8c;font-weight:600">hěn gāoxìng rènshi nǐ!</div>
+    <div style="font-size:9px;color:#888;font-style:italic">nice to meet you!</div></div>
+  </div>
+</div>
+</div>
+<div class="slide">
+<div class="endb">
+  <div style="font-size:48px">🌟🐼🌸</div>
+  <div style="font-size:32px;font-weight:900;background:linear-gradient(135deg,#e91e8c,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent">你真棒，Elana！</div>
+  <div style="font-size:11px;color:#aaa">nǐ zhēn bàng! · you are amazing!</div>
+  <div style="font-size:13px;color:#888">太厉害了！tài lìhai le! · 加油！jiā yóu! 💪</div>
+  <div class="cklist">
+    <span class="ck">✅ 拼音 pīnyīn</span><span class="ck">✅ 家庭 jiātíng</span>
+    <span class="ck">✅ 数字 shùzì 1–30</span><span class="ck">✅ 月份 yuèfèn</span>
+    <span class="ck">✅ 星期 xīngqī</span><span class="ck">✅ 颜色 yánsè</span>
+    <span class="ck">✅ 食物 shíwù</span><span class="ck">✅ 水果 shuǐguǒ</span>
+    <span class="ck">✅ 饮料 yǐnliào</span><span class="ck">✅ 句型 jùxíng</span>
+    <span class="ck">✅ 自我介绍 zìwǒ jièshào</span>
+    <span class="ck">🎮 家庭配对</span><span class="ck">🎮 数字问答</span>
+    <span class="ck">🎮 月份问答</span><span class="ck">🎮 星期问答</span>
+    <span class="ck">🎮 颜色游戏</span><span class="ck">🎮 吃还是喝</span>
+    <span class="ck">🎮 水果颜色配对</span>
+  </div>
+  <div style="font-size:11px;color:#aaa">📅 2026年3月24日 — 2026年5月12日</div>
+</div>
+</div>
+<div class="nav">
+  <button class="nbtn" onclick="go(cur-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nbtn" onclick="go(cur+1)">→</button>
+</div>
+</div>
+<script>
+// ── Navigation ──
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('dots');
+let cur=0;
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>go(i);dotsEl.appendChild(d);
+});
+function go(n){
+  slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');
+  cur=(n+slides.length)%slides.length;
+  slides[cur].classList.add('active');dotsEl.children[cur].classList.add('active');
+  if(GI[cur])GI[cur]();
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);
+});
+const GI={};
+
+// ── Hint toggle ──
+let hintOn=false;
+function tH(btn){
+  hintOn=!hintOn;
+  document.body.classList.toggle('hints',hintOn);
+  btn.textContent=hintOn?'💡 hints: on':'💡 hints: off';
+  btn.classList.toggle('on',hintOn);
+  // sync all other hint buttons
+  document.querySelectorAll('.hbtn').forEach(b=>{
+    b.textContent=hintOn?'💡 hints: on':'💡 hints: off';
+    b.classList.toggle('on',hintOn);
+  });
+}
+
+// ── Helpers ──
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function $id(id){return document.getElementById(id)}
+
+// ── Game 1: Family Memory Match (slide 4) ──
+const FAM=[
+  {id:1,hz:'爸爸',py:'bàba',en:'dad',em:'👨'},
+  {id:2,hz:'妈妈',py:'māma',en:'mum',em:'👩'},
+  {id:3,hz:'哥哥',py:'gēge',en:'older brother',em:'🧑'},
+  {id:4,hz:'姐姐',py:'jiějie',en:'older sister',em:'👧'},
+  {id:5,hz:'弟弟',py:'dìdi',en:'younger brother',em:'👦'},
+  {id:6,hz:'妹妹',py:'mèimei',en:'younger sister',em:'👶'},
+];
+let fFlipped=[],fMatched=0,fFlips=0,fLock=false;
+function initFam(){
+  fFlipped=[];fMatched=0;fFlips=0;fLock=false;
+  $id('fm').textContent='0';$id('ff').textContent='0';$id('fres').style.display='none';
+  const cards=[];
+  FAM.forEach(p=>{
+    cards.push({id:p.id,side:'hz',hz:p.hz,py:p.py,en:p.en});
+    cards.push({id:p.id,side:'em',em:p.em});
+  });
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){
+      if(fLock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');
+      if(card.side==='hz'){
+        el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+          <div class="mcard-py">${card.py}</div>
+          <div class="mcard-hz">${card.hz}</div>
+          <div style="font-size:7.5px;color:#aaa" class="hpy">${card.en}</div>
+        </div>`;
+      }else{
+        el.innerHTML=`<div style="font-size:32px">${card.em}</div>`;
+      }
+      fFlipped.push({el,card});
+      if(fFlipped.length===2){
+        fFlips++;$id('ff').textContent=fFlips;
+        if(fFlipped[0].card.id===fFlipped[1].card.id){
+          fFlipped[0].el.classList.add('match');fFlipped[1].el.classList.add('match');
+          fFlipped=[];fMatched++;$id('fm').textContent=fMatched;
+          if(fMatched===6){setTimeout(()=>{const r=$id('fres');r.style.display='block';r.textContent='🎉 perfect! '+fFlips+' flips — 太棒了！tài bàng le!';},400);}
+        }else{
+          fLock=true;setTimeout(()=>{
+            fFlipped[0].el.classList.remove('flip');fFlipped[0].el.textContent='🎴';
+            fFlipped[1].el.classList.remove('flip');fFlipped[1].el.textContent='🎴';
+            fFlipped=[];fLock=false;
+          },900);
+        }
+      }
+    };
+    $id('fgrid').innerHTML='';
+    document.getElementById('fgrid').append(el);
+  });
+  // re-append all at once
+  const grid=$id('fgrid');grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){
+      if(fLock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');
+      if(card.side==='hz'){
+        el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+          <div class="mcard-py">${card.py}</div>
+          <div class="mcard-hz">${card.hz}</div>
+        </div>`;
+      }else{el.innerHTML=`<div style="font-size:32px">${card.em}</div>`;}
+      fFlipped.push({el,card});
+      if(fFlipped.length===2){
+        fFlips++;$id('ff').textContent=fFlips;
+        if(fFlipped[0].card.id===fFlipped[1].card.id){
+          fFlipped[0].el.classList.add('match');fFlipped[1].el.classList.add('match');
+          fFlipped=[];fMatched++;$id('fm').textContent=fMatched;
+          if(fMatched===6){setTimeout(()=>{const r=$id('fres');r.style.display='block';r.textContent='🎉 perfect! '+fFlips+' flips — 太棒了！tài bàng le!';},400);}
+        }else{
+          fLock=true;setTimeout(()=>{
+            fFlipped[0].el.classList.remove('flip');fFlipped[0].el.textContent='🎴';
+            fFlipped[1].el.classList.remove('flip');fFlipped[1].el.textContent='🎴';
+            fFlipped=[];fLock=false;
+          },900);
+        }
+      }
+    };
+    grid.appendChild(el);
+  });
+}
+GI[4]=initFam;
+
+// ── Game 2: Number Quiz (slide 6) ──
+const NUMS=[{n:1,hz:'一',py:'yī'},{n:2,hz:'二',py:'èr'},{n:3,hz:'三',py:'sān'},
+  {n:4,hz:'四',py:'sì'},{n:5,hz:'五',py:'wǔ'},{n:6,hz:'六',py:'liù'},
+  {n:7,hz:'七',py:'qī'},{n:8,hz:'八',py:'bā'},{n:9,hz:'九',py:'jiǔ'},
+  {n:10,hz:'十',py:'shí'},{n:11,hz:'十一',py:'shíyī'},{n:12,hz:'十二',py:"shí'èr"},
+  {n:15,hz:'十五',py:'shíwǔ'},{n:20,hz:'二十',py:'èrshí'},{n:25,hz:'二十五',py:'èrshíwǔ'},
+  {n:30,hz:'三十',py:'sānshí'},{n:18,hz:'十八',py:'shíbā'},{n:13,hz:'十三',py:'shísān'}];
+let nScore=0,nQ=0;
+function initNum(){nScore=0;nQ=0;$id('ns').textContent='0';$id('nq').textContent='1';$id('nr').style.display='none';nextNum();}
+function nextNum(){
+  if(nQ>=8){const r=$id('nr');r.style.display='block';r.textContent='🎉 '+nScore+'/8 — '+(nScore===8?'perfect! 完美！':nScore>=6?'great! 很好！':'keep going! 加油！');$id('no').innerHTML='';return;}
+  const pool=shuffle(NUMS);const cor=pool[0];
+  $id('nd').textContent=cor.n;$id('nq').textContent=nQ+1;
+  const opts=pool.slice(0,4).sort(()=>Math.random()-.5);
+  if(!opts.find(x=>x.n===cor.n))opts[0]=cor;
+  const el=$id('no');el.innerHTML='';let ans=false;
+  opts.sort(()=>Math.random()-.5).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="hpy">${opt.py}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.n===cor.n){btn.classList.add('ok');nScore++;$id('ns').textContent=nScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===cor.hz)b.classList.add('ok');});}
+      nQ++;setTimeout(nextNum,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[6]=initNum;
+
+// ── Game 3: Month Quiz (slide 8) ──
+const MONS=[{n:1,hz:'一月',py:'yī yuè',en:'January'},{n:2,hz:'二月',py:'èr yuè',en:'February'},
+  {n:3,hz:'三月',py:'sān yuè',en:'March'},{n:4,hz:'四月',py:'sì yuè',en:'April'},
+  {n:5,hz:'五月',py:'wǔ yuè',en:'May'},{n:6,hz:'六月',py:'liù yuè',en:'June'},
+  {n:7,hz:'七月',py:'qī yuè',en:'July'},{n:8,hz:'八月',py:'bā yuè',en:'August'},
+  {n:9,hz:'九月',py:'jiǔ yuè',en:'September'},{n:10,hz:'十月',py:'shí yuè',en:'October'},
+  {n:11,hz:'十一月',py:'shíyī yuè',en:'November'},{n:12,hz:'十二月',py:"shí'èr yuè",en:'December'}];
+let mScore=0,mQ=0;
+function initMon(){mScore=0;mQ=0;$id('ms').textContent='0';$id('mq').textContent='1';$id('mr').style.display='none';nextMon();}
+function nextMon(){
+  if(mQ>=8){const r=$id('mr');r.style.display='block';r.textContent='🎉 '+mScore+'/8 — '+(mScore>=7?'amazing! 太棒了！':mScore>=5?'good! 很好！':'keep going! 加油！');$id('mo').innerHTML='';return;}
+  const pool=shuffle(MONS);const cor=pool[0];
+  $id('mn').textContent=cor.n;$id('mq').textContent=mQ+1;
+  const opts=pool.slice(0,4);if(!opts.find(x=>x.n===cor.n))opts[0]=cor;
+  opts.sort(()=>Math.random()-.5);
+  const el=$id('mo');el.innerHTML='';let ans=false;
+  opts.forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:14px">${opt.hz}</span><span class="hpy">${opt.py}</span><span class="hen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.n===cor.n){btn.classList.add('ok');mScore++;$id('ms').textContent=mScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===cor.hz)b.classList.add('ok');});}
+      mQ++;setTimeout(nextMon,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[8]=initMon;
+
+// ── Game 4: Weekday Quiz (slide 9) ──
+const WKS=[{n:1,hz:'星期一',py:'xīngqīyī',en:'Monday'},{n:2,hz:'星期二',py:"xīngqī'èr",en:'Tuesday'},
+  {n:3,hz:'星期三',py:'xīngqīsān',en:'Wednesday'},{n:4,hz:'星期四',py:'xīngqīsì',en:'Thursday'},
+  {n:5,hz:'星期五',py:'xīngqīwǔ',en:'Friday'},{n:6,hz:'星期六',py:'xīngqīliù',en:'Saturday'},
+  {n:7,hz:'星期日',py:'xīngqīrì',en:'Sunday'}];
+let wScore=0,wQ=0,wOrder=[];
+function initWk(){wScore=0;wQ=0;$id('ws').textContent='0';$id('wq').textContent='1';$id('wr').style.display='none';wOrder=shuffle(WKS);nextWk();}
+function nextWk(){
+  if(wQ>=WKS.length){const r=$id('wr');r.style.display='block';r.textContent='🎉 '+wScore+'/7 — '+(wScore===7?'perfect! 完美！':wScore>=5?'great! 很好！':'keep going! 加油！');$id('wo').innerHTML='';return;}
+  const cor=wOrder[wQ];$id('wn').textContent=cor.n;$id('wq').textContent=wQ+1;
+  const pool=shuffle(WKS);const opts=pool.slice(0,4);if(!opts.find(x=>x.n===cor.n))opts[0]=cor;
+  opts.sort(()=>Math.random()-.5);
+  const el=$id('wo');el.innerHTML='';let ans=false;
+  opts.forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:12px">${opt.hz}</span><span class="hpy">${opt.py}</span><span class="hen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.n===cor.n){btn.classList.add('ok');wScore++;$id('ws').textContent=wScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===cor.hz)b.classList.add('ok');});}
+      wQ++;setTimeout(nextWk,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[9]=initWk;
+
+// ── Game 5: Colour Quiz (slide 11) ──
+const COLS=[{hz:'红色',py:'hóngsè',en:'red',hex:'#ef4444'},{hz:'橙色',py:'chéngsè',en:'orange',hex:'#f97316'},
+  {hz:'黄色',py:'huángsè',en:'yellow',hex:'#eab308'},{hz:'绿色',py:'lǜsè',en:'green',hex:'#22c55e'},
+  {hz:'蓝色',py:'lánsè',en:'blue',hex:'#3b82f6'},{hz:'紫色',py:'zǐsè',en:'purple',hex:'#a855f7'},
+  {hz:'粉色',py:'fěnsè',en:'pink',hex:'#ec4899'}];
+let cScore=0,cQ=0,cOrder=[],cAnswered=false;
+function initCol(){
+  cScore=0;cQ=0;cAnswered=false;
+  $id('cs').textContent='0';$id('cr').style.display='none';
+  cOrder=shuffle(COLS);
+  const el=$id('copts');el.innerHTML='';
+  COLS.forEach(c=>{
+    const btn=document.createElement('div');btn.className='cq-opt';btn.style.background=c.hex;
+    const lbl=document.createElement('div');lbl.className='cq-lbl';
+    lbl.innerHTML=`<span class="cq-lbl-hz">${c.hz}</span><span class="hpy" style="color:#555">${c.py}</span>`;
+    btn.appendChild(lbl);
+    btn.onclick=function(){
+      if(cAnswered)return;cAnswered=true;
+      const cor=cOrder[cQ];
+      el.querySelectorAll('.cq-opt').forEach(b=>b.style.pointerEvents='none');
+      if(c.hex===cor.hex){btn.classList.add('ok');cScore++;$id('cs').textContent=cScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.cq-opt').forEach(b=>{if(b.style.background===cor.hex)b.classList.add('ok');});}
+      cQ++;setTimeout(()=>{el.querySelectorAll('.cq-opt').forEach(b=>{b.classList.remove('ok','no');b.style.pointerEvents='';});cAnswered=false;nextCol();},950);
+    };
+    el.appendChild(btn);
+  });
+  nextCol();
+}
+function nextCol(){
+  if(cQ>=COLS.length){
+    $id('cr').style.display='block';
+    $id('cr').textContent='🎉 '+cScore+'/7 — '+(cScore===7?'perfect! 完美！':cScore>=5?'great! 很好！':'keep going! 加油！');
+    $id('cbox').style.background='linear-gradient(135deg,#e91e8c,#7c3aed)';
+    $id('chz').textContent='🎉';$id('cpy').textContent='done!';return;
+  }
+  const c=cOrder[cQ];
+  $id('cbox').style.background=c.hex;
+  $id('chz').textContent=c.hz;$id('cpy').textContent=c.py;
+}
+GI[11]=initCol;
+
+// ── Game 6: Eat or Drink (slide 13) ──
+const EOD=[
+  {em:'🍚',hz:'米饭',py:'mǐfàn',en:'rice',t:'eat'},
+  {em:'🍜',hz:'面条',py:'miàntiáo',en:'noodles',t:'eat'},
+  {em:'🥟',hz:'饺子',py:'jiǎozi',en:'dumplings',t:'eat'},
+  {em:'🍰',hz:'蛋糕',py:'dàngāo',en:'cake',t:'eat'},
+  {em:'🍦',hz:'冰淇淋',py:'bīngqílín',en:'ice cream',t:'eat'},
+  {em:'🍎',hz:'苹果',py:'píngguǒ',en:'apple',t:'eat'},
+  {em:'💧',hz:'水',py:'shuǐ',en:'water',t:'drink'},
+  {em:'🥛',hz:'牛奶',py:'niúnǎi',en:'milk',t:'drink'},
+  {em:'🧃',hz:'果汁',py:'guǒzhī',en:'juice',t:'drink'},
+  {em:'🧋',hz:'奶茶',py:'nǎichá',en:'milk tea',t:'drink'},
+];
+let eScore=0,eQ=0,eItems=[];
+function initEod(){eScore=0;eQ=0;eItems=shuffle(EOD);$id('es').textContent='0';$id('eq').textContent='1';$id('er').style.display='none';$id('ecard').style.opacity='1';showEod();}
+function showEod(){
+  if(eQ>=eItems.length){$id('er').style.display='block';$id('er').textContent='🎉 '+eScore+'/10 — '+(eScore>=9?'perfect! 完美！':eScore>=7?'great! 很好！':'keep going! 加油！');$id('ecard').style.opacity='.4';return;}
+  const it=eItems[eQ];
+  $id('eem').textContent=it.em;$id('ehz').textContent=it.hz;$id('epy').textContent=it.py;$id('een').textContent=it.en;
+  $id('eq').textContent=Math.min(eQ+1,10);
+}
+function eodG(type){
+  if(eQ>=eItems.length)return;
+  const it=eItems[eQ];const ok=it.t===type;
+  if(ok){eScore++;$id('es').textContent=eScore;}
+  const c=$id('ecard');c.style.background=ok?'linear-gradient(135deg,#dcfce7,#bbf7d0)':'linear-gradient(135deg,#fee2e2,#fca5a5)';
+  eQ++;setTimeout(()=>{c.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)';showEod();},550);
+}
+GI[13]=initEod;
+
+// ── Game 7: Fruit-Colour Match (slide 16) ──
+const FCP=[
+  {fid:'r',fruit:{em:'🍎',hz:'苹果',py:'píngguǒ'},color:{hz:'红色',py:'hóngsè',hex:'#ef4444'}},
+  {fid:'o',fruit:{em:'🍊',hz:'橙子',py:'chéngzi'},color:{hz:'橙色',py:'chéngsè',hex:'#f97316'}},
+  {fid:'y',fruit:{em:'🍌',hz:'香蕉',py:'xiāngjiāo'},color:{hz:'黄色',py:'huángsè',hex:'#eab308'}},
+  {fid:'p',fruit:{em:'🍇',hz:'葡萄',py:'pútáo'},color:{hz:'紫色',py:'zǐsè',hex:'#a855f7'}},
+  {fid:'pk',fruit:{em:'🍓',hz:'草莓',py:'cǎoméi'},color:{hz:'粉色',py:'fěnsè',hex:'#ec4899'}},
+];
+let fcSel=null,fcCount=0;
+function initFc(){
+  fcSel=null;fcCount=0;$id('fcs').textContent='0';$id('fcr').style.display='none';
+  const sf=shuffle(FCP),sc=shuffle(FCP);
+  const fl=$id('ffl'),cl=$id('fcl');fl.innerHTML='';cl.innerHTML='';
+  sf.forEach(p=>{
+    const el=document.createElement('div');el.className='fci fci-f';el.dataset.id=p.fid;
+    el.innerHTML=`<span style="font-size:18px">${p.fruit.em}</span><div><div class="fci-hz">${p.fruit.hz}</div><div class="fci-py hpy">${p.fruit.py}</div></div>`;
+    el.onclick=()=>fcClick('f',p.fid,el);fl.appendChild(el);
+  });
+  sc.forEach(p=>{
+    const el=document.createElement('div');el.className='fci fci-c';el.dataset.id=p.fid;
+    el.innerHTML=`<span class="fcdot" style="background:${p.color.hex}"></span><div><div class="fci-hz">${p.color.hz}</div><div class="fci-py hpy">${p.color.py}</div></div>`;
+    el.onclick=()=>fcClick('c',p.fid,el);cl.appendChild(el);
+  });
+}
+function fcClick(side,id,el){
+  if(el.classList.contains('mat'))return;
+  if(!fcSel){
+    document.querySelectorAll('.fci.sel').forEach(e=>e.classList.remove('sel'));
+    el.classList.add('sel');fcSel={side,id,el};
+  }else{
+    if(fcSel.el===el){el.classList.remove('sel');fcSel=null;return;}
+    if(fcSel.side===side){document.querySelectorAll('.fci.sel').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');fcSel={side,id,el};return;}
+    if(fcSel.id===id){
+      fcSel.el.classList.remove('sel');fcSel.el.classList.add('mat');el.classList.add('mat');
+      fcCount++;$id('fcs').textContent=fcCount;
+      if(fcCount===5){$id('fcr').style.display='block';$id('fcr').textContent='🎉 all matched! 全对！quán duì! 太棒了！';}
+    }else{
+      const a=fcSel.el,b=el;a.classList.remove('sel');a.classList.add('bad');b.classList.add('bad');
+      setTimeout(()=>{a.classList.remove('bad');b.classList.remove('bad');},500);
+    }
+    fcSel=null;
+  }
+}
+GI[16]=initFc;
+</script>
+</body>
+</html>
