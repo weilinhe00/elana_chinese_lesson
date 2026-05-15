@@ -145,6 +145,17 @@ body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(1
 .hotcup::before{content:"〰";position:absolute;left:50%;top:-0.55em;transform:translateX(-50%);font-size:0.45em;color:#fca5a5;font-weight:900;letter-spacing:-0.1em;text-shadow:0 0.05em 0.1em rgba(220,38,38,0.5)}
 .hotcup::after{content:"〰";position:absolute;left:50%;top:-0.3em;transform:translateX(-50%);font-size:0.4em;color:#dc2626;font-weight:900;letter-spacing:-0.1em}
 
+/* ── Plushie wrapper — wraps any animal emoji to make it look like a stuffed toy ── */
+.plush-wrap{display:inline-block;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.7),transparent 50%),linear-gradient(135deg,#fce7f3 0%,#fbcfe8 50%,#f9a8d4 100%);border-radius:38% 50% 38% 50%;padding:0.12em 0.18em;border:0.09em dashed #ec4899;box-shadow:0 0.15em 0.4em rgba(236,72,153,0.3),inset 0 0 0.4em rgba(255,255,255,0.7),inset 0 -0.15em 0.25em rgba(236,72,153,0.15);position:relative;line-height:1;vertical-align:-0.05em;filter:saturate(0.9) brightness(1.06)}
+.plush-wrap::before{content:"✨";position:absolute;top:-0.32em;left:-0.18em;font-size:0.42em;filter:none;z-index:1;line-height:1;transform:rotate(-15deg)}
+/* "玩偶" hang-tag — bottom-right corner like a real toy tag */
+.plush-tag{position:absolute;bottom:-0.42em;right:-0.15em;background:#fff;color:#be185d;font-size:0.26em;font-weight:900;padding:0.2em 0.45em;border-radius:0.18em;border:0.14em solid #ec4899;letter-spacing:0.05em;line-height:1;transform:rotate(-6deg);box-shadow:0 0.12em 0.25em rgba(0,0,0,0.2);z-index:2;white-space:nowrap}
+.plush-tag::before{content:"";position:absolute;top:-0.55em;right:0.5em;width:0.12em;height:0.55em;background:#ec4899}
+
+/* Real animal wrapper — leafy green nature frame */
+.real-wrap{display:inline-block;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.5),transparent 60%),radial-gradient(circle,#dcfce7 0%,#86efac 100%);border-radius:50%;padding:0.1em 0.14em;border:0.08em solid #4ade80;box-shadow:0 0.12em 0.3em rgba(34,197,94,0.25),inset 0 0 0.3em rgba(255,255,255,0.6);position:relative;line-height:1;vertical-align:-0.05em}
+.real-wrap::before{content:"🌿";position:absolute;top:-0.3em;left:-0.2em;font-size:0.38em;line-height:1}
+
 .gpy,.gen{display:none}
 .gpy{font-size:8.5px;color:#7c3aed;font-weight:700;line-height:1.3}
 .gen{font-size:8.5px;color:#888;font-style:italic;line-height:1.3}
@@ -491,34 +502,34 @@ body.show-en .gen{display:block}
 </div>
 <div class="c2" style="gap:6px;flex:1">
   <div class="combo">
-    <div class="real"><div class="lbl-r">真的 zhēn de · real</div><div class="em">🐻</div><div class="hz">熊</div><div class="py">xióng</div><div class="en">bear</div></div>
+    <div class="real"><div class="lbl-r">真的 zhēn de · real</div><div class="em"><span class="real-wrap">🐻</span></div><div class="hz">熊</div><div class="py">xióng</div><div class="en">bear</div></div>
     <div class="arr">→</div>
-    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu · plush</div><div class="em">🧸</div><div class="hz">熊玩偶</div><div class="py">xióng wán'ǒu</div><div class="en">teddy bear</div></div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu · plush</div><div class="em"><span class="plush-wrap">🐻<span class="plush-tag">玩偶</span></span></div><div class="hz">熊玩偶</div><div class="py">xióng wán'ǒu</div><div class="en">teddy bear</div></div>
   </div>
   <div class="combo">
-    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐼</div><div class="hz">熊猫</div><div class="py">xióngmāo</div><div class="en">panda</div></div>
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em"><span class="real-wrap">🐼</span></div><div class="hz">熊猫</div><div class="py">xióngmāo</div><div class="en">panda</div></div>
     <div class="arr">→</div>
-    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">熊猫玩偶</div><div class="py">xióngmāo wán'ǒu</div><div class="en">panda plushie</div></div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em"><span class="plush-wrap">🐼<span class="plush-tag">玩偶</span></span></div><div class="hz">熊猫玩偶</div><div class="py">xióngmāo wán'ǒu</div><div class="en">panda plushie</div></div>
   </div>
   <div class="combo">
-    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐱</div><div class="hz">猫</div><div class="py">māo</div><div class="en">cat</div></div>
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em"><span class="real-wrap">🐱</span></div><div class="hz">猫</div><div class="py">māo</div><div class="en">cat</div></div>
     <div class="arr">→</div>
-    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">猫玩偶</div><div class="py">māo wán'ǒu</div><div class="en">cat plushie</div></div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em"><span class="plush-wrap">🐱<span class="plush-tag">玩偶</span></span></div><div class="hz">猫玩偶</div><div class="py">māo wán'ǒu</div><div class="en">cat plushie</div></div>
   </div>
   <div class="combo">
-    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐰</div><div class="hz">兔子</div><div class="py">tùzi</div><div class="en">rabbit</div></div>
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em"><span class="real-wrap">🐰</span></div><div class="hz">兔子</div><div class="py">tùzi</div><div class="en">rabbit</div></div>
     <div class="arr">→</div>
-    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">兔子玩偶</div><div class="py">tùzi wán'ǒu</div><div class="en">bunny plushie</div></div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em"><span class="plush-wrap">🐰<span class="plush-tag">玩偶</span></span></div><div class="hz">兔子玩偶</div><div class="py">tùzi wán'ǒu</div><div class="en">bunny plushie</div></div>
   </div>
   <div class="combo">
-    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐶</div><div class="hz">狗</div><div class="py">gǒu</div><div class="en">dog</div></div>
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em"><span class="real-wrap">🐶</span></div><div class="hz">狗</div><div class="py">gǒu</div><div class="en">dog</div></div>
     <div class="arr">→</div>
-    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">狗玩偶</div><div class="py">gǒu wán'ǒu</div><div class="en">puppy plushie</div></div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em"><span class="plush-wrap">🐶<span class="plush-tag">玩偶</span></span></div><div class="hz">狗玩偶</div><div class="py">gǒu wán'ǒu</div><div class="en">puppy plushie</div></div>
   </div>
   <div class="combo">
-    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐘</div><div class="hz">大象</div><div class="py">dà xiàng</div><div class="en">elephant</div></div>
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em"><span class="real-wrap">🐘</span></div><div class="hz">大象</div><div class="py">dà xiàng</div><div class="en">elephant</div></div>
     <div class="arr">→</div>
-    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">大象玩偶</div><div class="py">dà xiàng wán'ǒu</div><div class="en">elephant plushie</div></div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em"><span class="plush-wrap">🐘<span class="plush-tag">玩偶</span></span></div><div class="hz">大象玩偶</div><div class="py">dà xiàng wán'ǒu</div><div class="en">elephant plushie</div></div>
   </div>
 </div>
 </div>
@@ -1255,15 +1266,15 @@ GI[13]=initAq;
 
 // ════ GAME 2: Plushie Match (slide 15, index 14) ════
 const PLUSH=[
-  {em:'🐻',hz:'熊',py:'xióng',plush:'熊玩偶',plushpy:'xióng wán\'ǒu',en:'teddy bear'},
-  {em:'🐼',hz:'熊猫',py:'xióngmāo',plush:'熊猫玩偶',plushpy:'xióngmāo wán\'ǒu',en:'panda plushie'},
-  {em:'🐱',hz:'猫',py:'māo',plush:'猫玩偶',plushpy:'māo wán\'ǒu',en:'cat plushie'},
-  {em:'🐶',hz:'狗',py:'gǒu',plush:'狗玩偶',plushpy:'gǒu wán\'ǒu',en:'dog plushie'},
-  {em:'🐰',hz:'兔子',py:'tùzi',plush:'兔子玩偶',plushpy:'tùzi wán\'ǒu',en:'bunny plushie'},
-  {em:'🐘',hz:'大象',py:'dà xiàng',plush:'大象玩偶',plushpy:'dà xiàng wán\'ǒu',en:'elephant plushie'},
-  {em:'🐯',hz:'老虎',py:'lǎohǔ',plush:'老虎玩偶',plushpy:'lǎohǔ wán\'ǒu',en:'tiger plushie'},
-  {em:'🦁',hz:'狮子',py:'shīzi',plush:'狮子玩偶',plushpy:'shīzi wán\'ǒu',en:'lion plushie'},
-  {em:'🐵',hz:'猴子',py:'hóuzi',plush:'猴子玩偶',plushpy:'hóuzi wán\'ǒu',en:'monkey plushie'},
+  {em:'🐻',plushem:'🐻',hz:'熊',py:'xióng',plush:'熊玩偶',plushpy:'xióng wán\'ǒu',en:'teddy bear'},
+  {em:'🐼',plushem:'🐼',hz:'熊猫',py:'xióngmāo',plush:'熊猫玩偶',plushpy:'xióngmāo wán\'ǒu',en:'panda plushie'},
+  {em:'🐱',plushem:'🐱',hz:'猫',py:'māo',plush:'猫玩偶',plushpy:'māo wán\'ǒu',en:'cat plushie'},
+  {em:'🐶',plushem:'🐶',hz:'狗',py:'gǒu',plush:'狗玩偶',plushpy:'gǒu wán\'ǒu',en:'dog plushie'},
+  {em:'🐰',plushem:'🐰',hz:'兔子',py:'tùzi',plush:'兔子玩偶',plushpy:'tùzi wán\'ǒu',en:'bunny plushie'},
+  {em:'🐘',plushem:'🐘',hz:'大象',py:'dà xiàng',plush:'大象玩偶',plushpy:'dà xiàng wán\'ǒu',en:'elephant plushie'},
+  {em:'🐯',plushem:'🐯',hz:'老虎',py:'lǎohǔ',plush:'老虎玩偶',plushpy:'lǎohǔ wán\'ǒu',en:'tiger plushie'},
+  {em:'🦁',plushem:'🦁',hz:'狮子',py:'shīzi',plush:'狮子玩偶',plushpy:'shīzi wán\'ǒu',en:'lion plushie'},
+  {em:'🐵',plushem:'🐵',hz:'猴子',py:'hóuzi',plush:'猴子玩偶',plushpy:'hóuzi wán\'ǒu',en:'monkey plushie'},
 ];
 let pmScore=0,pmQ=0,pmItems=[];
 function initPm(){
@@ -1278,14 +1289,14 @@ function showPm(){
     $id('pmo').innerHTML='';return;
   }
   const it=pmItems[pmQ];
-  $id('pmem').textContent=it.em;$id('pmhz').textContent=it.hz;$id('pmpy').textContent=it.py;
+  $id('pmem').innerHTML='<span class="real-wrap">'+it.em+'</span>';$id('pmhz').textContent=it.hz;$id('pmpy').textContent=it.py;
   $id('pmq').textContent=pmQ+1;
   const wrong=PLUSH.filter(o=>o.plush!==it.plush);
   const opts=[it,...shuffle(wrong).slice(0,3)];
   const el=$id('pmo');el.innerHTML='';let ans=false;
   shuffle(opts).forEach(opt=>{
     const btn=document.createElement('button');btn.className='qopt';
-    btn.innerHTML=`<span class="qopt-hz">🧸 ${opt.plush}</span><span class="gpy">${opt.plushpy}</span><span class="gen">${opt.en}</span>`;
+    btn.innerHTML=`<span style="font-size:24px"><span class="plush-wrap">${opt.plushem}<span class="plush-tag">玩偶</span></span></span><span class="qopt-hz" style="font-size:11px;margin-top:2px">${opt.plush}</span><span class="gpy">${opt.plushpy}</span><span class="gen">${opt.en}</span>`;
     btn.onclick=function(){
       if(ans)return;ans=true;
       if(opt.plush===it.plush){btn.classList.add('ok');pmScore++;$id('pms').textContent=pmScore;}
@@ -1593,21 +1604,22 @@ GI[26]=initVb;
 
 // ════ GAME 8: Real or Plushie (slide 28, index 27) ════
 const RP=[
-  {em:'🐻',hz:'熊',py:'xióng',en:'bear',t:'real'},
-  {em:'🧸',hz:'熊玩偶',py:'xióng wán\'ǒu',en:'teddy bear',t:'plush'},
-  {em:'🐱',hz:'猫',py:'māo',en:'cat',t:'real'},
-  {em:'🐼',hz:'熊猫',py:'xióngmāo',en:'panda',t:'real'},
-  {em:'🧸',hz:'熊猫玩偶',py:'xióngmāo wán\'ǒu',en:'panda plushie',t:'plush'},
-  {em:'🐰',hz:'兔子',py:'tùzi',en:'rabbit',t:'real'},
-  {em:'🧸',hz:'兔子玩偶',py:'tùzi wán\'ǒu',en:'bunny plushie',t:'plush'},
-  {em:'🐘',hz:'大象',py:'dà xiàng',en:'elephant',t:'real'},
-  {em:'🧸',hz:'大象玩偶',py:'dà xiàng wán\'ǒu',en:'elephant plushie',t:'plush'},
-  {em:'🐯',hz:'老虎',py:'lǎohǔ',en:'tiger',t:'real'},
-  {em:'🧸',hz:'老虎玩偶',py:'lǎohǔ wán\'ǒu',en:'tiger plushie',t:'plush'},
-  {em:'🦁',hz:'狮子',py:'shīzi',en:'lion',t:'real'},
-  {em:'🧸',hz:'狮子玩偶',py:'shīzi wán\'ǒu',en:'lion plushie',t:'plush'},
-  {em:'🐶',hz:'狗',py:'gǒu',en:'dog',t:'real'},
-  {em:'🧸',hz:'狗玩偶',py:'gǒu wán\'ǒu',en:'dog plushie',t:'plush'},
+  {em:'<span class="real-wrap">🐻</span>',hz:'熊',py:'xióng',en:'bear',t:'real'},
+  {em:'<span class="plush-wrap">🐻<span class="plush-tag">玩偶</span></span>',hz:'熊玩偶',py:'xióng wán\'ǒu',en:'teddy bear',t:'plush'},
+  {em:'<span class="real-wrap">🐱</span>',hz:'猫',py:'māo',en:'cat',t:'real'},
+  {em:'<span class="plush-wrap">🐱<span class="plush-tag">玩偶</span></span>',hz:'猫玩偶',py:'māo wán\'ǒu',en:'cat plushie',t:'plush'},
+  {em:'<span class="real-wrap">🐼</span>',hz:'熊猫',py:'xióngmāo',en:'panda',t:'real'},
+  {em:'<span class="plush-wrap">🐼<span class="plush-tag">玩偶</span></span>',hz:'熊猫玩偶',py:'xióngmāo wán\'ǒu',en:'panda plushie',t:'plush'},
+  {em:'<span class="real-wrap">🐰</span>',hz:'兔子',py:'tùzi',en:'rabbit',t:'real'},
+  {em:'<span class="plush-wrap">🐰<span class="plush-tag">玩偶</span></span>',hz:'兔子玩偶',py:'tùzi wán\'ǒu',en:'bunny plushie',t:'plush'},
+  {em:'<span class="real-wrap">🐘</span>',hz:'大象',py:'dà xiàng',en:'elephant',t:'real'},
+  {em:'<span class="plush-wrap">🐘<span class="plush-tag">玩偶</span></span>',hz:'大象玩偶',py:'dà xiàng wán\'ǒu',en:'elephant plushie',t:'plush'},
+  {em:'<span class="real-wrap">🐯</span>',hz:'老虎',py:'lǎohǔ',en:'tiger',t:'real'},
+  {em:'<span class="plush-wrap">🐯<span class="plush-tag">玩偶</span></span>',hz:'老虎玩偶',py:'lǎohǔ wán\'ǒu',en:'tiger plushie',t:'plush'},
+  {em:'<span class="real-wrap">🦁</span>',hz:'狮子',py:'shīzi',en:'lion',t:'real'},
+  {em:'<span class="plush-wrap">🦁<span class="plush-tag">玩偶</span></span>',hz:'狮子玩偶',py:'shīzi wán\'ǒu',en:'lion plushie',t:'plush'},
+  {em:'<span class="real-wrap">🐶</span>',hz:'狗',py:'gǒu',en:'dog',t:'real'},
+  {em:'<span class="plush-wrap">🐶<span class="plush-tag">玩偶</span></span>',hz:'狗玩偶',py:'gǒu wán\'ǒu',en:'dog plushie',t:'plush'},
 ];
 let rpScore=0,rpQ=0,rpItems=[];
 function initRp(){
@@ -1622,7 +1634,7 @@ function showRp(){
     $id('rpcard').style.opacity='.4';return;
   }
   const it=rpItems[rpQ];
-  $id('rpem').textContent=it.em;$id('rphz').textContent=it.hz;$id('rppy').textContent=it.py;$id('rpen').textContent=it.en;
+  $id('rpem').innerHTML=it.em;$id('rphz').textContent=it.hz;$id('rppy').textContent=it.py;$id('rpen').textContent=it.en;
   $id('rpq').textContent=rpQ+1;
 }
 function rpPick(type){
