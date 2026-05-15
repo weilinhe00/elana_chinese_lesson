@@ -10,6 +10,15 @@
 /* ── CRITICAL: pinyin must NEVER be uppercased by CSS ── */
 body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fce4ec,#e8eaf6 50%,#e0f7fa);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .app{width:860px;position:relative}
+
+/* Persistent back-to-index button — visible on every slide */
+.home-btn{position:fixed;top:14px;left:14px;z-index:1000;background:linear-gradient(135deg,#e91e8c,#7c3aed);color:#fff;padding:7px 13px 7px 11px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:.2s;font-family:inherit}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.24)}
+.home-icon{font-size:16px;font-weight:900;line-height:1}
+.home-text{display:flex;flex-direction:column;line-height:1.15;align-items:flex-start}
+.home-hz{font-size:11.5px;font-weight:900}
+.home-py{font-size:7.5px;font-weight:600;opacity:.9}
+.home-en{font-size:7.5px;font-style:italic;opacity:.85}
 .slide{display:none;background:#fff;border-radius:28px;padding:20px 32px 14px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:510px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
 .slide.active{display:flex}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -196,6 +205,14 @@ body.hints .hpy,body.hints .hen{display:block}
 </style>
 </head>
 <body>
+<a class="home-btn" href="index.html" title="返回课程列表 huí dào kèchéng lièbiǎo · back to lesson list">
+  <span class="home-icon">←</span>
+  <div class="home-text">
+    <span class="home-hz">🏠 课程列表</span>
+    <span class="home-py">kèchéng lièbiǎo</span>
+    <span class="home-en">all lessons</span>
+  </div>
+</a>
 <div class="app">
 
 <div class="slide active">

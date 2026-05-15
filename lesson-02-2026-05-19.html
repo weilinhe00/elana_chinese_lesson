@@ -9,6 +9,15 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fff7ed,#fce4ec 50%,#e0f7fa);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .app{width:880px;position:relative}
+
+/* Persistent back-to-index button — visible on every slide */
+.home-btn{position:fixed;top:14px;left:14px;z-index:1000;background:linear-gradient(135deg,#ea580c,#e91e8c);color:#fff;padding:7px 13px 7px 11px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:.2s;font-family:inherit}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.24)}
+.home-icon{font-size:16px;font-weight:900;line-height:1}
+.home-text{display:flex;flex-direction:column;line-height:1.15;align-items:flex-start}
+.home-hz{font-size:11.5px;font-weight:900}
+.home-py{font-size:7.5px;font-weight:600;opacity:.9}
+.home-en{font-size:7.5px;font-style:italic;opacity:.85}
 .slide{display:none;background:#fff;border-radius:28px;padding:18px 28px 12px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:560px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
 .slide.active{display:flex}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -110,9 +119,11 @@ body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(1
 .gbtn:hover{opacity:.85}
 .gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d;max-width:520px}
 
-/* Global toggle: prominent, always visible at top right of slide */
-.toggle-bar{position:absolute;top:10px;left:14px;display:flex;gap:6px;z-index:10}
+/* Game toggle bar — top-right of slide so it doesn't overlap home button */
+.toggle-bar{position:absolute;top:10px;right:14px;display:flex;gap:6px;z-index:10}
 .tgl{background:#ede9fe;color:#7c3aed;border:2px solid #c4b5fd;padding:3px 9px;border-radius:999px;font-size:9.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+/* Hide the small badge on game slides — the toggle bar takes that spot */
+.slide:has(.toggle-bar) .badge{display:none}
 .tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
 .tgl:hover{transform:scale(1.05)}
 
@@ -176,6 +187,14 @@ body.show-en .gen{display:block}
 </style>
 </head>
 <body>
+<a class="home-btn" href="index.html" title="返回课程列表 huí dào kèchéng lièbiǎo · back to lesson list">
+  <span class="home-icon">←</span>
+  <div class="home-text">
+    <span class="home-hz">🏠 课程列表</span>
+    <span class="home-py">kèchéng lièbiǎo</span>
+    <span class="home-en">all lessons</span>
+  </div>
+</a>
 <div class="app">
 
 <!-- ════════════════ SLIDE 1: COVER ════════════════ -->
@@ -196,11 +215,13 @@ body.show-en .gen{display:block}
     <span class="ctag">🎮 8 游戏 yóuxì · games</span>
     <span class="ctag">💰 买单 mǎidān · pay the bill</span>
   </div>
-  <div style="background:#fff;border:2px solid #fdba74;border-radius:14px;padding:9px 16px;font-size:11px;color:#c2410c;margin-top:8px;max-width:580px;line-height:1.6">
-    <b>💡 小贴士 xiǎo tiēshì · tip:</b> 游戏里默认只有中文。点上面的按钮可以打开拼音和英文！<br>
-    <span style="color:#888;font-style:italic">Games show only Chinese by default. Click the buttons at top-left to turn on pinyin and English!</span>
+  <div style="background:#fff;border:2px solid #fdba74;border-radius:14px;padding:9px 16px;font-size:11px;color:#c2410c;margin-top:8px;max-width:600px;line-height:1.6">
+    <b>💡 小贴士 xiǎo tiēshì · tip:</b><br>
+    游戏里默认只有中文。点上方按钮可以打开拼音和英文！<br>
+    <span style="color:#7c3aed;font-weight:600;font-size:10px">yóuxì lǐ mòrèn zhǐ yǒu zhōngwén. diǎn shàngfāng ànniǔ kěyǐ dǎkāi pīnyīn hé yīngwén!</span><br>
+    <span style="color:#888;font-style:italic;font-size:10px">Games show only Chinese by default. Click the buttons above to turn on pinyin and English!</span>
   </div>
-  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 · sān shí yè · 30 pages</div>
+  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 sān shí yè · 30 pages</div>
 </div>
 </div>
 
@@ -574,8 +595,8 @@ body.show-en .gen{display:block}
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
     <div class="gsbar">🎯 <span id="lws">0</span>/8</div>
-    <div class="gsbar">题 <span id="lwq">1</span>/8</div>
-    <button class="gbtn" onclick="initLw()">↺ 重来 chónglái</button>
+    <div class="gsbar">题 tí · q.<span id="lwq">1</span>/8</div>
+    <button class="gbtn" onclick="initLw()">↺ 重来 chónglái · restart</button>
   </div>
   <div class="qq">
     <div style="font-size:36px" id="lwem">🍚</div>
@@ -598,8 +619,8 @@ body.show-en .gen{display:block}
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
     <div class="gsbar">🎯 <span id="eds">0</span>/10</div>
-    <div class="gsbar">题 <span id="edq">1</span>/10</div>
-    <button class="gbtn" onclick="initEd()">↺ 重来</button>
+    <div class="gsbar">题 tí · q.<span id="edq">1</span>/10</div>
+    <button class="gbtn" onclick="initEd()">↺ 重来 chónglái · restart</button>
   </div>
   <div class="qq" id="edcard">
     <div style="font-size:48px" id="edem">🍚</div>
@@ -733,8 +754,8 @@ body.show-en .gen{display:block}
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
     <div class="gsbar">🎯 <span id="dqs">0</span>/8</div>
-    <div class="gsbar">题 <span id="dqq">1</span>/8</div>
-    <button class="gbtn" onclick="initDq()">↺ 重来</button>
+    <div class="gsbar">题 tí · q.<span id="dqq">1</span>/8</div>
+    <button class="gbtn" onclick="initDq()">↺ 重来 chónglái · restart</button>
   </div>
   <div class="qq">
     <div class="qqmain" id="dqem" style="font-size:54px">🥤</div>
@@ -793,8 +814,8 @@ body.show-en .gen{display:block}
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
     <div class="gsbar">🎯 <span id="fqs">0</span>/10</div>
-    <div class="gsbar">题 <span id="fqq">1</span>/10</div>
-    <button class="gbtn" onclick="initFq()">↺ 重来</button>
+    <div class="gsbar">题 tí · q.<span id="fqq">1</span>/10</div>
+    <button class="gbtn" onclick="initFq()">↺ 重来 chónglái · restart</button>
   </div>
   <div class="qq">
     <div class="qqmain" id="fqem" style="font-size:54px">🥟</div>
@@ -850,8 +871,8 @@ body.show-en .gen{display:block}
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
     <div class="gsbar">🎯 <span id="vbs">0</span>/8</div>
-    <div class="gsbar">题 <span id="vbq">1</span>/8</div>
-    <button class="gbtn" onclick="initVb()">↺ 重来</button>
+    <div class="gsbar">题 tí · q.<span id="vbq">1</span>/8</div>
+    <button class="gbtn" onclick="initVb()">↺ 重来 chónglái · restart</button>
   </div>
   <div class="vbq">
     <div class="vbq-sentence" id="vbsent">我 <span class="vbq-blank">___</span> 一杯水。</div>
@@ -973,9 +994,9 @@ body.show-en .gen{display:block}
 <div class="title-en">memory match — flip the cards and find pairs!</div>
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
-    <div class="gsbar">🎯 配对 <span id="mm">0</span>/6</div>
-    <div class="gsbar">🔄 翻 <span id="mf">0</span></div>
-    <button class="gbtn" onclick="initMem()">↺ 重来</button>
+    <div class="gsbar">🎯 配对 pèiduì · matches <span id="mm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 fān · flips <span id="mf">0</span></div>
+    <button class="gbtn" onclick="initMem()">↺ 重来 chónglái · restart</button>
   </div>
   <div class="mgrid" id="mgrid"></div>
   <div class="gres" id="mres"></div>
@@ -991,9 +1012,9 @@ body.show-en .gen{display:block}
 <div class="title-en">fill in the blanks — click words to complete the dialogue!</div>
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
-    <div class="gsbar">🎯 关 <span id="fbround">1</span>/3</div>
-    <button class="gbtn" onclick="initFb()">↺ 重来</button>
-    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">下一关 →</button>
+    <div class="gsbar">🎯 关 guān · level <span id="fbround">1</span>/3</div>
+    <button class="gbtn" onclick="initFb()">↺ 重来 chónglái · restart</button>
+    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">下一关 xià yī guān · next →</button>
   </div>
   <div class="fib" id="fbwrap"></div>
   <div class="gres" id="fbres" style="font-size:13px"></div>
@@ -1010,8 +1031,8 @@ body.show-en .gen{display:block}
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
     <div class="gsbar">🎯 <span id="rrs">0</span>/6</div>
-    <div class="gsbar">题 <span id="rrq">1</span>/6</div>
-    <button class="gbtn" onclick="initRr()">↺ 重来</button>
+    <div class="gsbar">题 tí · q.<span id="rrq">1</span>/6</div>
+    <button class="gbtn" onclick="initRr()">↺ 重来 chónglái · restart</button>
   </div>
   <div class="resp-bub">
     <div class="avi w">🙋‍♀️</div>
@@ -1021,7 +1042,7 @@ body.show-en .gen{display:block}
       <div class="en gen" id="rren">Welcome! How many people?</div>
     </div>
   </div>
-  <div style="font-size:11px;color:#888">↓ 你怎么回答？<span class="gen">your reply?</span> ↓</div>
+  <div style="font-size:11px;color:#888;text-align:center">↓ 你怎么回答？<span class="gpy">nǐ zěnme huídá?</span> <span class="gen">your reply?</span> ↓</div>
   <div class="qopts" id="rro" style="max-width:560px"></div>
   <div class="gres" id="rrr"></div>
 </div>
@@ -1102,26 +1123,26 @@ body.show-en .gen{display:block}
     <span style="font-style:italic">Next time you go to a restaurant, remember to order in Chinese!</span>
   </div>
   <div class="cklist">
-    <span class="ck">✅ 餐厅词汇 cāntīng cíhuì</span>
-    <span class="ck">✅ 餐具 cānjù</span>
-    <span class="ck">✅ 食物 shíwù</span>
-    <span class="ck">✅ 饮料 yǐnliào</span>
-    <span class="ck">✅ 量词 liàngcí</span>
-    <span class="ck">✅ 动词 dòngcí</span>
-    <span class="ck">✅ 礼貌用语 lǐmào yòngyǔ</span>
-    <span class="ck">✅ 7 个对话 duìhuà</span>
-    <span class="ck">✅ 角色扮演 juésè bànyǎn</span>
-    <span class="ck">🎮 量词配对</span>
-    <span class="ck">🎮 吃还是喝</span>
-    <span class="ck">🎮 饮料问答</span>
-    <span class="ck">🎮 食物问答</span>
-    <span class="ck">🎮 动词配对</span>
-    <span class="ck">🎮 记忆配对</span>
-    <span class="ck">🎮 填空</span>
-    <span class="ck">🎮 服务员问答</span>
+    <span class="ck">✅ 餐厅词汇 cāntīng cíhuì · restaurant words</span>
+    <span class="ck">✅ 餐具 cānjù · utensils</span>
+    <span class="ck">✅ 食物 shíwù · food</span>
+    <span class="ck">✅ 饮料 yǐnliào · drinks</span>
+    <span class="ck">✅ 量词 liàngcí · measure words</span>
+    <span class="ck">✅ 动词 dòngcí · verbs</span>
+    <span class="ck">✅ 礼貌用语 lǐmào yòngyǔ · polite phrases</span>
+    <span class="ck">✅ 7 个对话 duìhuà · 7 dialogues</span>
+    <span class="ck">✅ 角色扮演 juésè bànyǎn · role-play</span>
+    <span class="ck">🎮 量词配对 liàngcí pèiduì · measure match</span>
+    <span class="ck">🎮 吃还是喝 chī háishi hē · eat or drink</span>
+    <span class="ck">🎮 饮料问答 yǐnliào wèndá · drink quiz</span>
+    <span class="ck">🎮 食物问答 shíwù wèndá · food quiz</span>
+    <span class="ck">🎮 动词配对 dòngcí pèiduì · verb match</span>
+    <span class="ck">🎮 记忆配对 jìyì pèiduì · memory match</span>
+    <span class="ck">🎮 填空 tiánkòng · fill-in-blank</span>
+    <span class="ck">🎮 服务员问答 fúwùyuán wèndá · waiter Q&amp;A</span>
   </div>
   <div style="font-size:12px;color:#888;margin-top:6px">
-    太厉害了！tài lìhai le! · amazing! 加油！jiā yóu! · keep going! 💪
+    太厉害了！tài lìhai le! · so amazing! · 加油！jiā yóu! · keep going! 💪
   </div>
   <div style="font-size:11px;color:#aaa">📅 2026年5月19日 · wǔ yuè shíjiǔ rì · May 19, 2026</div>
   <a href="index.html" style="background:linear-gradient(135deg,#ea580c,#e91e8c);color:#fff;padding:8px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:12px;margin-top:6px">← 回到课程列表 huí dào kèchéng lièbiǎo · back to lessons</a>
@@ -1211,7 +1232,7 @@ function initLw(){
 function showLw(){
   if(lwQ>=8){
     const r=$id('lwr');r.style.display='block';
-    r.textContent='🎉 '+lwScore+'/8 — '+(lwScore===8?'完美！wánměi!':lwScore>=6?'很好！hěn hǎo!':'加油！jiā yóu!');
+    r.textContent='🎉 '+lwScore+'/8 — '+(lwScore===8?'完美！wánměi! · perfect!':lwScore>=6?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
     $id('lwo').innerHTML='';return;
   }
   const it=lwItems[lwQ];
@@ -1265,7 +1286,7 @@ function initEd(){
 function showEd(){
   if(edQ>=10){
     const r=$id('edr');r.style.display='block';
-    r.textContent='🎉 '+edScore+'/10 — '+(edScore>=9?'完美！wánměi!':edScore>=7?'很好！hěn hǎo!':'加油！jiā yóu!');
+    r.textContent='🎉 '+edScore+'/10 — '+(edScore>=9?'完美！wánměi! · perfect!':edScore>=7?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
     $id('edcard').style.opacity='.4';return;
   }
   const it=edItems[edQ];
@@ -1304,7 +1325,7 @@ function initDq(){
 function showDq(){
   if(dqQ>=8){
     const r=$id('dqr');r.style.display='block';
-    r.textContent='🎉 '+dqScore+'/8 — '+(dqScore===8?'完美！wánměi!':dqScore>=6?'很好！hěn hǎo!':'加油！jiā yóu!');
+    r.textContent='🎉 '+dqScore+'/8 — '+(dqScore===8?'完美！wánměi! · perfect!':dqScore>=6?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
     $id('dqo').innerHTML='';return;
   }
   const it=dqItems[dqQ];
@@ -1358,7 +1379,7 @@ function initFq(){
 function showFq(){
   if(fqQ>=10){
     const r=$id('fqr');r.style.display='block';
-    r.textContent='🎉 '+fqScore+'/10 — '+(fqScore>=9?'完美！wánměi!':fqScore>=7?'很好！hěn hǎo!':'加油！jiā yóu!');
+    r.textContent='🎉 '+fqScore+'/10 — '+(fqScore>=9?'完美！wánměi! · perfect!':fqScore>=7?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
     $id('fqo').innerHTML='';return;
   }
   const it=fqItems[fqQ];
@@ -1409,7 +1430,7 @@ function initVb(){
 function showVb(){
   if(vbQ>=8){
     const r=$id('vbr');r.style.display='block';
-    r.textContent='🎉 '+vbScore+'/8 — '+(vbScore===8?'完美！wánměi!':vbScore>=6?'很好！hěn hǎo!':'加油！jiā yóu!');
+    r.textContent='🎉 '+vbScore+'/8 — '+(vbScore===8?'完美！wánměi! · perfect!':vbScore>=6?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
     $id('vbo').innerHTML='';return;
   }
   const it=vbItems[vbQ];
@@ -1470,7 +1491,7 @@ function initMem(){
         if(mFlipped[0].card.id===mFlipped[1].card.id){
           mFlipped[0].el.classList.add('match');mFlipped[1].el.classList.add('match');
           mFlipped=[];mMatched++;$id('mm').textContent=mMatched;
-          if(mMatched===6){setTimeout(()=>{const r=$id('mres');r.style.display='block';r.textContent='🎉 '+mFlips+' 翻 fān · 太棒了！tài bàng le!';},400);}
+          if(mMatched===6){setTimeout(()=>{const r=$id('mres');r.style.display='block';r.textContent='🎉 '+mFlips+' 翻 fān · flips — 太棒了！tài bàng le! · awesome!';},400);}
         }else{
           mLock=true;setTimeout(()=>{
             mFlipped[0].el.classList.remove('flip');mFlipped[0].el.textContent='🎴';
@@ -1556,7 +1577,7 @@ function renderFb(){
         const r=$id('fbres');r.style.display='block';
         if(correct){
           r.style.background='linear-gradient(135deg,#dcfce7,#bbf7d0)';r.style.color='#15803d';
-          r.textContent='🎉 对了！duì le! correct!';
+          r.textContent='🎉 对了！duì le! · correct!';
           $id('fbnext').style.display=fbIdx<FB_ROUNDS.length-1?'inline-block':'none';
           if(fbIdx===FB_ROUNDS.length-1){
             setTimeout(()=>{r.textContent='🌟 全部完成！quánbù wánchéng! all done — 太棒了！';},700);
@@ -1640,7 +1661,7 @@ function initRr(){
 function showRr(){
   if(rrQ>=6){
     const r=$id('rrr');r.style.display='block';
-    r.textContent='🎉 '+rrScore+'/6 — '+(rrScore===6?'完美！wánměi!':rrScore>=4?'很好！hěn hǎo!':'加油！jiā yóu!');
+    r.textContent='🎉 '+rrScore+'/6 — '+(rrScore===6?'完美！wánměi! · perfect!':rrScore>=4?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
     $id('rro').innerHTML='';return;
   }
   const it=rrItems[rrQ];
