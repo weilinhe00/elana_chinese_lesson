@@ -124,6 +124,21 @@ body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(1
 .tgl{background:#ede9fe;color:#7c3aed;border:2px solid #c4b5fd;padding:3px 9px;border-radius:999px;font-size:9.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
 /* Hide the small badge on game slides — the toggle bar takes that spot */
 .slide:has(.toggle-bar) .badge{display:none}
+
+/* ── Custom drink can icons (scale with parent font-size via em) ── */
+.cancan{display:inline-block;width:0.62em;height:0.95em;border-radius:0.13em 0.13em 0.18em 0.18em;position:relative;vertical-align:-0.08em;overflow:hidden;box-shadow:0 0.025em 0.06em rgba(0,0,0,0.25),inset 0.05em 0 0 rgba(255,255,255,0.15),inset -0.05em 0 0 rgba(0,0,0,0.2)}
+.cancan::before{content:"";position:absolute;left:0.08em;right:0.08em;top:0.06em;height:0.16em;background:rgba(255,255,255,0.5);border-radius:0.04em}
+.cancan-cola{background:linear-gradient(180deg,#ef4444 0%,#991b1b 50%,#450a0a 100%)}
+.cancan-cola::after{content:"C";position:absolute;font-family:'Nunito',sans-serif;font-weight:900;font-size:0.42em;color:#fef9c3;left:50%;top:62%;transform:translate(-50%,-50%);letter-spacing:-0.05em;text-shadow:0 0.02em 0.04em rgba(0,0,0,0.3)}
+.cancan-sprite{background:linear-gradient(180deg,#84cc16 0%,#15803d 50%,#14532d 100%)}
+.cancan-sprite::after{content:"S";position:absolute;font-family:'Nunito',sans-serif;font-weight:900;font-size:0.42em;color:#fef9c3;left:50%;top:62%;transform:translate(-50%,-50%);text-shadow:0 0.02em 0.04em rgba(0,0,0,0.3)}
+/* Ice water glass — clear glass with ice cubes inside */
+.iceglass{display:inline-block;width:0.85em;height:0.95em;border-radius:0.06em 0.06em 0.3em 0.3em;position:relative;vertical-align:-0.08em;background:linear-gradient(180deg,rgba(186,230,253,0.4) 0%,rgba(56,189,248,0.7) 50%,rgba(8,145,178,0.85) 100%);border:0.06em solid rgba(8,145,178,0.85);box-shadow:inset 0.05em 0 0.05em rgba(255,255,255,0.5)}
+.iceglass::before{content:"";position:absolute;left:0.18em;top:0.2em;width:0.22em;height:0.22em;background:rgba(255,255,255,0.85);border-radius:0.04em;transform:rotate(15deg);box-shadow:0.28em 0.1em 0 -0.02em rgba(255,255,255,0.85)}
+/* Hot water cup — with steam */
+.hotcup{display:inline-block;width:0.9em;height:0.9em;border-radius:0.1em 0.1em 0.35em 0.35em;position:relative;vertical-align:-0.08em;background:linear-gradient(180deg,#fef3c7 0%,#fbbf24 70%,#d97706 100%);border:0.06em solid #d97706}
+.hotcup::before{content:"〰";position:absolute;left:50%;top:-0.55em;transform:translateX(-50%);font-size:0.45em;color:#fca5a5;font-weight:900;letter-spacing:-0.1em;text-shadow:0 0.05em 0.1em rgba(220,38,38,0.5)}
+.hotcup::after{content:"〰";position:absolute;left:50%;top:-0.3em;transform:translateX(-50%);font-size:0.4em;color:#dc2626;font-weight:900;letter-spacing:-0.1em}
 .tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
 .tgl:hover{transform:scale(1.05)}
 
@@ -406,10 +421,10 @@ body.show-en .gen{display:block}
 </div>
 <div class="lbl co" style="font-size:10px;margin-top:4px;margin-bottom:3px">⭐ 新词 xīn cí · NEW words</div>
 <div class="c5" style="margin-bottom:6px">
-  <div class="fch br"><span class="em">🥤</span><div class="py">kělè</div><div class="hz">可乐</div><div class="en">cola</div></div>
-  <div class="fch bp"><span class="em">🥤</span><div class="py">xuěbì</div><div class="hz">雪碧</div><div class="en">sprite</div></div>
-  <div class="fch bo"><span class="em">♨️</span><div class="py">rè shuǐ</div><div class="hz">热水</div><div class="en">hot water</div></div>
-  <div class="fch bb"><span class="em">🧊</span><div class="py">bīng shuǐ</div><div class="hz">冰水</div><div class="en">ice water</div></div>
+  <div class="fch br"><span class="em"><span class="cancan cancan-cola"></span></span><div class="py">kělè</div><div class="hz">可乐</div><div class="en">cola</div></div>
+  <div class="fch bp"><span class="em"><span class="cancan cancan-sprite"></span></span><div class="py">xuěbì</div><div class="hz">雪碧</div><div class="en">sprite</div></div>
+  <div class="fch bo"><span class="em"><span class="hotcup"></span></span><div class="py">rè shuǐ</div><div class="hz">热水</div><div class="en">hot water</div></div>
+  <div class="fch bb"><span class="em"><span class="iceglass"></span></span><div class="py">bīng shuǐ</div><div class="hz">冰水</div><div class="en">ice water</div></div>
   <div class="fch by"><span class="em">🍊</span><div class="py">chéngzhī</div><div class="hz">橙汁</div><div class="en">orange juice</div></div>
 </div>
 <div class="card by" style="font-size:11px;margin-top:4px">
@@ -1272,9 +1287,9 @@ const ED=[
   {em:'🥛',hz:'牛奶',py:'niúnǎi',en:'milk',t:'drink'},
   {em:'🧃',hz:'果汁',py:'guǒzhī',en:'juice',t:'drink'},
   {em:'🧋',hz:'奶茶',py:'nǎichá',en:'milk tea',t:'drink'},
-  {em:'🥤',hz:'可乐',py:'kělè',en:'cola',t:'drink'},
-  {em:'🥤',hz:'雪碧',py:'xuěbì',en:'sprite',t:'drink'},
-  {em:'♨️',hz:'热水',py:'rè shuǐ',en:'hot water',t:'drink'},
+  {em:'<span class="cancan cancan-cola"></span>',hz:'可乐',py:'kělè',en:'cola',t:'drink'},
+  {em:'<span class="cancan cancan-sprite"></span>',hz:'雪碧',py:'xuěbì',en:'sprite',t:'drink'},
+  {em:'<span class="hotcup"></span>',hz:'热水',py:'rè shuǐ',en:'hot water',t:'drink'},
   {em:'🍊',hz:'橙汁',py:'chéngzhī',en:'orange juice',t:'drink'},
 ];
 let edScore=0,edQ=0,edItems=[];
@@ -1290,7 +1305,7 @@ function showEd(){
     $id('edcard').style.opacity='.4';return;
   }
   const it=edItems[edQ];
-  $id('edem').textContent=it.em;$id('edhz').textContent=it.hz;$id('edpy').textContent=it.py;$id('eden').textContent=it.en;
+  $id('edem').innerHTML=it.em;$id('edhz').textContent=it.hz;$id('edpy').textContent=it.py;$id('eden').textContent=it.en;
   $id('edq').textContent=edQ+1;
 }
 function edPick(type){
@@ -1310,10 +1325,10 @@ const DQ=[
   {em:'🍵',hz:'茶',py:'chá',en:'tea'},
   {em:'🧋',hz:'奶茶',py:'nǎichá',en:'milk tea'},
   {em:'🧃',hz:'果汁',py:'guǒzhī',en:'juice'},
-  {em:'🥤',hz:'可乐',py:'kělè',en:'cola'},
-  {em:'🥤',hz:'雪碧',py:'xuěbì',en:'sprite'},
-  {em:'♨️',hz:'热水',py:'rè shuǐ',en:'hot water'},
-  {em:'🧊',hz:'冰水',py:'bīng shuǐ',en:'ice water'},
+  {em:'<span class="cancan cancan-cola"></span>',hz:'可乐',py:'kělè',en:'cola'},
+  {em:'<span class="cancan cancan-sprite"></span>',hz:'雪碧',py:'xuěbì',en:'sprite'},
+  {em:'<span class="hotcup"></span>',hz:'热水',py:'rè shuǐ',en:'hot water'},
+  {em:'<span class="iceglass"></span>',hz:'冰水',py:'bīng shuǐ',en:'ice water'},
   {em:'🍊',hz:'橙汁',py:'chéngzhī',en:'orange juice'},
 ];
 let dqScore=0,dqQ=0,dqItems=[];
@@ -1329,7 +1344,7 @@ function showDq(){
     $id('dqo').innerHTML='';return;
   }
   const it=dqItems[dqQ];
-  $id('dqem').textContent=it.em;$id('dqq').textContent=dqQ+1;
+  $id('dqem').innerHTML=it.em;$id('dqq').textContent=dqQ+1;
   const wrong=DQ.filter(o=>o.hz!==it.hz);
   const opts=[it,...shuffle(wrong).slice(0,3)];
   const el=$id('dqo');el.innerHTML='';let ans=false;

@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Elana的中文课 · 在超市购物 · Supermarket Shopping</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#e0f7fa,#dcfce7 50%,#fef3c7);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.app{width:880px;position:relative}
+
+/* Persistent back-to-index button */
+.home-btn{position:fixed;top:14px;left:14px;z-index:1000;background:linear-gradient(135deg,#0891b2,#16a34a);color:#fff;padding:7px 13px 7px 11px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:.2s;font-family:inherit}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.24)}
+.home-icon{font-size:16px;font-weight:900;line-height:1}
+.home-text{display:flex;flex-direction:column;line-height:1.15;align-items:flex-start}
+.home-hz{font-size:11.5px;font-weight:900}
+.home-py{font-size:7.5px;font-weight:600;opacity:.9}
+.home-en{font-size:7.5px;font-style:italic;opacity:.85}
+
+.slide{display:none;background:#fff;border-radius:28px;padding:18px 28px 12px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:560px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
+.slide.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Colours */
+.cp{color:#e91e8c}.cu{color:#7c3aed}.ct{color:#0891b2}.co{color:#ea580c}.cg{color:#16a34a}.cb{color:#2563eb}.cy{color:#ca8a04}.cr{color:#dc2626}
+.bp{background:#fce7f3}.bu{background:#ede9fe}.bt{background:#cffafe}.bo{background:#ffedd5}.bg{background:#dcfce7}.bb{background:#dbeafe}.by{background:#fef9c3}.br{background:#fee2e2}
+
+/* Layout */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.c4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.c5{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.c6{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+
+/* Typography */
+.tag{font-size:9px;font-weight:800;letter-spacing:.3px;color:inherit;margin-bottom:3px}
+.title{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.1;margin-bottom:1px}
+.title-py{font-size:11px;color:#0891b2;font-weight:700;margin-bottom:1px}
+.title-en{font-size:10.5px;color:#888;font-style:italic;margin-bottom:6px}
+.sub{font-size:10.5px;color:#888;margin-bottom:8px}
+.lbl{font-size:8.5px;font-weight:800;letter-spacing:.2px;margin-bottom:4px}
+.badge{font-size:8px;font-weight:800;position:absolute;top:10px;right:14px;opacity:.4}
+.card{border-radius:11px;padding:8px 10px}
+
+/* Vocab cards */
+.vc{border-radius:10px;padding:7px 4px;text-align:center}
+.vc .py{font-size:9px;color:#0891b2;font-weight:700;margin-top:2px}
+.vc .hz{font-size:13px;font-weight:900;color:#1a1a2e;margin:1px 0}
+.vc .en{font-size:8.5px;color:#888}
+
+.fch{border-radius:9px;padding:6px 4px;text-align:center}
+.fch .em{font-size:18px;display:block}
+.fch .py{font-size:8px;color:#0891b2;font-weight:600}
+.fch .hz{font-size:10.5px;font-weight:800;color:#1a1a2e}
+.fch .en{font-size:7.5px;color:#888}
+
+/* Money price tag */
+.price{display:inline-block;background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border-radius:8px;padding:2px 8px;font-weight:900;font-size:13px;border:2px dashed #f59e0b}
+
+/* Plushie + animal combo card */
+.combo{display:flex;background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:14px;padding:10px;gap:8px;align-items:center}
+.combo .real{flex:1;text-align:center;background:#fff;border-radius:10px;padding:6px}
+.combo .arr{font-size:18px;color:#7c3aed;font-weight:900}
+.combo .plush{flex:1;text-align:center;background:#fff;border-radius:10px;padding:6px;border:2px dashed #ec4899}
+.combo .em{font-size:24px}
+.combo .hz{font-size:11px;font-weight:900;color:#1a1a2e;margin-top:2px}
+.combo .py{font-size:8px;color:#0891b2;font-weight:700}
+.combo .en{font-size:7.5px;color:#888;font-style:italic}
+.combo .lbl-r{font-size:7px;color:#0891b2;font-weight:800;letter-spacing:.4px;margin-bottom:2px}
+.combo .lbl-p{font-size:7px;color:#e91e8c;font-weight:800;letter-spacing:.4px;margin-bottom:2px}
+
+/* Dialogue bubbles */
+.dlg{flex:1;display:flex;flex-direction:column;gap:5px}
+.dlg-turn{display:flex;gap:8px;align-items:flex-start}
+.dlg-turn.right{flex-direction:row-reverse}
+.avi{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.avi.w{background:linear-gradient(135deg,#5eead4,#0891b2)}
+.avi.c{background:linear-gradient(135deg,#f9a8d4,#ec4899)}
+.avi.c2{background:linear-gradient(135deg,#a5b4fc,#6366f1)}
+.avi.c3{background:linear-gradient(135deg,#86efac,#22c55e)}
+.bub{border-radius:14px;padding:6px 11px;max-width:80%;position:relative}
+.bub.w{background:#cffafe;border-top-left-radius:4px}
+.bub.c{background:#fce7f3;border-top-right-radius:4px}
+.bub.c2{background:#e0e7ff;border-top-right-radius:4px}
+.bub.c3{background:#dcfce7;border-top-right-radius:4px}
+.bub .hz{font-size:12px;font-weight:800;color:#1a1a2e;line-height:1.3}
+.bub .py{font-size:8.5px;color:#0891b2;font-weight:700;margin-top:1px;line-height:1.2}
+.bub .en{font-size:8px;color:#777;font-style:italic;margin-top:1px;line-height:1.2}
+.who{font-size:7.5px;font-weight:800;letter-spacing:.3px;color:#888;text-transform:uppercase;margin-bottom:1px}
+
+/* Sentence patterns */
+.sp{border-radius:10px;padding:6px 10px;margin-bottom:4px}
+.sp .pat{font-size:11.5px;font-weight:900;color:#1a1a2e}
+.sp .patpy{font-size:8.5px;color:#0891b2;font-weight:600}
+.sp .paten{font-size:8.5px;color:#666;font-style:italic;margin:1px 0}
+.sp .ex{font-size:10.5px;font-weight:700;margin-top:3px}
+.sp .expy{font-size:8px;color:#aaa}
+.sp .exen{font-size:8.5px;color:#999;font-style:italic}
+
+/* Cover */
+.cov{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.cov-title{font-size:40px;font-weight:900;background:linear-gradient(135deg,#0891b2,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ctag{background:#cffafe;color:#0e7490;border-radius:999px;padding:4px 10px;font-size:10px;font-weight:700;display:inline-block;margin:3px}
+
+/* End slide */
+.endb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+.cklist{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;max-width:740px}
+.ck{background:#cffafe;border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;color:#0e7490}
+
+/* Nav */
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
+.nbtn{width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;font-size:15px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);transition:.2s;color:#333;display:flex;align-items:center;justify-content:center}
+.nbtn:hover{transform:scale(1.1)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:680px}
+.dot{width:6px;height:6px;border-radius:50%;background:#ddd;cursor:pointer;transition:.2s}
+.dot.active{background:#0891b2;transform:scale(1.4)}
+
+/* Games */
+.gw{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.gsbar{font-size:12px;font-weight:800;color:#0e7490;background:#cffafe;padding:3px 12px;border-radius:999px}
+.gbtn{background:linear-gradient(135deg,#0891b2,#16a34a);color:#fff;border:none;padding:5px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer;font-family:inherit}
+.gbtn:hover{opacity:.85}
+.gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d;max-width:520px}
+
+/* Game toggle bar — top-right of slide */
+.toggle-bar{position:absolute;top:10px;right:14px;display:flex;gap:6px;z-index:10}
+.tgl{background:#ede9fe;color:#7c3aed;border:2px solid #c4b5fd;padding:3px 9px;border-radius:999px;font-size:9.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+.tgl:hover{transform:scale(1.05)}
+.slide:has(.toggle-bar) .badge{display:none}
+
+/* ── Custom drink can icons (scale with parent font-size via em) ── */
+.cancan{display:inline-block;width:0.62em;height:0.95em;border-radius:0.13em 0.13em 0.18em 0.18em;position:relative;vertical-align:-0.08em;overflow:hidden;box-shadow:0 0.025em 0.06em rgba(0,0,0,0.25),inset 0.05em 0 0 rgba(255,255,255,0.15),inset -0.05em 0 0 rgba(0,0,0,0.2)}
+.cancan::before{content:"";position:absolute;left:0.08em;right:0.08em;top:0.06em;height:0.16em;background:rgba(255,255,255,0.5);border-radius:0.04em}
+.cancan-cola{background:linear-gradient(180deg,#ef4444 0%,#991b1b 50%,#450a0a 100%)}
+.cancan-cola::after{content:"C";position:absolute;font-family:'Nunito',sans-serif;font-weight:900;font-size:0.42em;color:#fef9c3;left:50%;top:62%;transform:translate(-50%,-50%);letter-spacing:-0.05em;text-shadow:0 0.02em 0.04em rgba(0,0,0,0.3)}
+.cancan-sprite{background:linear-gradient(180deg,#84cc16 0%,#15803d 50%,#14532d 100%)}
+.cancan-sprite::after{content:"S";position:absolute;font-family:'Nunito',sans-serif;font-weight:900;font-size:0.42em;color:#fef9c3;left:50%;top:62%;transform:translate(-50%,-50%);text-shadow:0 0.02em 0.04em rgba(0,0,0,0.3)}
+.iceglass{display:inline-block;width:0.85em;height:0.95em;border-radius:0.06em 0.06em 0.3em 0.3em;position:relative;vertical-align:-0.08em;background:linear-gradient(180deg,rgba(186,230,253,0.4) 0%,rgba(56,189,248,0.7) 50%,rgba(8,145,178,0.85) 100%);border:0.06em solid rgba(8,145,178,0.85);box-shadow:inset 0.05em 0 0.05em rgba(255,255,255,0.5)}
+.iceglass::before{content:"";position:absolute;left:0.18em;top:0.2em;width:0.22em;height:0.22em;background:rgba(255,255,255,0.85);border-radius:0.04em;transform:rotate(15deg);box-shadow:0.28em 0.1em 0 -0.02em rgba(255,255,255,0.85)}
+.hotcup{display:inline-block;width:0.9em;height:0.9em;border-radius:0.1em 0.1em 0.35em 0.35em;position:relative;vertical-align:-0.08em;background:linear-gradient(180deg,#fef3c7 0%,#fbbf24 70%,#d97706 100%);border:0.06em solid #d97706}
+.hotcup::before{content:"〰";position:absolute;left:50%;top:-0.55em;transform:translateX(-50%);font-size:0.45em;color:#fca5a5;font-weight:900;letter-spacing:-0.1em;text-shadow:0 0.05em 0.1em rgba(220,38,38,0.5)}
+.hotcup::after{content:"〰";position:absolute;left:50%;top:-0.3em;transform:translateX(-50%);font-size:0.4em;color:#dc2626;font-weight:900;letter-spacing:-0.1em}
+
+.gpy,.gen{display:none}
+.gpy{font-size:8.5px;color:#7c3aed;font-weight:700;line-height:1.3}
+.gen{font-size:8.5px;color:#888;font-style:italic;line-height:1.3}
+body.show-py .gpy{display:block}
+body.show-en .gen{display:block}
+
+/* Quiz */
+.qq{background:linear-gradient(135deg,#cffafe,#dcfce7);border-radius:14px;padding:12px 18px;text-align:center;width:100%;max-width:360px}
+.qqmain{font-size:30px;font-weight:900;color:#1a1a2e;line-height:1.1}
+.qqlbl{font-size:11px;color:#888;margin-top:3px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:460px}
+.qopts.three{grid-template-columns:repeat(3,1fr)}
+.qopt{background:#fff;border:2px solid #e0e0e0;border-radius:11px;padding:8px 10px;font-weight:800;cursor:pointer;transition:.15s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:50px;justify-content:center}
+.qopt:hover{border-color:#0891b2;background:#ecfeff}
+.qopt.ok{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.qopt.no{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qopt-hz{font-size:14px}
+
+/* Memory match */
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%;max-width:660px}
+.mcard{background:linear-gradient(135deg,#0891b2,#16a34a);border-radius:10px;height:72px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;user-select:none;transition:.25s}
+.mcard.flip{background:#fff;border:2px solid #0891b2;cursor:default}
+.mcard.match{background:linear-gradient(135deg,#dcfce7,#bbf7d0)!important;border:2px solid #16a34a!important;cursor:default}
+.mcard-py{font-size:9px;color:#0891b2;font-weight:700}
+.mcard-hz{font-size:14px;font-weight:900;color:#1a1a2e}
+
+/* Fill-in-blank */
+.fib{background:linear-gradient(135deg,#cffafe,#dcfce7);border-radius:14px;padding:13px 18px;width:100%;max-width:560px}
+.fib-row{font-size:15px;line-height:2.1;color:#1a1a2e;font-weight:700;text-align:center}
+.fib-blank{display:inline-block;min-width:80px;border-bottom:3px solid #0891b2;padding:0 6px;font-weight:900;color:#0891b2;text-align:center;margin:0 2px;cursor:pointer}
+.fib-blank.filled{border-bottom-color:#16a34a;color:#15803d;background:#dcfce7;border-radius:6px}
+.fib-bank{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+.fib-tok{background:#fff;border:2px solid #0891b2;color:#1a1a2e;padding:5px 13px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+.fib-tok:hover{background:#cffafe}
+.fib-tok.used{opacity:.3;pointer-events:none}
+
+/* Phrase rows */
+.phr{display:flex;align-items:center;gap:9px;border-radius:10px;padding:6px 11px;margin-bottom:4px}
+.phr .em{font-size:18px;flex-shrink:0}
+.phr .hz{font-size:13px;font-weight:900;color:#1a1a2e}
+.phr .py{font-size:9px;color:#0891b2;font-weight:700}
+.phr .en{font-size:9px;color:#888;font-style:italic}
+
+/* Verb pick */
+.vbq{background:linear-gradient(135deg,#cffafe,#dcfce7);border-radius:14px;padding:14px 18px;width:100%;max-width:520px;text-align:center}
+.vbq-sentence{font-size:15px;font-weight:800;color:#1a1a2e;line-height:1.8}
+.vbq-blank{display:inline-block;min-width:64px;border-bottom:3px dashed #0891b2;color:#0891b2;padding:0 4px;font-weight:900}
+.vbq-py{font-size:9.5px;color:#7c3aed;font-weight:700;margin-top:3px}
+.vbq-en{font-size:9px;color:#888;font-style:italic;margin-top:1px}
+
+/* Real vs plushie game */
+.rp-card{background:linear-gradient(135deg,#cffafe,#dcfce7);border-radius:14px;padding:16px 22px;text-align:center;width:100%;max-width:340px}
+.rp-em{font-size:64px;line-height:1}
+.rp-hz{font-size:22px;font-weight:900;color:#1a1a2e;margin-top:6px}
+.rp-py{font-size:11px;color:#7c3aed;font-weight:700;margin-top:2px}
+.rp-en{font-size:10px;color:#888;font-style:italic;margin-top:1px}
+.rp-btns{display:flex;gap:12px;max-width:420px;width:100%}
+.rp-btn{flex:1;padding:10px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;transition:.15s;font-weight:800}
+.rp-btn:hover{transform:scale(1.04)}
+.rp-btn.real{background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d}
+.rp-btn.plush{background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#9d174d}
+.rp-hz-btn{font-size:17px;font-weight:900}
+.rp-py-btn{font-size:9px;opacity:.85}
+.rp-en-btn{font-size:9px;font-style:italic;opacity:.85}
+</style>
+</head>
+<body>
+<a class="home-btn" href="index.html" title="返回课程列表 huí dào kèchéng lièbiǎo · back to lesson list">
+  <span class="home-icon">←</span>
+  <div class="home-text">
+    <span class="home-hz">🏠 课程列表</span>
+    <span class="home-py">kèchéng lièbiǎo</span>
+    <span class="home-en">all lessons</span>
+  </div>
+</a>
+<div class="app">
+
+<!-- ════════════════ SLIDE 1: COVER ════════════════ -->
+<div class="slide active">
+<div class="cov">
+  <div style="font-size:48px">🛒🏬🧸</div>
+  <div class="cov-title">在超市购物<br><span style="font-size:18px;font-weight:700;background:none;-webkit-text-fill-color:#888">zài chāoshì gòuwù · Shopping at the Supermarket</span></div>
+  <div style="background:linear-gradient(135deg,#cffafe,#dcfce7);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:800;color:#0e7490">📅 2026年5月26日 · wǔ yuè èrshíliù rì · May 26, 2026</div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:720px">
+    <span class="ctag">🛒 超市 chāoshì · supermarket</span>
+    <span class="ctag">💰 钱 qián · money</span>
+    <span class="ctag">🍎 水果 shuǐguǒ · fruits (review)</span>
+    <span class="ctag">🥬 蔬菜 shūcài · vegetables</span>
+    <span class="ctag">🥤 饮料 yǐnliào · drinks (review)</span>
+    <span class="ctag">🐱 动物 dòngwù · animals (NEW!)</span>
+    <span class="ctag">🧸 玩偶 wán'ǒu · plushies (NEW!)</span>
+    <span class="ctag">💬 7 对话 duìhuà · dialogues</span>
+    <span class="ctag">🎮 8 游戏 yóuxì · games</span>
+    <span class="ctag">🎭 角色扮演 juésè bànyǎn · role-play</span>
+  </div>
+  <div style="background:#fff;border:2px solid #67e8f9;border-radius:14px;padding:9px 16px;font-size:11px;color:#0e7490;margin-top:8px;max-width:600px;line-height:1.6">
+    <b>💡 小贴士 xiǎo tiēshì · tip:</b><br>
+    游戏里默认只有中文。点上方按钮可以打开拼音和英文！<br>
+    <span style="color:#7c3aed;font-weight:600;font-size:10px">yóuxì lǐ mòrèn zhǐ yǒu zhōngwén. diǎn shàngfāng ànniǔ kěyǐ dǎkāi pīnyīn hé yīngwén!</span><br>
+    <span style="color:#888;font-style:italic;font-size:10px">Games show only Chinese by default. Click the buttons above to turn on pinyin and English!</span>
+  </div>
+  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 sān shí yè · 30 pages</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 2: SUPERMARKET PLACES & PEOPLE ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 1</span>
+<div class="tag ct">🛒 超市 chāoshì · supermarket — places &amp; people</div>
+<div class="title">在超市 zài chāoshì</div>
+<div class="title-en">at the supermarket — places &amp; people</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="vc bt"><div style="font-size:26px">🏬</div><div class="py">chāoshì</div><div class="hz">超市</div><div class="en">supermarket</div></div>
+  <div class="vc bp"><div style="font-size:26px">🙋‍♀️</div><div class="py">shōuyínyuán</div><div class="hz">收银员</div><div class="en">cashier (person)</div></div>
+  <div class="vc bu"><div style="font-size:26px">🧑‍💼</div><div class="py">gùkè</div><div class="hz">顾客</div><div class="en">customer</div></div>
+  <div class="vc bg"><div style="font-size:26px">💁</div><div class="py">fúwùyuán</div><div class="hz">服务员</div><div class="en">staff (review)</div></div>
+  <div class="vc bo"><div style="font-size:26px">🛒</div><div class="py">gòuwùchē</div><div class="hz">购物车</div><div class="en">shopping cart</div></div>
+  <div class="vc by"><div style="font-size:26px">🧺</div><div class="py">gòuwùlán</div><div class="hz">购物篮</div><div class="en">shopping basket</div></div>
+  <div class="vc bb"><div style="font-size:26px">📚</div><div class="py">huòjià</div><div class="hz">货架</div><div class="en">shelf</div></div>
+  <div class="vc br"><div style="font-size:26px">💳</div><div class="py">shōuyíntái</div><div class="hz">收银台</div><div class="en">checkout counter</div></div>
+</div>
+<div class="card bt" style="font-size:11px">
+  <div class="lbl ct">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.8;margin-top:3px">
+    <b>欢迎光临超市！</b><br>
+    <span class="ct" style="font-size:9.5px">huānyíng guānglín chāoshì!</span><br>
+    <span style="color:#888;font-size:10px;font-style:italic">Welcome to the supermarket!</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 3: MONEY VOCAB ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 2</span>
+<div class="tag ct">💰 钱 qián · money &amp; prices</div>
+<div class="title">钱和价钱 qián hé jiàqián</div>
+<div class="title-en">money and prices — how to talk about cost</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="vc by"><div style="font-size:26px">💰</div><div class="py">qián</div><div class="hz">钱</div><div class="en">money</div></div>
+  <div class="vc bo"><div style="font-size:26px">💴</div><div class="py">yuán</div><div class="hz">元</div><div class="en">yuan (formal)</div></div>
+  <div class="vc bp"><div style="font-size:26px">💵</div><div class="py">kuài</div><div class="hz">块</div><div class="en">kuai (spoken)</div></div>
+  <div class="vc bu"><div style="font-size:26px">🪙</div><div class="py">máo</div><div class="hz">毛</div><div class="en">10 cents (spoken)</div></div>
+  <div class="vc bg"><div style="font-size:26px">🏷️</div><div class="py">jiàqián</div><div class="hz">价钱</div><div class="en">price</div></div>
+  <div class="vc bb"><div style="font-size:26px">🧾</div><div class="py">zhàngdān</div><div class="hz">账单</div><div class="en">bill (review)</div></div>
+  <div class="vc bt"><div style="font-size:26px">🛍️</div><div class="py">dàizi</div><div class="hz">袋子</div><div class="en">bag</div></div>
+  <div class="vc br"><div style="font-size:26px">🔁</div><div class="py">zhǎo qián</div><div class="hz">找钱</div><div class="en">give change</div></div>
+</div>
+<div class="c2">
+  <div class="card bp" style="font-size:11px">
+    <div class="lbl cp">💬 问价钱 wèn jiàqián · ask the price</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>多少钱？</b> <span class="cp" style="font-size:9px">duōshǎo qián?</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">how much?</span><br>
+      <b>这个</b> <span class="price">五元 5元</span> <span class="cp" style="font-size:8.5px">wǔ yuán</span>
+    </div>
+  </div>
+  <div class="card by" style="font-size:11px">
+    <div class="lbl cy">💡 块 vs 元</div>
+    <div style="line-height:1.7;margin-top:3px">
+      <b>元 yuán</b> = on price tags, formal<br>
+      <b>块 kuài</b> = spoken, casual<br>
+      same value! 一样 yīyàng ✓
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 4: FOOD REVIEW (SUPERMARKET ITEMS) ════════════════ -->
+<div class="slide">
+<span class="badge cp">review</span>
+<div class="tag cp">🍞 复习食物 fùxí shíwù · review: food at the supermarket</div>
+<div class="title">超市的食物 chāoshì de shíwù</div>
+<div class="title-en">food at the supermarket — most are review!</div>
+<div class="c5" style="margin-bottom:6px">
+  <div class="fch bp"><span class="em">🍞</span><div class="py">miànbāo</div><div class="hz">面包</div><div class="en">bread</div></div>
+  <div class="fch bu"><span class="em">🥚</span><div class="py">jīdàn</div><div class="hz">鸡蛋</div><div class="en">eggs</div></div>
+  <div class="fch bg"><span class="em">🍚</span><div class="py">mǐfàn</div><div class="hz">米饭</div><div class="en">rice</div></div>
+  <div class="fch bo"><span class="em">🍜</span><div class="py">miàntiáo</div><div class="hz">面条</div><div class="en">noodles</div></div>
+  <div class="fch bt"><span class="em">🥟</span><div class="py">jiǎozi</div><div class="hz">饺子</div><div class="en">dumplings</div></div>
+  <div class="fch by"><span class="em">🍗</span><div class="py">jīròu</div><div class="hz">鸡肉</div><div class="en">chicken</div></div>
+  <div class="fch br"><span class="em">🥩</span><div class="py">niúròu</div><div class="hz">牛肉</div><div class="en">beef</div></div>
+  <div class="fch bb"><span class="em">🐟</span><div class="py">yú</div><div class="hz">鱼</div><div class="en">fish</div></div>
+  <div class="fch bp"><span class="em">🧀</span><div class="py">nǎilào</div><div class="hz">奶酪</div><div class="en">cheese ⭐</div></div>
+  <div class="fch bu"><span class="em">🍦</span><div class="py">bīngqílín</div><div class="hz">冰淇淋</div><div class="en">ice cream</div></div>
+</div>
+<div class="card bg" style="font-size:11px">
+  <div class="lbl cg">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>我要买一些面包和鸡蛋。</b><br>
+    <span class="cg" style="font-size:9.5px">wǒ yào mǎi yīxiē miànbāo hé jīdàn.</span><br>
+    <span style="color:#888;font-size:10px;font-style:italic">I want to buy some bread and eggs. · 一些 yīxiē = some</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 5: DRINKS REVIEW ════════════════ -->
+<div class="slide">
+<span class="badge cp">review</span>
+<div class="tag cp">🥤 复习饮料 fùxí yǐnliào · review: drinks at the supermarket</div>
+<div class="title">超市的饮料 chāoshì de yǐnliào</div>
+<div class="title-en">drinks at the supermarket — all review!</div>
+<div class="c5" style="margin-bottom:6px">
+  <div class="fch bb"><span class="em">💧</span><div class="py">shuǐ</div><div class="hz">水</div><div class="en">water</div></div>
+  <div class="fch bg"><span class="em">🥛</span><div class="py">niúnǎi</div><div class="hz">牛奶</div><div class="en">milk</div></div>
+  <div class="fch bt"><span class="em">🍵</span><div class="py">chá</div><div class="hz">茶</div><div class="en">tea</div></div>
+  <div class="fch bu"><span class="em">🧋</span><div class="py">nǎichá</div><div class="hz">奶茶</div><div class="en">milk tea</div></div>
+  <div class="fch by"><span class="em">🧃</span><div class="py">guǒzhī</div><div class="hz">果汁</div><div class="en">juice</div></div>
+  <div class="fch br"><span class="em"><span class="cancan cancan-cola"></span></span><div class="py">kělè</div><div class="hz">可乐</div><div class="en">cola</div></div>
+  <div class="fch bp"><span class="em"><span class="cancan cancan-sprite"></span></span><div class="py">xuěbì</div><div class="hz">雪碧</div><div class="en">sprite</div></div>
+  <div class="fch bo"><span class="em">🍊</span><div class="py">chéngzhī</div><div class="hz">橙汁</div><div class="en">orange juice</div></div>
+  <div class="fch bb"><span class="em"><span class="iceglass"></span></span><div class="py">bīng shuǐ</div><div class="hz">冰水</div><div class="en">ice water</div></div>
+  <div class="fch bp"><span class="em">☕</span><div class="py">kāfēi</div><div class="hz">咖啡</div><div class="en">coffee</div></div>
+</div>
+<div class="card by" style="font-size:11px;margin-top:4px">
+  <div class="lbl cy">💡 量词 liàngcí · measure words for drinks</div>
+  <div style="margin-top:2px;line-height:1.7">
+    <b>一瓶水 yī píng shuǐ</b> = 1 bottle of water · <b>一盒牛奶 yī hé niúnǎi</b> = 1 carton of milk · <b>一杯果汁 yī bēi guǒzhī</b> = 1 cup of juice
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 6: FRUITS REVIEW ════════════════ -->
+<div class="slide">
+<span class="badge cp">review</span>
+<div class="tag cp">🍎 复习水果 fùxí shuǐguǒ · review: fruits</div>
+<div class="title">水果 shuǐguǒ</div>
+<div class="title-en">fruits — all review from earlier lessons</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="vc bp"><div style="font-size:30px">🍎</div><div class="py">píngguǒ</div><div class="hz">苹果</div><div class="en">apple</div></div>
+  <div class="vc bo"><div style="font-size:30px">🍊</div><div class="py">chéngzi</div><div class="hz">橙子</div><div class="en">orange</div></div>
+  <div class="vc by"><div style="font-size:30px">🍌</div><div class="py">xiāngjiāo</div><div class="hz">香蕉</div><div class="en">banana</div></div>
+  <div class="vc bu"><div style="font-size:30px">🍇</div><div class="py">pútáo</div><div class="hz">葡萄</div><div class="en">grapes</div></div>
+  <div class="vc bp"><div style="font-size:30px">🍓</div><div class="py">cǎoméi</div><div class="hz">草莓</div><div class="en">strawberry</div></div>
+  <div class="vc bg"><div style="font-size:30px">🍉</div><div class="py">xīguā</div><div class="hz">西瓜</div><div class="en">watermelon</div></div>
+  <div class="vc bp"><div style="font-size:30px">🍑</div><div class="py">táozi</div><div class="hz">桃子</div><div class="en">peach</div></div>
+  <div class="vc bo"><div style="font-size:30px">🥭</div><div class="py">mángguǒ</div><div class="hz">芒果</div><div class="en">mango</div></div>
+</div>
+<div class="card bp" style="font-size:11px">
+  <div class="lbl cp">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>我要三个苹果和一些葡萄。</b><br>
+    <span class="cp" style="font-size:9.5px">wǒ yào sān gè píngguǒ hé yīxiē pútáo.</span><br>
+    <span style="color:#888;font-size:10px;font-style:italic">I want 3 apples and some grapes.</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 7: VEGETABLES ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 3</span>
+<div class="tag co">🥬 蔬菜 shūcài · vegetables (some new!)</div>
+<div class="title">蔬菜 shūcài</div>
+<div class="title-en">vegetables — review + new words</div>
+<div class="lbl cg" style="margin-bottom:3px;font-size:10px">✅ 复习 fùxí · review</div>
+<div class="c4" style="margin-bottom:5px">
+  <div class="vc bt"><div style="font-size:26px">🍅</div><div class="py">xīhóngshì</div><div class="hz">西红柿</div><div class="en">tomato</div></div>
+  <div class="vc by"><div style="font-size:26px">🥔</div><div class="py">tǔdòu</div><div class="hz">土豆</div><div class="en">potato</div></div>
+  <div class="vc bo"><div style="font-size:26px">🥕</div><div class="py">húluóbo</div><div class="hz">胡萝卜</div><div class="en">carrot</div></div>
+  <div class="vc bg"><div style="font-size:26px">🥬</div><div class="py">shūcài</div><div class="hz">蔬菜</div><div class="en">vegetables</div></div>
+</div>
+<div class="lbl co" style="margin-bottom:3px;margin-top:4px;font-size:10px">⭐ 新词 xīn cí · NEW words</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="vc bg"><div style="font-size:26px">🥒</div><div class="py">huángguā</div><div class="hz">黄瓜</div><div class="en">cucumber</div></div>
+  <div class="vc by"><div style="font-size:26px">🌽</div><div class="py">yùmǐ</div><div class="hz">玉米</div><div class="en">corn</div></div>
+  <div class="vc bp"><div style="font-size:26px">🍄</div><div class="py">mógu</div><div class="hz">蘑菇</div><div class="en">mushroom</div></div>
+  <div class="vc bu"><div style="font-size:26px">🥦</div><div class="py">xīlánhuā</div><div class="hz">西兰花</div><div class="en">broccoli</div></div>
+</div>
+<div class="card bp" style="font-size:11px">
+  <div class="lbl cp">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>蔬菜在哪里？</b> <span class="cp" style="font-size:9px">shūcài zài nǎli?</span> <span style="color:#888;font-size:9.5px;font-style:italic">where are the vegetables?</span><br>
+    <b>在那边。</b> <span class="cp" style="font-size:9px">zài nàbiān.</span> <span style="color:#888;font-size:9.5px;font-style:italic">over there.</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 8: ANIMALS PART 1 ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 4 · NEW</span>
+<div class="tag co">🐱 动物 (一) dòngwù · animals — pets &amp; farm</div>
+<div class="title">家养动物 jiāyǎng dòngwù</div>
+<div class="title-en">home pets &amp; farm animals — NEW words!</div>
+<div class="c5" style="margin-bottom:5px">
+  <div class="vc bp"><div style="font-size:30px">🐱</div><div class="py">māo</div><div class="hz">猫</div><div class="en">cat</div></div>
+  <div class="vc bo"><div style="font-size:30px">🐶</div><div class="py">gǒu</div><div class="hz">狗</div><div class="en">dog</div></div>
+  <div class="vc by"><div style="font-size:30px">🐰</div><div class="py">tùzi</div><div class="hz">兔子</div><div class="en">rabbit</div></div>
+  <div class="vc bb"><div style="font-size:30px">🐦</div><div class="py">niǎo</div><div class="hz">鸟</div><div class="en">bird</div></div>
+  <div class="vc bt"><div style="font-size:30px">🐟</div><div class="py">yú</div><div class="hz">鱼</div><div class="en">fish</div></div>
+</div>
+<div class="c5" style="margin-bottom:6px">
+  <div class="vc bg"><div style="font-size:30px">🐔</div><div class="py">jī</div><div class="hz">鸡</div><div class="en">chicken</div></div>
+  <div class="vc br"><div style="font-size:30px">🐮</div><div class="py">niú</div><div class="hz">牛</div><div class="en">cow</div></div>
+  <div class="vc bp"><div style="font-size:30px">🐷</div><div class="py">zhū</div><div class="hz">猪</div><div class="en">pig</div></div>
+  <div class="vc by"><div style="font-size:30px">🐑</div><div class="py">yáng</div><div class="hz">羊</div><div class="en">sheep</div></div>
+  <div class="vc bu"><div style="font-size:30px">🐴</div><div class="py">mǎ</div><div class="hz">马</div><div class="en">horse</div></div>
+</div>
+<div class="card bo" style="font-size:11px">
+  <div class="lbl co">💡 动物的家人 dòngwù de jiārén · baby animals</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>小</b> xiǎo (small/little) + 动物 = baby! &nbsp;·&nbsp; <b>小猫 xiǎo māo</b> = kitten · <b>小狗 xiǎo gǒu</b> = puppy · <b>小鸡 xiǎo jī</b> = chick
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 9: ANIMALS PART 2 ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 5 · NEW</span>
+<div class="tag co">🦁 动物 (二) dòngwù · animals — wild &amp; zoo</div>
+<div class="title">野生动物 yěshēng dòngwù</div>
+<div class="title-en">wild &amp; zoo animals — NEW words!</div>
+<div class="c4" style="margin-bottom:5px">
+  <div class="vc br"><div style="font-size:30px">🐻</div><div class="py">xióng</div><div class="hz">熊</div><div class="en">bear</div></div>
+  <div class="vc bg"><div style="font-size:30px">🐼</div><div class="py">xióngmāo</div><div class="hz">熊猫</div><div class="en">panda ⭐</div></div>
+  <div class="vc bo"><div style="font-size:30px">🐯</div><div class="py">lǎohǔ</div><div class="hz">老虎</div><div class="en">tiger</div></div>
+  <div class="vc by"><div style="font-size:30px">🦁</div><div class="py">shīzi</div><div class="hz">狮子</div><div class="en">lion</div></div>
+</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="vc bb"><div style="font-size:30px">🐘</div><div class="py">dà xiàng</div><div class="hz">大象</div><div class="en">elephant</div></div>
+  <div class="vc bu"><div style="font-size:30px">🐵</div><div class="py">hóuzi</div><div class="hz">猴子</div><div class="en">monkey</div></div>
+  <div class="vc bt"><div style="font-size:30px">🦒</div><div class="py">chángjǐnglù</div><div class="hz">长颈鹿</div><div class="en">giraffe</div></div>
+  <div class="vc bp"><div style="font-size:30px">🦓</div><div class="py">bānmǎ</div><div class="hz">斑马</div><div class="en">zebra</div></div>
+</div>
+<div class="card bg" style="font-size:11px">
+  <div class="lbl cg">⭐ 熊猫 xióngmāo · the panda</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>熊 xióng</b> = bear · <b>猫 māo</b> = cat → put together: <b>熊猫 xióngmāo</b> = "bear-cat" = panda! 🐼<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">China's national animal! 中国的国宝 Zhōngguó de guóbǎo</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 10: PLUSHIES (ANIMAL + 玩偶) ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 6 · NEW</span>
+<div class="tag co">🧸 玩偶 wán'ǒu · plushies — animals + 玩偶!</div>
+<div class="title">动物玩偶 dòngwù wán'ǒu</div>
+<div class="title-en">animal plushies — say the animal + 玩偶 wán'ǒu!</div>
+<div class="card by" style="font-size:11px;margin-bottom:6px">
+  <div class="lbl cy">🎯 公式 gōngshì · the formula</div>
+  <div style="line-height:1.7;margin-top:3px">
+    🐻 动物 dòngwù (animal) <b> + 玩偶 wán'ǒu</b> = 🧸 plushie of that animal!<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">Add the word 玩偶 (wán'ǒu = doll/plushie) after the animal name.</span>
+  </div>
+</div>
+<div class="c2" style="gap:6px;flex:1">
+  <div class="combo">
+    <div class="real"><div class="lbl-r">真的 zhēn de · real</div><div class="em">🐻</div><div class="hz">熊</div><div class="py">xióng</div><div class="en">bear</div></div>
+    <div class="arr">→</div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu · plush</div><div class="em">🧸</div><div class="hz">熊玩偶</div><div class="py">xióng wán'ǒu</div><div class="en">teddy bear</div></div>
+  </div>
+  <div class="combo">
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐼</div><div class="hz">熊猫</div><div class="py">xióngmāo</div><div class="en">panda</div></div>
+    <div class="arr">→</div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">熊猫玩偶</div><div class="py">xióngmāo wán'ǒu</div><div class="en">panda plushie</div></div>
+  </div>
+  <div class="combo">
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐱</div><div class="hz">猫</div><div class="py">māo</div><div class="en">cat</div></div>
+    <div class="arr">→</div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">猫玩偶</div><div class="py">māo wán'ǒu</div><div class="en">cat plushie</div></div>
+  </div>
+  <div class="combo">
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐰</div><div class="hz">兔子</div><div class="py">tùzi</div><div class="en">rabbit</div></div>
+    <div class="arr">→</div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">兔子玩偶</div><div class="py">tùzi wán'ǒu</div><div class="en">bunny plushie</div></div>
+  </div>
+  <div class="combo">
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐶</div><div class="hz">狗</div><div class="py">gǒu</div><div class="en">dog</div></div>
+    <div class="arr">→</div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">狗玩偶</div><div class="py">gǒu wán'ǒu</div><div class="en">puppy plushie</div></div>
+  </div>
+  <div class="combo">
+    <div class="real"><div class="lbl-r">真的 zhēn de</div><div class="em">🐘</div><div class="hz">大象</div><div class="py">dà xiàng</div><div class="en">elephant</div></div>
+    <div class="arr">→</div>
+    <div class="plush"><div class="lbl-p">玩偶 wán'ǒu</div><div class="em">🧸</div><div class="hz">大象玩偶</div><div class="py">dà xiàng wán'ǒu</div><div class="en">elephant plushie</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 11: BUYING SENTENCE PATTERNS ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 1</span>
+<div class="tag cg">🛒 购物句型 gòuwù jùxíng · shopping sentence patterns</div>
+<div class="title">怎么买东西 zěnme mǎi dōngxi</div>
+<div class="title-en">how to buy things — useful sentence patterns</div>
+<div class="two" style="gap:7px">
+  <div>
+    <div class="sp bt">
+      <div class="pat">我要买 ___ 。</div><div class="patpy">wǒ yào mǎi ___ .</div>
+      <div class="paten">I want to buy ___ .</div>
+      <div class="ex ct">我要买一些水果。<span class="expy"> yīxiē shuǐguǒ</span></div><div class="exen">I want to buy some fruit.</div>
+    </div>
+    <div class="sp bp">
+      <div class="pat">我想买 ___ 。</div><div class="patpy">wǒ xiǎng mǎi ___ .</div>
+      <div class="paten">I'd like to buy ___ .</div>
+      <div class="ex cp">我想买一个熊玩偶！<span class="expy"> xióng wán'ǒu</span></div><div class="exen">I want to buy a teddy bear!</div>
+    </div>
+    <div class="sp bu">
+      <div class="pat">请给我 ___ 。</div><div class="patpy">qǐng gěi wǒ ___ .</div>
+      <div class="paten">Please give me ___ .</div>
+      <div class="ex cu">请给我两瓶牛奶。<span class="expy"> liǎng píng niúnǎi</span></div><div class="exen">Please give me 2 bottles of milk.</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bg">
+      <div class="pat">___ 在哪里？</div><div class="patpy">___ zài nǎli?</div>
+      <div class="paten">Where is ___ ?</div>
+      <div class="ex cg">玩偶在哪里？<span class="expy"> wán'ǒu</span></div><div class="exen">Where are the plushies?</div>
+    </div>
+    <div class="sp bo">
+      <div class="pat">我看看 ___ 。</div><div class="patpy">wǒ kàn kàn ___ .</div>
+      <div class="paten">Let me look at ___ .</div>
+      <div class="ex co">我看看那个熊猫玩偶。<span class="expy"> nàge xióngmāo</span></div><div class="exen">Let me look at that panda plushie.</div>
+    </div>
+    <div class="sp by">
+      <div class="pat">一共 ___ 块。</div><div class="patpy">yīgòng ___ kuài .</div>
+      <div class="paten">Total: ___ kuai.</div>
+      <div class="ex cy">一共五十块。<span class="expy"> wǔshí kuài</span></div><div class="exen">Total: 50 kuai.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 12: PRICES & NUMBERS REVIEW ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 2</span>
+<div class="tag cg">💰 价钱和数字 jiàqián hé shùzì · prices &amp; numbers</div>
+<div class="title">多少钱？duōshǎo qián?</div>
+<div class="title-en">how much? — review numbers from lesson 1!</div>
+<div class="c4" style="margin-bottom:5px;gap:4px">
+  <div class="vc bt"><div style="font-size:14px;font-weight:900">1 元</div><div class="py">yī yuán</div><div class="hz">一元 / 一块</div><div class="en">1 yuan</div></div>
+  <div class="vc bp"><div style="font-size:14px;font-weight:900">5 元</div><div class="py">wǔ yuán</div><div class="hz">五元 / 五块</div><div class="en">5 yuan</div></div>
+  <div class="vc bg"><div style="font-size:14px;font-weight:900">10 元</div><div class="py">shí yuán</div><div class="hz">十元 / 十块</div><div class="en">10 yuan</div></div>
+  <div class="vc by"><div style="font-size:14px;font-weight:900">20 元</div><div class="py">èrshí yuán</div><div class="hz">二十元</div><div class="en">20 yuan</div></div>
+  <div class="vc bo"><div style="font-size:14px;font-weight:900">50 元</div><div class="py">wǔshí yuán</div><div class="hz">五十元</div><div class="en">50 yuan</div></div>
+  <div class="vc bu"><div style="font-size:14px;font-weight:900">100 元</div><div class="py">yībǎi yuán</div><div class="hz">一百元</div><div class="en">100 yuan</div></div>
+  <div class="vc bb"><div style="font-size:14px;font-weight:900">200 元</div><div class="py">èrbǎi yuán</div><div class="hz">两百元</div><div class="en">200 yuan</div></div>
+  <div class="vc br"><div style="font-size:14px;font-weight:900">500 元</div><div class="py">wǔbǎi yuán</div><div class="hz">五百元</div><div class="en">500 yuan</div></div>
+</div>
+<div class="c2">
+  <div class="card bg" style="font-size:11px">
+    <div class="lbl cg">💬 便宜 vs 贵</div>
+    <div style="line-height:1.7;margin-top:3px">
+      <b>便宜 piányi</b> = cheap 😊<br>
+      <b>贵 guì</b> / <b>太贵了 tài guì le</b> = (too) expensive 😱
+    </div>
+  </div>
+  <div class="card bp" style="font-size:11px">
+    <div class="lbl cp">💯 example</div>
+    <div style="line-height:1.7;margin-top:3px">
+      苹果 píngguǒ <span class="price">2元</span> 一个 yī gè<br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">apples — 2 yuan each</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 13: KEY VERBS ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 3</span>
+<div class="tag cg">🔑 关键动词 guānjiàn dòngcí · key verbs for shopping</div>
+<div class="title">购物的动词 gòuwù de dòngcí</div>
+<div class="title-en">verbs you'll use at the supermarket</div>
+<div class="c2" style="gap:7px">
+  <div class="card bt" style="font-size:11px">
+    <div class="lbl ct" style="font-size:15px">买 <span style="color:#aaa;font-size:10px">mǎi</span> · to buy</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>我要买苹果。</b><br>
+      <span class="ct" style="font-size:9px">wǒ yào mǎi píngguǒ.</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">I want to buy apples.</span>
+    </div>
+  </div>
+  <div class="card bo" style="font-size:11px">
+    <div class="lbl co" style="font-size:15px">卖 <span style="color:#aaa;font-size:10px">mài</span> · to sell</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>这里卖玩偶吗？</b><br>
+      <span class="co" style="font-size:9px">zhèlǐ mài wán'ǒu ma?</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">Do you sell plushies here?</span>
+    </div>
+  </div>
+  <div class="card bp" style="font-size:11px">
+    <div class="lbl cp" style="font-size:15px">想 <span style="color:#aaa;font-size:10px">xiǎng</span> · would like to</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>我想买一个熊猫玩偶。</b><br>
+      <span class="cp" style="font-size:9px">wǒ xiǎng mǎi yī gè xióngmāo wán'ǒu.</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">I'd like to buy a panda plushie.</span>
+    </div>
+  </div>
+  <div class="card bu" style="font-size:11px">
+    <div class="lbl cu" style="font-size:15px">找 <span style="color:#aaa;font-size:10px">zhǎo</span> · look for / give change</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>找你五块。</b><br>
+      <span class="cu" style="font-size:9px">zhǎo nǐ wǔ kuài.</span><br>
+      <span style="color:#888;font-size:9.5px;font-style:italic">Here's 5 kuai change.</span>
+    </div>
+  </div>
+  <div class="card by" style="grid-column:span 2;font-size:11px">
+    <div class="lbl cy" style="font-size:15px">付钱 <span style="color:#aaa;font-size:10px">fù qián</span> · to pay</div>
+    <div style="line-height:1.8;margin-top:3px">
+      <b>我用手机付钱。</b> <span class="cy" style="font-size:9px">wǒ yòng shǒujī fù qián.</span> <span style="color:#888;font-size:9.5px;font-style:italic">I'll pay with my phone.</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 14: 🎮 GAME 1 — ANIMAL QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 1</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">动物问答 dòngwù wèndá</div>
+<div class="title-en">animal quiz — see the animal, pick the Chinese name!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="aqs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="aqq">1</span>/10</div>
+    <button class="gbtn" onclick="initAq()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="aqem" style="font-size:54px">🐱</div>
+    <div class="qqlbl">这是什么动物？<span class="gen">What animal is this?</span></div>
+  </div>
+  <div class="qopts" id="aqo"></div>
+  <div class="gres" id="aqr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 15: 🎮 GAME 2 — PLUSHIE MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 2</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">玩偶配对 wán'ǒu pèiduì</div>
+<div class="title-en">plushie match — see the animal, pick its plushie name!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="pms">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="pmq">1</span>/8</div>
+    <button class="gbtn" onclick="initPm()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:38px" id="pmem">🐻</div>
+    <div class="qqmain" id="pmhz">熊</div>
+    <div class="gpy" id="pmpy" style="text-align:center;color:#7c3aed;font-weight:700">xióng</div>
+    <div class="qqlbl">→ 🧸 它的玩偶叫什么？ <span class="gen">What is its plushie called?</span></div>
+  </div>
+  <div class="qopts" id="pmo"></div>
+  <div class="gres" id="pmr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 16: DIALOGUE 1 — ARRIVAL ════════════════ -->
+<div class="slide">
+<span class="badge cb">对话 1</span>
+<div class="tag cb">💬 对话 (一) duìhuà · arriving at the supermarket</div>
+<div class="title">场景一：到超市 chǎngjǐng yī</div>
+<div class="title-en">scene 1: arriving at the supermarket</div>
+<div class="dlg">
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈 māma · mum</div>
+    <div class="hz">Elana，我们去超市买东西。</div>
+    <div class="py">Elana, wǒmen qù chāoshì mǎi dōngxi.</div>
+    <div class="en">Elana, let's go to the supermarket to buy things.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🤩</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">好！我要一辆购物车。</div>
+    <div class="py">hǎo! wǒ yào yī liàng gòuwùchē.</div>
+    <div class="en">Okay! I want a shopping cart.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">收银员 shōuyínyuán · cashier</div>
+    <div class="hz">欢迎光临！请进。</div>
+    <div class="py">huānyíng guānglín! qǐng jìn.</div>
+    <div class="en">Welcome! Please come in.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">您好！</div>
+    <div class="py">nín hǎo!</div>
+    <div class="en">Hello!</div></div></div>
+</div>
+<div class="card by" style="font-size:10.5px;margin-top:5px">
+  <div class="lbl cy">🔑 关键词 guānjiàn cí · key words</div>
+  <div style="margin-top:2px;line-height:1.6"><b>买东西 mǎi dōngxi</b> = buy things (literal "buy stuff") · <b>一辆 yī liàng</b> = measure word for vehicles/carts</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 17: DIALOGUE 2 — WHERE IS IT? ════════════════ -->
+<div class="slide">
+<span class="badge cb">对话 2</span>
+<div class="tag cb">💬 对话 (二) · asking where things are 问路</div>
+<div class="title">场景二：在哪里？chǎngjǐng èr</div>
+<div class="title-en">scene 2: where is it? — asking directions</div>
+<div class="dlg">
+  <div class="dlg-turn right"><div class="avi c">🤔</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">请问，水果在哪里？</div>
+    <div class="py">qǐng wèn, shuǐguǒ zài nǎli?</div>
+    <div class="en">Excuse me, where are the fruits?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员 fúwùyuán · staff</div>
+    <div class="hz">水果在那边。</div>
+    <div class="py">shuǐguǒ zài nàbiān.</div>
+    <div class="en">The fruits are over there.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">谢谢！那玩偶呢？</div>
+    <div class="py">xièxie! nà wán'ǒu ne?</div>
+    <div class="en">Thanks! What about plushies?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+    <div class="hz">玩偶在二楼。</div>
+    <div class="py">wán'ǒu zài èr lóu.</div>
+    <div class="en">Plushies are on the second floor.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🎉</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">太好了！谢谢您！</div>
+    <div class="py">tài hǎo le! xièxie nín!</div>
+    <div class="en">Great! Thank you!</div></div></div>
+</div>
+<div class="card by" style="font-size:10.5px;margin-top:5px">
+  <div class="lbl cy">🔑 关键词</div>
+  <div style="margin-top:2px;line-height:1.6"><b>那边 nàbiān</b> = over there · <b>那 ___ 呢? nà ___ ne?</b> = what about ___ ? · <b>二楼 èr lóu</b> = 2nd floor</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 18: DIALOGUE 3 — ASKING PRICE ════════════════ -->
+<div class="slide">
+<span class="badge cb">对话 3</span>
+<div class="tag cb">💬 对话 (三) · asking price 问价钱</div>
+<div class="title">场景三：多少钱？chǎngjǐng sān</div>
+<div class="title-en">scene 3: how much? — asking the price</div>
+<div class="dlg">
+  <div class="dlg-turn right"><div class="avi c">🍎</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">请问，这个苹果多少钱？</div>
+    <div class="py">qǐng wèn, zhège píngguǒ duōshǎo qián?</div>
+    <div class="en">Excuse me, how much is this apple?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+    <div class="hz">苹果两块一个。</div>
+    <div class="py">píngguǒ liǎng kuài yī gè.</div>
+    <div class="en">Apples are 2 kuai each.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🤔</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">那香蕉呢？</div>
+    <div class="py">nà xiāngjiāo ne?</div>
+    <div class="en">What about bananas?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+    <div class="hz">香蕉五块一斤。</div>
+    <div class="py">xiāngjiāo wǔ kuài yī jīn.</div>
+    <div class="en">Bananas are 5 kuai per jin (≈ pound).</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">不贵！我要三个苹果。</div>
+    <div class="py">bù guì! wǒ yào sān gè píngguǒ.</div>
+    <div class="en">Not expensive! I want 3 apples.</div></div></div>
+</div>
+<div class="card by" style="font-size:10px;margin-top:5px">
+  <div class="lbl cy">🔑 量词 liàngcí</div>
+  <div style="margin-top:1px"><b>一斤 yī jīn</b> = about 500g (≈ 1 pound) — common for buying veggies &amp; fruit by weight in China!</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 19: 🎮 GAME 3 — PRICE QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 3</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">价钱问答 jiàqián wèndá</div>
+<div class="title-en">price quiz — read the price, pick the Chinese!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="prs">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="prq">1</span>/8</div>
+    <button class="gbtn" onclick="initPr()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="prnum" style="font-size:48px">25 元</div>
+    <div class="qqlbl">这个价钱怎么念？<span class="gen">How do we read this price?</span></div>
+  </div>
+  <div class="qopts" id="pro"></div>
+  <div class="gres" id="prr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 20: DIALOGUE 4 — BUYING FRUITS & DRINKS ════════════════ -->
+<div class="slide">
+<span class="badge cb">对话 4</span>
+<div class="tag cb">💬 对话 (四) · buying fruits &amp; drinks 买东西</div>
+<div class="title">场景四：买水果和饮料 chǎngjǐng sì</div>
+<div class="title-en">scene 4: buying fruits and drinks</div>
+<div class="dlg">
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈 māma · mum</div>
+    <div class="hz">我们要买什么？</div>
+    <div class="py">wǒmen yào mǎi shénme?</div>
+    <div class="en">What should we buy?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😋</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">三个苹果、两个橙子和一些葡萄。</div>
+    <div class="py">sān gè píngguǒ, liǎng gè chéngzi hé yīxiē pútáo.</div>
+    <div class="en">3 apples, 2 oranges, and some grapes.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+    <div class="hz">饮料呢？</div>
+    <div class="py">yǐnliào ne?</div>
+    <div class="en">And drinks?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🥛</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">一盒牛奶和一瓶橙汁！</div>
+    <div class="py">yī hé niúnǎi hé yī píng chéngzhī!</div>
+    <div class="en">A carton of milk and a bottle of orange juice!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+    <div class="hz">好的！把它们放进购物车。</div>
+    <div class="py">hǎo de! bǎ tāmen fàng jìn gòuwùchē.</div>
+    <div class="en">Okay! Put them in the cart.</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 21: DIALOGUE 5 — BUYING A PLUSHIE ════════════════ -->
+<div class="slide">
+<span class="badge cb">对话 5</span>
+<div class="tag cb">💬 对话 (五) · buying a plushie 买玩偶</div>
+<div class="title">场景五：买熊猫玩偶 chǎngjǐng wǔ</div>
+<div class="title-en">scene 5: buying a panda plushie!</div>
+<div class="dlg">
+  <div class="dlg-turn right"><div class="avi c">🤩</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">妈妈，妈妈！我想买这个熊猫玩偶！</div>
+    <div class="py">māma, māma! wǒ xiǎng mǎi zhège xióngmāo wán'ǒu!</div>
+    <div class="en">Mum, mum! I want to buy this panda plushie!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈 māma · mum</div>
+    <div class="hz">让我看看 — 它多少钱？</div>
+    <div class="py">ràng wǒ kàn kàn — tā duōshǎo qián?</div>
+    <div class="en">Let me see — how much is it?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">服务员</div>
+    <div class="hz">这个熊猫玩偶三十五元。</div>
+    <div class="py">zhège xióngmāo wán'ǒu sānshíwǔ yuán.</div>
+    <div class="en">This panda plushie is 35 yuan.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+    <div class="hz">不贵，可以！</div>
+    <div class="py">bù guì, kěyǐ!</div>
+    <div class="en">Not expensive, okay!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🥰</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">谢谢妈妈！我太喜欢它了！</div>
+    <div class="py">xièxie māma! wǒ tài xǐhuān tā le!</div>
+    <div class="en">Thank you mum! I love it so much!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 22: 🎮 GAME 4 — MIXED ITEM QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 4</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">超市混合问答 chāoshì hùnhé wèndá</div>
+<div class="title-en">supermarket mixed quiz — food, drinks, animals, plushies!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="mxs">0</span>/12</div>
+    <div class="gsbar">题 tí · q.<span id="mxq">1</span>/12</div>
+    <button class="gbtn" onclick="initMx()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="mxem" style="font-size:54px">🍎</div>
+    <div class="qqlbl">这是什么？<span class="gen">What is this?</span></div>
+  </div>
+  <div class="qopts" id="mxo"></div>
+  <div class="gres" id="mxr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 23: DIALOGUE 6 — AT THE CHECKOUT ════════════════ -->
+<div class="slide">
+<span class="badge cb">对话 6</span>
+<div class="tag cb">💬 对话 (六) · at the checkout 在收银台</div>
+<div class="title">场景六：在收银台 chǎngjǐng liù</div>
+<div class="title-en">scene 6: at the checkout counter</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">收银员 shōuyínyuán · cashier</div>
+    <div class="hz">您好！您买了几样东西？</div>
+    <div class="py">nín hǎo! nín mǎi le jǐ yàng dōngxi?</div>
+    <div class="en">Hello! How many items did you buy?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+    <div class="hz">水果、牛奶、橙汁，还有一个熊猫玩偶。</div>
+    <div class="py">shuǐguǒ, niúnǎi, chéngzhī, hái yǒu yī gè xióngmāo wán'ǒu.</div>
+    <div class="en">Fruits, milk, orange juice, and a panda plushie.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">收银员</div>
+    <div class="hz">一共六十二元。</div>
+    <div class="py">yīgòng liùshí'èr yuán.</div>
+    <div class="en">Total: 62 yuan.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+    <div class="hz">好的，给您一百块。</div>
+    <div class="py">hǎo de, gěi nín yībǎi kuài.</div>
+    <div class="en">Okay, here's 100 kuai.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">收银员</div>
+    <div class="hz">找您三十八块。</div>
+    <div class="py">zhǎo nín sānshíbā kuài.</div>
+    <div class="en">Here's your change — 38 kuai.</div></div></div>
+</div>
+<div class="card by" style="font-size:10px;margin-top:4px">
+  <div class="lbl cy">🔑 key</div>
+  <div style="margin-top:1px"><b>几样东西? jǐ yàng dōngxi?</b> = how many items? · <b>样 yàng</b> = kind/type · <b>找您 X 块</b> = your change is X kuai</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 24: DIALOGUE 7 — GOODBYE ════════════════ -->
+<div class="slide">
+<span class="badge cb">对话 7</span>
+<div class="tag cb">💬 对话 (七) · saying goodbye 再见</div>
+<div class="title">场景七：再见 chǎngjǐng qī</div>
+<div class="title-en">scene 7: leaving the supermarket</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">收银员 shōuyínyuán · cashier</div>
+    <div class="hz">这是您的袋子。</div>
+    <div class="py">zhè shì nín de dàizi.</div>
+    <div class="en">Here is your bag.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">谢谢！</div>
+    <div class="py">xièxie!</div>
+    <div class="en">Thank you!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">收银员</div>
+    <div class="hz">谢谢光临！欢迎下次再来！</div>
+    <div class="py">xièxie guānglín! huānyíng xià cì zài lái!</div>
+    <div class="en">Thanks for coming! Welcome back next time!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🧸</div><div class="bub c"><div class="who" style="text-align:right">Elana</div>
+    <div class="hz">再见！我会带着熊猫玩偶来！</div>
+    <div class="py">zàijiàn! wǒ huì dài zhe xióngmāo wán'ǒu lái!</div>
+    <div class="en">Goodbye! I'll bring my panda plushie!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">收银员</div>
+    <div class="hz">哈哈，好的！再见！</div>
+    <div class="py">hāha, hǎo de! zàijiàn!</div>
+    <div class="en">Haha, okay! Goodbye!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 25: 🎮 GAME 5 — MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 5</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">动物记忆配对 dòngwù jìyì pèiduì</div>
+<div class="title-en">animal memory match — flip cards to find pairs!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 pèiduì · matches <span id="mm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 fān · flips <span id="mf">0</span></div>
+    <button class="gbtn" onclick="initMem()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="mgrid" id="mgrid"></div>
+  <div class="gres" id="mres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 26: 🎮 GAME 6 — FILL IN BLANKS ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 6</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">购物填空 gòuwù tiánkòng</div>
+<div class="title-en">shopping fill-in-blank — click words to complete!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 关 guān · level <span id="fbround">1</span>/3</div>
+    <button class="gbtn" onclick="initFb()">↺ 重来 chónglái · restart</button>
+    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">下一关 xià yī guān · next →</button>
+  </div>
+  <div class="fib" id="fbwrap"></div>
+  <div class="gres" id="fbres" style="font-size:13px"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 27: 🎮 GAME 7 — VERB PICK ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 7</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">动词配对 dòngcí pèiduì</div>
+<div class="title-en">verb match — which verb fits the sentence?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="vbs">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="vbq">1</span>/8</div>
+    <button class="gbtn" onclick="initVb()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="vbq">
+    <div class="vbq-sentence" id="vbsent">我要 <span class="vbq-blank">___</span> 一个玩偶。</div>
+    <div class="vbq-py gpy" id="vbpy">wǒ yào ___ yī gè wán'ǒu.</div>
+    <div class="vbq-en gen" id="vben">I want to ___ a plushie.</div>
+  </div>
+  <div class="qopts three" id="vbo" style="max-width:440px"></div>
+  <div class="gres" id="vbr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 28: 🎮 GAME 8 — REAL OR PLUSHIE ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 8</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">真的还是玩偶？zhēn de háishi wán'ǒu?</div>
+<div class="title-en">real animal or plushie? — click the right answer!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="rps">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="rpq">1</span>/10</div>
+    <button class="gbtn" onclick="initRp()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="rp-card" id="rpcard">
+    <div class="rp-em" id="rpem">🐻</div>
+    <div class="rp-hz" id="rphz">熊</div>
+    <div class="rp-py gpy" id="rppy">xióng</div>
+    <div class="rp-en gen" id="rpen">bear</div>
+  </div>
+  <div class="rp-btns">
+    <button class="rp-btn real" onclick="rpPick('real')">
+      <div class="rp-hz-btn">🐾 真的动物</div>
+      <div class="rp-py-btn gpy">zhēn de dòngwù</div>
+      <div class="rp-en-btn gen">real animal</div>
+    </button>
+    <button class="rp-btn plush" onclick="rpPick('plush')">
+      <div class="rp-hz-btn">🧸 玩偶</div>
+      <div class="rp-py-btn gpy">wán'ǒu</div>
+      <div class="rp-en-btn gen">plushie</div>
+    </button>
+  </div>
+  <div class="gres" id="rpr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 29: ROLE-PLAY (FULL SHOPPING) ════════════════ -->
+<div class="slide">
+<span class="badge cg">角色扮演</span>
+<div class="tag cg">🎭 角色扮演 juésè bànyǎn · role-play</div>
+<div class="title">Elana和妈妈逛超市 Elana hé māma guàng chāoshì</div>
+<div class="title-en">Elana and Mum shopping at the supermarket — full role-play!</div>
+<div class="dlg" style="gap:3px">
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">欢迎光临！</div><div class="py">huānyíng guānglín!</div><div class="en">Welcome!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">您好！请问水果在哪里？</div><div class="py">nín hǎo! qǐng wèn shuǐguǒ zài nǎli?</div><div class="en">Hello! Where are the fruits?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">在那边。</div><div class="py">zài nàbiān.</div><div class="en">Over there.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🍎</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">我要三个苹果和一些葡萄。</div><div class="py">wǒ yào sān gè píngguǒ hé yīxiē pútáo.</div><div class="en">I want 3 apples and some grapes.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">再买一盒牛奶和一瓶橙汁。</div><div class="py">zài mǎi yī hé niúnǎi hé yī píng chéngzhī.</div><div class="en">Also buy a carton of milk and a bottle of orange juice.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🤩</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">妈妈，我想买这个熊猫玩偶！</div><div class="py">māma, wǒ xiǎng mǎi zhège xióngmāo wán'ǒu!</div><div class="en">Mum, I want to buy this panda plushie!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">多少钱？</div><div class="py">duōshǎo qián?</div><div class="en">How much?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">熊猫玩偶三十五元。一共六十二元。</div><div class="py">xióngmāo wán'ǒu sānshíwǔ yuán. yīgòng liùshí'èr yuán.</div><div class="en">The plushie is 35 yuan. Total: 62 yuan.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">给您一百块。</div><div class="py">gěi nín yībǎi kuài.</div><div class="en">Here's 100 kuai.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">找您三十八块。谢谢光临！</div><div class="py">zhǎo nín sānshíbā kuài. xièxie guānglín!</div><div class="en">Your change: 38 kuai. Thanks for coming!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🧸</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">谢谢！再见！</div><div class="py">xièxie! zàijiàn!</div><div class="en">Thanks! Goodbye!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 30: END CELEBRATION ════════════════ -->
+<div class="slide">
+<div class="endb">
+  <div style="font-size:54px">🛒🧸🎉</div>
+  <div style="font-size:30px;font-weight:900;background:linear-gradient(135deg,#0891b2,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Elana，你会逛超市了！</div>
+  <div style="font-size:14px;color:#0891b2;font-weight:700">Elana, nǐ huì guàng chāoshì le!</div>
+  <div style="font-size:12px;color:#888;font-style:italic">Elana, you can go supermarket shopping now!</div>
+  <div style="font-size:11px;color:#aaa;margin-top:4px;line-height:1.6">
+    下次去超市，记得用中文！<br>
+    <span style="color:#0891b2;font-weight:700">xià cì qù chāoshì, jìde yòng zhōngwén!</span><br>
+    <span style="font-style:italic">Next time at the supermarket, remember to speak Chinese!</span>
+  </div>
+  <div class="cklist">
+    <span class="ck">✅ 超市词汇 chāoshì cíhuì · supermarket words</span>
+    <span class="ck">✅ 钱 qián · money</span>
+    <span class="ck">✅ 食物 shíwù · food (review)</span>
+    <span class="ck">✅ 饮料 yǐnliào · drinks (review)</span>
+    <span class="ck">✅ 水果 shuǐguǒ · fruits (review)</span>
+    <span class="ck">✅ 蔬菜 shūcài · vegetables</span>
+    <span class="ck">⭐ 动物 dòngwù · animals (NEW)</span>
+    <span class="ck">⭐ 玩偶 wán'ǒu · plushies (NEW)</span>
+    <span class="ck">✅ 7 个对话 duìhuà · 7 dialogues</span>
+    <span class="ck">✅ 角色扮演 juésè bànyǎn · role-play</span>
+    <span class="ck">🎮 动物问答 dòngwù wèndá · animal quiz</span>
+    <span class="ck">🎮 玩偶配对 wán'ǒu pèiduì · plushie match</span>
+    <span class="ck">🎮 价钱问答 jiàqián wèndá · price quiz</span>
+    <span class="ck">🎮 混合问答 hùnhé wèndá · mixed quiz</span>
+    <span class="ck">🎮 记忆配对 jìyì pèiduì · memory match</span>
+    <span class="ck">🎮 填空 tiánkòng · fill-in-blank</span>
+    <span class="ck">🎮 动词配对 dòngcí pèiduì · verb match</span>
+    <span class="ck">🎮 真的还是玩偶 zhēn de háishi wán'ǒu · real or plush</span>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:6px">
+    太厉害了！tài lìhai le! · so amazing! · 加油！jiā yóu! · keep going! 💪
+  </div>
+  <div style="font-size:11px;color:#aaa">📅 2026年5月26日 · wǔ yuè èrshíliù rì · May 26, 2026</div>
+  <a href="index.html" style="background:linear-gradient(135deg,#0891b2,#16a34a);color:#fff;padding:8px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:12px;margin-top:6px">← 回到课程列表 huí dào kèchéng lièbiǎo · back to lessons</a>
+</div>
+</div>
+
+<div class="nav">
+  <button class="nbtn" onclick="go(cur-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nbtn" onclick="go(cur+1)">→</button>
+</div>
+</div>
+
+<script>
+// ── Navigation ──
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('dots');
+let cur=0;
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>go(i);dotsEl.appendChild(d);
+});
+function go(n){
+  slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');
+  cur=(n+slides.length)%slides.length;
+  slides[cur].classList.add('active');dotsEl.children[cur].classList.add('active');
+  if(GI[cur])GI[cur]();
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);
+});
+const GI={};
+
+// ── Global toggles ──
+let showPY=false,showEN=false;
+function tPY(){
+  showPY=!showPY;
+  document.body.classList.toggle('show-py',showPY);
+  document.querySelectorAll('.tgl').forEach(b=>{
+    if(b.textContent.includes('拼音')){b.textContent=showPY?'拼音 pīnyīn ✓':'拼音 pīnyīn';b.classList.toggle('on',showPY);}
+  });
+}
+function tEN(){
+  showEN=!showEN;
+  document.body.classList.toggle('show-en',showEN);
+  document.querySelectorAll('.tgl').forEach(b=>{
+    if(b.textContent.includes('English')){b.textContent=showEN?'English ✓':'English';b.classList.toggle('on',showEN);}
+  });
+}
+
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function $id(id){return document.getElementById(id)}
+
+// ════ GAME 1: Animal Quiz (slide 14, index 13) ════
+const ANI=[
+  {em:'🐱',hz:'猫',py:'māo',en:'cat'},
+  {em:'🐶',hz:'狗',py:'gǒu',en:'dog'},
+  {em:'🐰',hz:'兔子',py:'tùzi',en:'rabbit'},
+  {em:'🐦',hz:'鸟',py:'niǎo',en:'bird'},
+  {em:'🐟',hz:'鱼',py:'yú',en:'fish'},
+  {em:'🐔',hz:'鸡',py:'jī',en:'chicken'},
+  {em:'🐮',hz:'牛',py:'niú',en:'cow'},
+  {em:'🐷',hz:'猪',py:'zhū',en:'pig'},
+  {em:'🐑',hz:'羊',py:'yáng',en:'sheep'},
+  {em:'🐴',hz:'马',py:'mǎ',en:'horse'},
+  {em:'🐻',hz:'熊',py:'xióng',en:'bear'},
+  {em:'🐼',hz:'熊猫',py:'xióngmāo',en:'panda'},
+  {em:'🐯',hz:'老虎',py:'lǎohǔ',en:'tiger'},
+  {em:'🦁',hz:'狮子',py:'shīzi',en:'lion'},
+  {em:'🐘',hz:'大象',py:'dà xiàng',en:'elephant'},
+  {em:'🐵',hz:'猴子',py:'hóuzi',en:'monkey'},
+  {em:'🦒',hz:'长颈鹿',py:'chángjǐnglù',en:'giraffe'},
+  {em:'🦓',hz:'斑马',py:'bānmǎ',en:'zebra'},
+];
+let aqScore=0,aqQ=0,aqItems=[];
+function initAq(){
+  aqScore=0;aqQ=0;aqItems=shuffle(ANI).slice(0,10);
+  $id('aqs').textContent='0';$id('aqq').textContent='1';$id('aqr').style.display='none';
+  showAq();
+}
+function showAq(){
+  if(aqQ>=10){
+    const r=$id('aqr');r.style.display='block';
+    r.textContent='🎉 '+aqScore+'/10 — '+(aqScore>=9?'完美！wánměi! · perfect!':aqScore>=7?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
+    $id('aqo').innerHTML='';return;
+  }
+  const it=aqItems[aqQ];
+  $id('aqem').textContent=it.em;$id('aqq').textContent=aqQ+1;
+  const wrong=ANI.filter(o=>o.hz!==it.hz);
+  const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('aqo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');aqScore++;$id('aqs').textContent=aqScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      aqQ++;setTimeout(showAq,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[13]=initAq;
+
+// ════ GAME 2: Plushie Match (slide 15, index 14) ════
+const PLUSH=[
+  {em:'🐻',hz:'熊',py:'xióng',plush:'熊玩偶',plushpy:'xióng wán\'ǒu',en:'teddy bear'},
+  {em:'🐼',hz:'熊猫',py:'xióngmāo',plush:'熊猫玩偶',plushpy:'xióngmāo wán\'ǒu',en:'panda plushie'},
+  {em:'🐱',hz:'猫',py:'māo',plush:'猫玩偶',plushpy:'māo wán\'ǒu',en:'cat plushie'},
+  {em:'🐶',hz:'狗',py:'gǒu',plush:'狗玩偶',plushpy:'gǒu wán\'ǒu',en:'dog plushie'},
+  {em:'🐰',hz:'兔子',py:'tùzi',plush:'兔子玩偶',plushpy:'tùzi wán\'ǒu',en:'bunny plushie'},
+  {em:'🐘',hz:'大象',py:'dà xiàng',plush:'大象玩偶',plushpy:'dà xiàng wán\'ǒu',en:'elephant plushie'},
+  {em:'🐯',hz:'老虎',py:'lǎohǔ',plush:'老虎玩偶',plushpy:'lǎohǔ wán\'ǒu',en:'tiger plushie'},
+  {em:'🦁',hz:'狮子',py:'shīzi',plush:'狮子玩偶',plushpy:'shīzi wán\'ǒu',en:'lion plushie'},
+  {em:'🐵',hz:'猴子',py:'hóuzi',plush:'猴子玩偶',plushpy:'hóuzi wán\'ǒu',en:'monkey plushie'},
+];
+let pmScore=0,pmQ=0,pmItems=[];
+function initPm(){
+  pmScore=0;pmQ=0;pmItems=shuffle(PLUSH).slice(0,8);
+  $id('pms').textContent='0';$id('pmq').textContent='1';$id('pmr').style.display='none';
+  showPm();
+}
+function showPm(){
+  if(pmQ>=8){
+    const r=$id('pmr');r.style.display='block';
+    r.textContent='🎉 '+pmScore+'/8 — '+(pmScore===8?'完美！wánměi! · perfect!':pmScore>=6?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
+    $id('pmo').innerHTML='';return;
+  }
+  const it=pmItems[pmQ];
+  $id('pmem').textContent=it.em;$id('pmhz').textContent=it.hz;$id('pmpy').textContent=it.py;
+  $id('pmq').textContent=pmQ+1;
+  const wrong=PLUSH.filter(o=>o.plush!==it.plush);
+  const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('pmo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">🧸 ${opt.plush}</span><span class="gpy">${opt.plushpy}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.plush===it.plush){btn.classList.add('ok');pmScore++;$id('pms').textContent=pmScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent.includes(it.plush))b.classList.add('ok');});}
+      pmQ++;setTimeout(showPm,1300);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[14]=initPm;
+
+// ════ GAME 3: Price Quiz (slide 19, index 18) ════
+const PRC=[
+  {n:1,hz:'一元 / 一块',py:'yī yuán / yī kuài'},
+  {n:2,hz:'两元 / 两块',py:'liǎng yuán / liǎng kuài'},
+  {n:5,hz:'五元 / 五块',py:'wǔ yuán / wǔ kuài'},
+  {n:10,hz:'十元 / 十块',py:'shí yuán / shí kuài'},
+  {n:15,hz:'十五元',py:'shíwǔ yuán'},
+  {n:20,hz:'二十元',py:'èrshí yuán'},
+  {n:25,hz:'二十五元',py:'èrshíwǔ yuán'},
+  {n:30,hz:'三十元',py:'sānshí yuán'},
+  {n:50,hz:'五十元',py:'wǔshí yuán'},
+  {n:62,hz:'六十二元',py:'liùshí\'èr yuán'},
+  {n:100,hz:'一百元',py:'yībǎi yuán'},
+];
+let prScore=0,prQ=0,prItems=[];
+function initPr(){
+  prScore=0;prQ=0;prItems=shuffle(PRC).slice(0,8);
+  $id('prs').textContent='0';$id('prq').textContent='1';$id('prr').style.display='none';
+  showPr();
+}
+function showPr(){
+  if(prQ>=8){
+    const r=$id('prr');r.style.display='block';
+    r.textContent='🎉 '+prScore+'/8 — '+(prScore===8?'完美！wánměi! · perfect!':prScore>=6?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
+    $id('pro').innerHTML='';return;
+  }
+  const it=prItems[prQ];
+  $id('prnum').textContent=it.n+' 元';$id('prq').textContent=prQ+1;
+  const wrong=PRC.filter(o=>o.n!==it.n);
+  const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('pro');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:13px">${opt.hz}</span><span class="gpy">${opt.py}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.n===it.n){btn.classList.add('ok');prScore++;$id('prs').textContent=prScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      prQ++;setTimeout(showPr,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[18]=initPr;
+
+// ════ GAME 4: Mixed Item Quiz (slide 22, index 21) ════
+const MX=[
+  {em:'🍎',hz:'苹果',py:'píngguǒ',en:'apple'},
+  {em:'🍌',hz:'香蕉',py:'xiāngjiāo',en:'banana'},
+  {em:'🍓',hz:'草莓',py:'cǎoméi',en:'strawberry'},
+  {em:'🍉',hz:'西瓜',py:'xīguā',en:'watermelon'},
+  {em:'🥒',hz:'黄瓜',py:'huángguā',en:'cucumber'},
+  {em:'🌽',hz:'玉米',py:'yùmǐ',en:'corn'},
+  {em:'🍅',hz:'西红柿',py:'xīhóngshì',en:'tomato'},
+  {em:'🥕',hz:'胡萝卜',py:'húluóbo',en:'carrot'},
+  {em:'🥛',hz:'牛奶',py:'niúnǎi',en:'milk'},
+  {em:'<span class="cancan cancan-cola"></span>',hz:'可乐',py:'kělè',en:'cola'},
+  {em:'🍞',hz:'面包',py:'miànbāo',en:'bread'},
+  {em:'🥚',hz:'鸡蛋',py:'jīdàn',en:'eggs'},
+  {em:'🐱',hz:'猫',py:'māo',en:'cat'},
+  {em:'🐶',hz:'狗',py:'gǒu',en:'dog'},
+  {em:'🐼',hz:'熊猫',py:'xióngmāo',en:'panda'},
+  {em:'🐰',hz:'兔子',py:'tùzi',en:'rabbit'},
+  {em:'🐘',hz:'大象',py:'dà xiàng',en:'elephant'},
+  {em:'🧸',hz:'玩偶',py:'wán\'ǒu',en:'plushie'},
+  {em:'🛒',hz:'购物车',py:'gòuwùchē',en:'shopping cart'},
+  {em:'💳',hz:'收银台',py:'shōuyíntái',en:'checkout'},
+];
+let mxScore=0,mxQ=0,mxItems=[];
+function initMx(){
+  mxScore=0;mxQ=0;mxItems=shuffle(MX).slice(0,12);
+  $id('mxs').textContent='0';$id('mxq').textContent='1';$id('mxr').style.display='none';
+  showMx();
+}
+function showMx(){
+  if(mxQ>=12){
+    const r=$id('mxr');r.style.display='block';
+    r.textContent='🎉 '+mxScore+'/12 — '+(mxScore>=11?'完美！wánměi! · perfect!':mxScore>=8?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
+    $id('mxo').innerHTML='';return;
+  }
+  const it=mxItems[mxQ];
+  $id('mxem').innerHTML=it.em;$id('mxq').textContent=mxQ+1;
+  const wrong=MX.filter(o=>o.hz!==it.hz);
+  const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('mxo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');mxScore++;$id('mxs').textContent=mxScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      mxQ++;setTimeout(showMx,1000);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[21]=initMx;
+
+// ════ GAME 5: Memory Match (slide 25, index 24) ════
+const MEM=[
+  {id:1,hz:'熊猫',py:'xióngmāo',em:'🐼'},
+  {id:2,hz:'兔子',py:'tùzi',em:'🐰'},
+  {id:3,hz:'大象',py:'dà xiàng',em:'🐘'},
+  {id:4,hz:'老虎',py:'lǎohǔ',em:'🐯'},
+  {id:5,hz:'购物车',py:'gòuwùchē',em:'🛒'},
+  {id:6,hz:'玩偶',py:'wán\'ǒu',em:'🧸'},
+];
+let mFlipped=[],mMatched=0,mFlips=0,mLock=false;
+function initMem(){
+  mFlipped=[];mMatched=0;mFlips=0;mLock=false;
+  $id('mm').textContent='0';$id('mf').textContent='0';$id('mres').style.display='none';
+  const cards=[];
+  MEM.forEach(p=>{
+    cards.push({id:p.id,side:'hz',hz:p.hz,py:p.py});
+    cards.push({id:p.id,side:'em',em:p.em});
+  });
+  const grid=$id('mgrid');grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){
+      if(mLock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');
+      if(card.side==='hz'){
+        el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+          <div class="mcard-py gpy">${card.py}</div>
+          <div class="mcard-hz">${card.hz}</div>
+        </div>`;
+      }else{el.innerHTML=`<div style="font-size:34px">${card.em}</div>`;}
+      mFlipped.push({el,card});
+      if(mFlipped.length===2){
+        mFlips++;$id('mf').textContent=mFlips;
+        if(mFlipped[0].card.id===mFlipped[1].card.id){
+          mFlipped[0].el.classList.add('match');mFlipped[1].el.classList.add('match');
+          mFlipped=[];mMatched++;$id('mm').textContent=mMatched;
+          if(mMatched===6){setTimeout(()=>{const r=$id('mres');r.style.display='block';r.textContent='🎉 '+mFlips+' 翻 fān · flips — 太棒了！tài bàng le! · awesome!';},400);}
+        }else{
+          mLock=true;setTimeout(()=>{
+            mFlipped[0].el.classList.remove('flip');mFlipped[0].el.textContent='🎴';
+            mFlipped[1].el.classList.remove('flip');mFlipped[1].el.textContent='🎴';
+            mFlipped=[];mLock=false;
+          },900);
+        }
+      }
+    };
+    grid.appendChild(el);
+  });
+}
+GI[24]=initMem;
+
+// ════ GAME 6: Fill-in-blank (slide 26, index 25) ════
+const FB_ROUNDS=[
+  {
+    sentence:'请问，水果在 ___ ？',
+    py:'qǐng wèn, shuǐguǒ zài ___ ?',
+    en:'Excuse me, where are the fruits?',
+    blanks:['哪里'],
+    bank:['哪里','那边','这里','二楼']
+  },
+  {
+    sentence:'我要 ___ 一个熊猫玩偶。',
+    py:'wǒ yào ___ yī gè xióngmāo wán\'ǒu.',
+    en:'I want to buy a panda plushie.',
+    blanks:['买'],
+    bank:['买','卖','要','点']
+  },
+  {
+    sentence:'这个苹果 ___ ？两块一 ___ 。',
+    py:'zhège píngguǒ ___ ? liǎng kuài yī ___ .',
+    en:'How much is this apple? 2 kuai each.',
+    blanks:['多少钱','个'],
+    bank:['多少钱','个','再见','瓶','盘']
+  },
+];
+let fbIdx=0,fbFilled=[];
+function initFb(){
+  fbIdx=0;
+  $id('fbres').style.display='none';
+  $id('fbnext').style.display='none';
+  $id('fbround').textContent='1';
+  renderFb();
+}
+function renderFb(){
+  const round=FB_ROUNDS[fbIdx];
+  fbFilled=round.blanks.map(()=>null);
+  $id('fbround').textContent=(fbIdx+1);
+  const wrap=$id('fbwrap');
+  let html='<div class="fib-row">';
+  let bidx=0;
+  const parts=round.sentence.split('___');
+  parts.forEach((p,i)=>{
+    html+=p;
+    if(i<parts.length-1){html+=`<span class="fib-blank" id="fb-b${bidx}" data-bi="${bidx}">____</span>`;bidx++;}
+  });
+  html+='</div>';
+  html+=`<div class="gpy" style="font-size:10px;color:#7c3aed;font-weight:600;text-align:center;margin-top:4px">${round.py}</div>`;
+  html+=`<div class="gen" style="font-size:9.5px;color:#888;font-style:italic;text-align:center">${round.en}</div>`;
+  html+='<div class="fib-bank">';
+  shuffle(round.bank).forEach(t=>{html+=`<button class="fib-tok" data-w="${t}">${t}</button>`;});
+  html+='</div>';
+  wrap.innerHTML=html;
+  wrap.querySelectorAll('.fib-tok').forEach(tok=>{
+    tok.onclick=function(){
+      const next=fbFilled.findIndex(x=>x===null);
+      if(next<0)return;
+      const word=tok.dataset.w;
+      const bk=$id('fb-b'+next);
+      bk.textContent=word;bk.classList.add('filled');
+      fbFilled[next]=word;
+      tok.classList.add('used');
+      bk.onclick=function(){
+        bk.textContent='____';bk.classList.remove('filled');
+        fbFilled[next]=null;
+        wrap.querySelectorAll('.fib-tok').forEach(t=>{if(t.dataset.w===word&&t.classList.contains('used')){t.classList.remove('used');}});
+        bk.onclick=null;
+      };
+      if(fbFilled.every(w=>w!==null)){
+        const correct=fbFilled.every((w,i)=>w===round.blanks[i]);
+        const r=$id('fbres');r.style.display='block';
+        if(correct){
+          r.style.background='linear-gradient(135deg,#dcfce7,#bbf7d0)';r.style.color='#15803d';
+          r.textContent='🎉 对了！duì le! · correct!';
+          $id('fbnext').style.display=fbIdx<FB_ROUNDS.length-1?'inline-block':'none';
+          if(fbIdx===FB_ROUNDS.length-1){
+            setTimeout(()=>{r.textContent='🌟 全部完成！quánbù wánchéng! · all done — 太棒了！';},700);
+          }
+        }else{
+          r.style.background='linear-gradient(135deg,#fee2e2,#fca5a5)';r.style.color='#991b1b';
+          r.textContent='❌ 再试一次！zài shì yī cì! · try again!';
+        }
+      }
+    };
+  });
+}
+function nextFb(){
+  if(fbIdx<FB_ROUNDS.length-1){fbIdx++;$id('fbres').style.display='none';$id('fbnext').style.display='none';renderFb();}
+}
+GI[25]=initFb;
+
+// ════ GAME 7: Verb Pick (slide 27, index 26) ════
+const VB=[
+  {sent:'我要 ___ 一个玩偶。',py:'wǒ yào ___ yī gè wán\'ǒu.',en:'I want to ___ a plushie.',a:'买'},
+  {sent:'这里 ___ 水果吗？',py:'zhèlǐ ___ shuǐguǒ ma?',en:'Do you ___ fruit here?',a:'卖'},
+  {sent:'我 ___ 买一个熊猫玩偶。',py:'wǒ ___ mǎi yī gè xióngmāo wán\'ǒu.',en:'I would ___ to buy a panda plushie.',a:'想'},
+  {sent:'请 ___ 我袋子。',py:'qǐng ___ wǒ dàizi.',en:'Please ___ me a bag.',a:'给'},
+  {sent:'___ 您五块钱。',py:'___ nín wǔ kuài qián.',en:'___ you 5 kuai change.',a:'找'},
+  {sent:'我用手机 ___ 钱。',py:'wǒ yòng shǒujī ___ qián.',en:'I ___ with my phone.',a:'付'},
+  {sent:'我 ___ 喝一杯果汁。',py:'wǒ ___ hē yī bēi guǒzhī.',en:'I would ___ to drink a juice.',a:'想'},
+  {sent:'妈妈 ___ 了三个苹果。',py:'māma ___ le sān gè píngguǒ.',en:'Mum ___ 3 apples.',a:'买'},
+  {sent:'请问，玩偶在 ___ 卖？',py:'qǐng wèn, wán\'ǒu zài ___ mài?',en:'Excuse me, where do you ___ plushies?',a:'哪里'},
+];
+const VB_OPTS=[
+  {hz:'买',py:'mǎi',en:'buy'},
+  {hz:'卖',py:'mài',en:'sell'},
+  {hz:'想',py:'xiǎng',en:'would like'},
+  {hz:'给',py:'gěi',en:'give'},
+  {hz:'找',py:'zhǎo',en:'change/find'},
+  {hz:'付',py:'fù',en:'pay'},
+  {hz:'哪里',py:'nǎli',en:'where'},
+];
+let vbScore=0,vbQ=0,vbItems=[];
+function initVb(){
+  vbScore=0;vbQ=0;vbItems=shuffle(VB).slice(0,8);
+  $id('vbs').textContent='0';$id('vbq').textContent='1';$id('vbr').style.display='none';
+  showVb();
+}
+function showVb(){
+  if(vbQ>=8){
+    const r=$id('vbr');r.style.display='block';
+    r.textContent='🎉 '+vbScore+'/8 — '+(vbScore===8?'完美！wánměi! · perfect!':vbScore>=6?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
+    $id('vbo').innerHTML='';return;
+  }
+  const it=vbItems[vbQ];
+  $id('vbsent').innerHTML=it.sent.replace('___','<span class="vbq-blank">___</span>');
+  $id('vbpy').textContent=it.py;
+  $id('vben').textContent=it.en;
+  $id('vbq').textContent=vbQ+1;
+  const wrong=VB_OPTS.filter(o=>o.hz!==it.a);
+  const opts=[VB_OPTS.find(o=>o.hz===it.a),...shuffle(wrong).slice(0,2)];
+  const el=$id('vbo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:18px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.a){btn.classList.add('ok');vbScore++;$id('vbs').textContent=vbScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.a)b.classList.add('ok');});}
+      vbQ++;setTimeout(showVb,1300);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[26]=initVb;
+
+// ════ GAME 8: Real or Plushie (slide 28, index 27) ════
+const RP=[
+  {em:'🐻',hz:'熊',py:'xióng',en:'bear',t:'real'},
+  {em:'🧸',hz:'熊玩偶',py:'xióng wán\'ǒu',en:'teddy bear',t:'plush'},
+  {em:'🐱',hz:'猫',py:'māo',en:'cat',t:'real'},
+  {em:'🐼',hz:'熊猫',py:'xióngmāo',en:'panda',t:'real'},
+  {em:'🧸',hz:'熊猫玩偶',py:'xióngmāo wán\'ǒu',en:'panda plushie',t:'plush'},
+  {em:'🐰',hz:'兔子',py:'tùzi',en:'rabbit',t:'real'},
+  {em:'🧸',hz:'兔子玩偶',py:'tùzi wán\'ǒu',en:'bunny plushie',t:'plush'},
+  {em:'🐘',hz:'大象',py:'dà xiàng',en:'elephant',t:'real'},
+  {em:'🧸',hz:'大象玩偶',py:'dà xiàng wán\'ǒu',en:'elephant plushie',t:'plush'},
+  {em:'🐯',hz:'老虎',py:'lǎohǔ',en:'tiger',t:'real'},
+  {em:'🧸',hz:'老虎玩偶',py:'lǎohǔ wán\'ǒu',en:'tiger plushie',t:'plush'},
+  {em:'🦁',hz:'狮子',py:'shīzi',en:'lion',t:'real'},
+  {em:'🧸',hz:'狮子玩偶',py:'shīzi wán\'ǒu',en:'lion plushie',t:'plush'},
+  {em:'🐶',hz:'狗',py:'gǒu',en:'dog',t:'real'},
+  {em:'🧸',hz:'狗玩偶',py:'gǒu wán\'ǒu',en:'dog plushie',t:'plush'},
+];
+let rpScore=0,rpQ=0,rpItems=[];
+function initRp(){
+  rpScore=0;rpQ=0;rpItems=shuffle(RP).slice(0,10);
+  $id('rps').textContent='0';$id('rpq').textContent='1';$id('rpr').style.display='none';
+  $id('rpcard').style.opacity='1';showRp();
+}
+function showRp(){
+  if(rpQ>=10){
+    const r=$id('rpr');r.style.display='block';
+    r.textContent='🎉 '+rpScore+'/10 — '+(rpScore>=9?'完美！wánměi! · perfect!':rpScore>=7?'很好！hěn hǎo! · great!':'加油！jiā yóu! · keep going!');
+    $id('rpcard').style.opacity='.4';return;
+  }
+  const it=rpItems[rpQ];
+  $id('rpem').textContent=it.em;$id('rphz').textContent=it.hz;$id('rppy').textContent=it.py;$id('rpen').textContent=it.en;
+  $id('rpq').textContent=rpQ+1;
+}
+function rpPick(type){
+  if(rpQ>=rpItems.length)return;
+  const it=rpItems[rpQ];const ok=it.t===type;
+  if(ok){rpScore++;$id('rps').textContent=rpScore;}
+  const c=$id('rpcard');
+  c.style.background=ok?'linear-gradient(135deg,#dcfce7,#bbf7d0)':'linear-gradient(135deg,#fee2e2,#fca5a5)';
+  rpQ++;setTimeout(()=>{c.style.background='linear-gradient(135deg,#cffafe,#dcfce7)';showRp();},600);
+}
+GI[27]=initRp;
+</script>
+</body>
+</html>
